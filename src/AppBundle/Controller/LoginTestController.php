@@ -46,7 +46,7 @@ class LoginTestController extends Controller
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
 
-        return $this->render('logintest/login.html.twig');
+        return $this->render('vistas/login.html.twig');
 
         /*
         if($request->request->has('username_parameter') && $request->request->has('password_parameter'))
