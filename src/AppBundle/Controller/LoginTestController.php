@@ -5,7 +5,6 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,6 +20,8 @@ class LoginTestController extends Controller
     }
     /**
      * @Route("/success",name="success")
+     * @param Request $request
+     * 
      */
     public function loadSuccess(Request $request)
     {
@@ -34,14 +35,16 @@ class LoginTestController extends Controller
     }
     /**
      * @Route("/login", name="login")
+     * 
      */
     public function loginAction(Request $request)
     {
-        if($request->request->has('username') && $request->request->has('pass'))
+        dump($request);
+        if($request->request->has('username_parameter') && $request->request->has('password_parameter'))
         {
-            $vect = array('username'=>$request->request->get('username'),'password'=>$request->request->get('pass'));
+            //$vect = array('username'=>$request->request->get('username_u'),'password'=>$request->request->get('pass'));
             //Hay post
-            return $this->redirectToRoute("success", $vect);
+            return $this->redirectToRoute("success");
 
         } else{
             //NO hay Post

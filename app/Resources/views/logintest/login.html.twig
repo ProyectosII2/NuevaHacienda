@@ -1,17 +1,16 @@
-
 {% extends 'base.html.twig' %}
 {% block body %}
 
 <label class="label1 text-center">LOGIN</label>
 
-<form action="/login" method="post">
+<form action={{path("login")}} method="post">
 	<div class="label text-center">
 	<label class="username">Username</label>
-      <input type="text" name="username" id="username">
+      <input type="text" name="_username">
     </div>
     <div class="text-center">
       	<label class="passwordlabel">Password</label>
-		<input type="password" name="pass" id="passwordtextbox">
+		<input type="password" name="_password" >
 	</div>
 	<div class="text-center">
 		<input type="submit" name="button" id="button" value="Aceptar">
