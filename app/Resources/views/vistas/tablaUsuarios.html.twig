@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="card">
+    <table id="users" class="mdl-data-table" cellspacing="0" width="100%">
+        <thead class="titulo">
+            <tr class ="ids">
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Solvente</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>101001</td>
+                <td>Ludwing Cano</td>
+                <td>11 avenida 22- 69</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>101002</td>
+                <td>Kevin Ponce</td>
+                <td>Universidad</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>101001</td>
+                <td>Ludwing Cano</td>
+                <td>11 avenida 22- 69</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>101002</td>
+                <td>Kevin Ponce</td>
+                <td>Universidad</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td>101001</td>
+                <td>Ludwing Cano</td>
+                <td>11 avenida 22- 69</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>101002</td>
+                <td>Kevin Ponce</td>
+                <td>Universidad</td>
+                <td>No</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block stylesheets %}
+<style>
+body {
+    font-family: Helvetica;
+    background: #212121;
+    -webkit-font-smoothing: antialiased;
+     padding: 0px 0px 0px 500px;
+}
+.card {
+    /* Add shadows to create the "card" effect */
+    margin-top: 150px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 700px;
+}
+/* On mouse-over, add a deeper shadow */
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.titulo {
+    background-color: #C2185B;
+    text-align: center;
+}
+
+.ids {
+    color:#ffffff;
+}
+</style>
+{% endblock %}
