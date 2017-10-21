@@ -5,9 +5,11 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginTestController extends Controller
 {
@@ -21,6 +23,7 @@ class LoginTestController extends Controller
     /**
      * @Route("/success",name="success")
      * @param Request $request
+     * @Security("has_role('ROLE_ADMIN')")
      * 
      */
     public function loadSuccess(Request $request)
@@ -37,9 +40,15 @@ class LoginTestController extends Controller
      * @Route("/login", name="login")
      * 
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, AuthenticationUtils $utils)
     {
-        dump($request);
+        dump($utils);
+        $error = $utils->getLastAuthenticationError();
+        $lastUsername = $utils->getLastUsername();
+
+        return $this->render('logintest/login.html.twig');
+
+        /*
         if($request->request->has('username_parameter') && $request->request->has('password_parameter'))
         {
             //$vect = array('username'=>$request->request->get('username_u'),'password'=>$request->request->get('pass'));
@@ -50,5 +59,6 @@ class LoginTestController extends Controller
             //NO hay Post
             return $this->render('logintest/login.html.twig');
         }
+        */
     }
 }
