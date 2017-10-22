@@ -6,31 +6,46 @@
     <h1>Ingreso Hacienda Real</h1>
 </hgroup>
 
-    <form class="formlogin">
-        <div class="group">
+ 
+ <form class="formlogin">
+      <div class = "imgdiv">
+        <img class = "img"src="http://www.haciendacaboresort.com/photogallery/large/hotel/hacienda-beach-club-and-residences-cabo-san-lucas-hotel-interior.jpg">
+      </div>
+     <div class="group">
             <input type="text"><span class="highlight"></span><span class="bar"></span>
             <label>Usuario</label>
         </div>
-        <div class="group">
+    <div class="group">
             <input type="text"><span class="highlight"></span><span class="bar"></span>
             <label>Contraseña</label>
-        </div>
+    </div>
         <button type="button" class="button buttonBlue">Ingresar
             <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
         </button>
-    </form>
+ </form>   
 
 {% endblock %}
 
 {% block stylesheets %}
 <style>
-.formlogin {
+.imgdiv {
     text-align: center;
     margin-top: auto;
     width: 380px;
-    margin: 4em auto;
-    padding: 3em 2em 2em 2em;
+        
+}
+
+.img{
+     width: 380px;
+     height: 200px;
+}
+
+.formlogin {
+    margin-top: auto;
+    text-align: center;
+    width: 380px;   
     background: #fafafa;
+    margin: 4em auto;
     border: 1px solid #ebebeb;
     box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
 }
@@ -50,6 +65,7 @@ h1 {
 }
 
 .group {
+    width: 100%;
     position: relative;
     margin-bottom: 45px;
 }
