@@ -4,6 +4,15 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Hacienda Real{% endblock %}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+
+        <!-- Links de referencia para las librerias de material desing https://getmdl.io/started/index.html -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <!--Link de referencia para el color del tema https://getmdl.io/customize/index.html -->
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css" />
+        
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        
+        <!-- -->
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
