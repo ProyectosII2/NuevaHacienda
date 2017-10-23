@@ -25,7 +25,6 @@ class LoginController extends Controller
     public function loadLanding(Request $request)
     {
         //$lastusername -> getName();
-        $lastusername = 
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
         return $this->render('logintest/success.html.twig', 
             array ('username' => $lastusername, 'variable' => $_SESSION['variable']
@@ -35,8 +34,11 @@ class LoginController extends Controller
      * @Route("/login", name="login")
      * 
      */
-    public function loginAction(Request $request)
+    public function loginAction(Request $request, AuthenticationUtils $utils)
     {
+        $error = $utils->getLastAuthenticationError();
+        $lastUsername = $utils->getLastUsername();
+
         $_SESSION['variable'] = "esta es una variable de sesion";
         return $this->render('vistas/login.html.twig');
 
