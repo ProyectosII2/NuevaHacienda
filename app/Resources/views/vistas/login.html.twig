@@ -3,46 +3,53 @@
 {% block body %}
 <!--Para mobiles-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<!--Div para Imagen
 <hgroup class="Titulo">
     <h1>Ingreso Hacienda Real</h1>
 </hgroup>
+-->
+<div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
 
-<div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp" >
-    
-    <!--Div para Imagen-->
-    <div  class="mdl-card__media">
-    <img class = "img" src="http://www.haciendacaboresort.com/photogallery/large/hotel/hacienda-beach-club-and-residences-cabo-san-lucas-hotel-interior.jpg">
-    </div>
-    <!--Div para User y Pass-->
-    <div class="mdl-card__supporting-text">
-        <form action={{path("login")}} method="post" >
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" name="_username" id="user">
-            <label class="mdl-textfield__label" for="user">Usuario</label>
-        </div>
+    <table >
+        <tr>
+            <td align="left">
+                <!--Div para Imagen-->
+                <div class="mdl-card__media">
+                    <img class="img" src="https://hdqwalls.com/wallpapers/black-green-material-design-hd.jpg">
+                </div>
+            </td>
+            <td align="center">
+                <p class="titulo" size="3"><strong> Ingreso Nueva Hacienda</strong></p>
+                <div class="mdl-card__supporting-text">
+                    <!--Div para User y Pass-->
+                    <form action={{path( "login")}} method="post">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" name="_username" id="user">
+                            <label class="mdl-textfield__label" for="user">Usuario</label>
+                        </div>
 
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" name="_password" id="password_user">
-            <label class="mdl-textfield__label" for="password_user">Contraseña</label>
-        </div> 
-    </div> 
-    
-     <!--Button-->
-    <input type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="button_login">
-         <i class="material-icons">forward</i>
-    </input>
-    
-        </form>   
-    
-</div> 
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="password" name="_password" id="password_user">
+                            <label class="mdl-textfield__label" for="password_user">Contraseña</label>
+                        </div>
+                </div>
+                </form>
+                <!--Button-->
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+                    Ingreso
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</div>
 
 {% endblock %}
 
 {% block stylesheets %}
 <style>
 body {
-    background: #212121;
+    background: #263238;
 }
 
 .Titulo {
@@ -50,33 +57,31 @@ body {
     margin-top: 4em;
 }
 
-h1 {
-    font-weight: 300;
-    color: #FFFFFF;
-}
-
-.mdl-card{
+.mdl-card{   
     margin: auto;
-}
-.img{
-     width: 380px;
-     height: 200px;
-     border:"0";
+     width: 800px;
+     height: 500px;
 }
 
-.group {
-    width: 100%;
-    position: relative;
-    margin-bottom: 45px;
+.mdl-card__supporting-text{
 }
+
+.mdl-card__media{
+}
+
+.img{
+     width: 450px;
+     height: 500px;
+}
+/*
 .mdl-textfield__input {
     font-size: 16px;
     color: #D32F2F;
     width: 100%;
 }
 
-.mdl-textfield__label {
-    color: #D32F2F;
+.mdl-textfield.is-focused .mdl-textfield__label {
+    color: #F44336;
 }
 
 .mdl-textfield.is-focused .mdl-textfield__label {
@@ -86,10 +91,10 @@ h1 {
 .mdl-textfield__label:after{
     background-color: #F44336;
 }
+*/
 .mdl-button { 
   margin-bottom: 25px;
   margin-right: -25px;
-  z-index: 150px;
 }
 </style>
 {% endblock %}
