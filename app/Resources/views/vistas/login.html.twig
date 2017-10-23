@@ -16,23 +16,24 @@
     </div>
     <!--Div para User y Pass-->
     <div class="mdl-card__supporting-text">
-        <form action="#" >
+        <form action={{path("login")}} method="post" >
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="user">
+            <input class="mdl-textfield__input" type="text" name="_username" id="user">
             <label class="mdl-textfield__label" for="user">Usuario</label>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="password_user">
+            <input class="mdl-textfield__input" type="password" name="_password" id="password_user">
             <label class="mdl-textfield__label" for="password_user">Contraseña</label>
-        </div>
-        </form>    
+        </div> 
     </div> 
     
      <!--Button-->
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="button_login">
+    <input type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="button_login">
          <i class="material-icons">forward</i>
-    </button>
+    </input>
+    
+        </form>   
     
 </div> 
 

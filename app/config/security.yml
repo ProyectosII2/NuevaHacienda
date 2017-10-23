@@ -11,9 +11,9 @@ security:
         in_memory:
             memory:
                 users:
-                    admin:
+                    memory:
                         password: '912ec803b2ce49e4a541068d495ab570'
-                        roles: 'ROLE_ADMIN'
+                        roles: 'ROLE_USER'
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -26,7 +26,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                post_only: true
+                default_target_path: homepage
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
