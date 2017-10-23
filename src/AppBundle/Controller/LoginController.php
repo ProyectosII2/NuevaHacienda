@@ -18,7 +18,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends Controller
 {
     /**
-     * @Route("/",name="homepage")
+     * @Route("/homepage",name="homepage")
      * @param Request $request
      * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')") 
      */
@@ -26,12 +26,12 @@ class LoginController extends Controller
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        return $this->render('logintest/success.html.twig', 
+        return $this->render('vistas/dashboard.html.twig', 
             array ('username' => $lastusername, 'variable' => $_SESSION['variable']
         ));
     }
     /**
-     * @Route("/login", name="login")
+     * @Route("/", name="login")
      * 
      */
     public function loginAction(Request $request, AuthenticationUtils $utils)
