@@ -1,67 +1,66 @@
 
 {% extends 'base.html.twig' %}
 {% block body %}
+<!--Para mobiles-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<hgroup>
+<hgroup class="Titulo">
     <h1>Ingreso Hacienda Real</h1>
 </hgroup>
 
- 
- <form class="formlogin">
-      <div class = "imgdiv">
-        <img class = "img"src="http://www.haciendacaboresort.com/photogallery/large/hotel/hacienda-beach-club-and-residences-cabo-san-lucas-hotel-interior.jpg">
-      </div>
-     <div class="group">
-            <input type="text"><span class="highlight"></span><span class="bar"></span>
-            <label>Usuario</label>
-        </div>
-    <div class="group">
-            <input type="text"><span class="highlight"></span><span class="bar"></span>
-            <label>Contraseña</label>
+<div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp" >
+    
+    <!--Div para Imagen-->
+    <div  class="mdl-card__media">
+    <img class = "img" src="http://www.haciendacaboresort.com/photogallery/large/hotel/hacienda-beach-club-and-residences-cabo-san-lucas-hotel-interior.jpg">
     </div>
-        <button type="button" class="button buttonBlue">Ingresar
-            <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-        </button>
- </form>   
+    <!--Div para User y Pass-->
+    <div class="mdl-card__supporting-text">
+        <form action="#" >
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="user">
+            <label class="mdl-textfield__label" for="user">Usuario</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="password_user">
+            <label class="mdl-textfield__label" for="password_user">Contraseña</label>
+        </div>
+        </form>    
+    </div> 
+    
+     <!--Button-->
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" id="button_login">
+         <i class="material-icons">forward</i>
+    </button>
+    
+</div> 
 
 {% endblock %}
 
 {% block stylesheets %}
 <style>
-.imgdiv {
-    text-align: center;
-    margin-top: auto;
-    width: 380px;
-        
-}
-
-.img{
-     width: 380px;
-     height: 200px;
-}
-
-.formlogin {
-    margin-top: auto;
-    text-align: center;
-    width: 380px;   
-    background: #fafafa;
-    margin: 4em auto;
-    border: 1px solid #ebebeb;
-    box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px, rgba(0, 0, 0, 0.09804) 0px 1px 2px 0px;
-}
-
 body {
-    font-family: Helvetica;
     background: #212121;
-    -webkit-font-smoothing: antialiased;
 }
-hgroup {
+
+.Titulo {
     text-align: center;
     margin-top: 4em;
 }
+
 h1 {
     font-weight: 300;
     color: #FFFFFF;
+}
+
+.mdl-card{
+    margin: auto;
+}
+.img{
+     width: 380px;
+     height: 200px;
+     border:"0";
 }
 
 .group {
@@ -69,203 +68,27 @@ h1 {
     position: relative;
     margin-bottom: 45px;
 }
-input {
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    -webkit-appearance: none;
-    display: block;
-    background: #fafafa;
-    color: #E91E63;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid #757575;
-}
-input:focus {
-    outline: none;
-}
-/* Label */
-
-label {
-    color: #999;
-    font-size: 18px;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: all 0.2s ease;
-}
-/* active */
-
-input:focus ~ label,
-input.used ~ label {
-    top: -20px;
-    transform: scale(.75);
-    left: -2px;
-    /* font-size: 14px; */
-    
-    color: #C2185B;
-}
-/* Underline */
-
-.bar {
-    position: relative;
-    display: block;
-    width: 100%;
-}
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #C2185B;
-    transition: all 0.2s ease;
-}
-.bar:before {
-    left: 50%;
-}
-.bar:after {
-    right: 50%;
-}
-/* active */
-
-input:focus ~ .bar:before,
-input:focus ~ .bar:after {
-    width: 50%;
-}
-/* Highlight */
-
-.highlight {
-    position: absolute;
-    height: 60%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-/* active */
-
-input:focus ~ .highlight {
-    animation: inputHighlighter 0.3s ease;
-}
-/* Animations */
-
-@keyframes inputHighlighter {
-    from {
-        background: #4a89dc;
-    }
-    to {
-        width: 0;
-        background: transparent;
-    }
-}
-/* Button */
-
-.button {
-    position: relative;
-    display: inline-block;
-    padding: 12px 24px;
-    margin: .3em 0 1em 0;
-    width: 100%;
-    vertical-align: middle;
-    color: #fff;
+.mdl-textfield__input {
     font-size: 16px;
-    line-height: 20px;
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
-    letter-spacing: 1px;
-    background: transparent;
-    border: 0;
-    border-bottom: 2px solid #F8BBD0;
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-.button:focus {
-    outline: 0;
-}
-/* Button modifiers */
-
-.buttonBlue {
-    background: #C2185B;
-    text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
-}
-.buttonBlue:hover {
-    background: #F8BBD0;
-}
-/* Ripples container */
-
-.ripples {
-    position: absolute;
-    top: 0;
-    left: 0;
+    color: #D32F2F;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: transparent;
-}
-/* Ripples circle */
-
-.ripplesCircle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-}
-.ripples.is-active .ripplesCircle {
-    animation: ripples .4s ease-in;
-}
-/* Ripples animation */
-
-@keyframes ripples {
-    0% {
-        opacity: 0;
-    }
-    25% {
-        opacity: 1;
-    }
-    100% {
-        width: 200%;
-        padding-bottom: 200%;
-        opacity: 0;
-    }
-}
-footer {
-    text-align: center;
-}
-footer p {
-    color: #888;
-    font-size: 13px;
-    letter-spacing: .4px;
-}
-footer a {
-    color: #4a89dc;
-    text-decoration: none;
-    transition: all .2s ease;
-}
-footer a:hover {
-    color: #666;
-    text-decoration: underline;
-}
-footer img {
-    width: 80px;
-    transition: all .2s ease;
-}
-footer img:hover {
-    opacity: .83;
-}
-footer img:focus,
-footer a:focus {
-    outline: none;
 }
 
+.mdl-textfield__label {
+    color: #D32F2F;
+}
+
+.mdl-textfield.is-focused .mdl-textfield__label {
+    color: #F44336;
+}
+
+.mdl-textfield__label:after{
+    background-color: #F44336;
+}
+.mdl-button { 
+  margin-bottom: 25px;
+  margin-right: -25px;
+  z-index: 150px;
+}
 </style>
 {% endblock %}
