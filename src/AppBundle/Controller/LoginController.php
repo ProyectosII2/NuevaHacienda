@@ -18,20 +18,19 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class LoginController extends Controller
 {
     /**
-     * @Route("/homepage",name="homepage")
-     * @param Request $request
+     * @Route("/",name="homepage")
      * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')") 
      */
     public function loadLanding(Request $request)
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        return $this->render('vistas/dashboard.html.twig', 
-            array ('username' => $lastusername, 'variable' => $_SESSION['variable']
-        ));
+        return $this->render('vistas/dashboard.html.twig');
+            //array ('username' => $lastusername, 'variable' => $_SESSION['variable']
+        //));
     }
     /**
-     * @Route("/", name="login")
+     * @Route("/login", name="login")
      * 
      */
     public function loginAction(Request $request, AuthenticationUtils $utils)
