@@ -19,11 +19,12 @@ class LoginController extends Controller
 {
     /**
      * @Route("/",name="homepage")
-     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')") 
+     * @Security("has_role('ROLE_USER')") 
      */
     public function loadLanding(Request $request)
     {
         //$lastusername -> getName();
+        //dump($this->get('security.token_storage'));
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
         return $this->render('vistas/dashboard.html.twig');
             //array ('username' => $lastusername, 'variable' => $_SESSION['variable']
@@ -37,9 +38,12 @@ class LoginController extends Controller
     {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
+        dump($error);
 
         $_SESSION['variable'] = "esta es una variable de sesion";
-        return $this->render('vistas/login.html.twig');
+        return $this->render('vistas/login.html.twig', 
+            array ('error'=>$error, 'username'=>$lastUsername)
+        );
 
         /*
         $session->set('name', $request->request->get('_username'));

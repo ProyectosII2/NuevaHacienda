@@ -4,10 +4,10 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use AppBundle\Entity;
 
 /**
  * @ORM\Table(name="app_users")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
 {
@@ -37,7 +37,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=20)
      */
-    private $rol;
+    private $role;
     
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -58,10 +58,9 @@ class User implements UserInterface, \Serializable
     {
         return $this->password;
     }
-
-    public function getRoles()
+    public function getRoles() 
     {
-        return $this->rol;
+        return array($this->role);
     }
     public function getSalt()
     {
@@ -79,7 +78,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->rol,
+            $this->role,
         ));
     }
 
@@ -90,7 +89,7 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->rol,
+            $this->role,
         ) = unserialize($serialized);
     }
 }

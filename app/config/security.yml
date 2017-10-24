@@ -2,18 +2,36 @@
 # https://symfony.com/doc/current/security.html
 security:
     encoders:
+        #comentar si se quiere usar bd
         Symfony\Component\Security\Core\User\User:
             algorithm: md5
             encode_as_base64: false
             iterations: 0
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+        #comentar si se quiere usar memoria quemada (y se necesita cambiar alortimo de encrypción)
+        #AppBundle\Entity\User:
+        #    algorithm: md5
+        #    encode_as_base64: false
+        #    iterations: 0
+
+    #jerarquia de roles ADMIN>USER
+    role_hierarchy:
+        ROLE_ADMIN: 'ROLE_USER'
     providers:
+        #usuario quemado
         in_memory:
             memory:
                 users:
                     memory:
                         password: '912ec803b2ce49e4a541068d495ab570'
+                        roles: 'ROLE_ADMIN'
+                    someuser:
+                        password: '912ec803b2ce49e4a541068d495ab570'
                         roles: 'ROLE_USER'
+        #usuario en base de datos (query en UserRepository.php)
+        #pgsql:
+        #    entity:
+        #        class: AppBundle:User
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -22,11 +40,19 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            anonymous: true
             form_login:
                 login_path: login
                 check_path: login
                 default_target_path: homepage
+
+            #descomentar para permitir conexion a bd!!
+            #pattern: ^/
+            #http_basic:
+            #    provider: pgsql
+
+
+
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
