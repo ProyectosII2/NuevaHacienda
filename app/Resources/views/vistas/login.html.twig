@@ -22,7 +22,7 @@
                 <p class="titulo" size="3"><strong> Ingreso Nueva Hacienda</strong></p>
                 <div class="mdl-card__supporting-text">
                     <!--Div para User y Pass-->
-                    <form action={{path( "login")}} method="post">
+                    <form action={{path("login")}} method="post">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             <input class="mdl-textfield__input" type="text" name="_username" id="user">
                             <label class="mdl-textfield__label" for="user">Usuario</label>
@@ -35,7 +35,7 @@
                 </div>
                 <!--Button-->
                 <button type="submit"class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-                    Ingreso
+                    Ingresar
                 </button>
                 </form>
                 
@@ -53,23 +53,13 @@ body {
     background: #263238;
 }
 
-.Titulo {
-    text-align: center;
-    margin-top: 4em;
-}
-
 .mdl-card{   
+    align-items: center;
      width: 800px;
      height: 500px;
      position:absolute;
      top: 150px;
     right: 400px;   
-}
-
-.mdl-card__supporting-text{
-}
-
-.mdl-card__media{
 }
 
 .img{
@@ -95,9 +85,6 @@ body {
     background-color: #F44336;
 }
 */
-.mdl-button { 
-  margin-bottom: 25px;
-  margin-right: -25px;
-}
+
 </style>
 {% endblock %}
