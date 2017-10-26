@@ -38,7 +38,7 @@ Alter table public."app_users" OWNER TO postgres;
 /* inserts despues de mapear proyecto en symfony con php
 md5 hash*/
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
-VALUES (nextval('user_gen'),'julio', '912EC803B2CE49E4A541068D495AB570', 'ROLE_ADMIN','some@mail.com',true);
+VALUES (nextval('user_gen'),'julio', 'asdf', 'ROLE_ADMIN','some@mail.com',true);
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
 VALUES (nextval('user_gen'),'roberto', '912EC803B2CE49E4A541068D495AB570', 'ROLE_USER','algun@mail.com',true);
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")

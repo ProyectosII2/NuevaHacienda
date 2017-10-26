@@ -1,0 +1,20 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 00e884abf06a32f76c02cf40a463ded21e1ec177
+
+# database en postgresql connection string -> cambiar parametros
+    psql_database_driver: pdo_pgsql
+    psql_database_host: 127.0.0.1
+    psql_database_port: 5432
+    psql_database_name: haciendatest
+    psql_database_user: postgres
+    psql_database_password: toor
