@@ -38,23 +38,19 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
-# Doctrine Configuration
-#Database connection string
+#Doctrine Configuration
 doctrine:
     dbal:
-        default_connection: default
+        default_connection: pgsql
         connections:
-            default:
-        #        driver:   pdo_pgsql
-        #        host:     127.0.0.1
-        #        port:     5432
-        #        dbname:   haciendatest
-        #        user:     postgres
-        #        password: toor
-        #        charset:  UTF8
-
-    
-
+            pgsql:
+                driver: pdo_pgsql
+                host: 127.0.0.1
+                port: 5432
+                dbname: haciendatest
+                user: postgres
+                password: toor
+                charset:  UTF8
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore

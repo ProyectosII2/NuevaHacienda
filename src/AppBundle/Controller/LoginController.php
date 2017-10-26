@@ -25,11 +25,11 @@ class LoginController extends Controller
     public function loadLanding(Request $request)
     {
         //$lastusername -> getName();
-        dump($this->get('security.token_storage'));
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        return $this->render('vistas/dashboard.html.twig');
-            //array ('username' => $lastusername, 'variable' => $_SESSION['variable']
-        //));
+        dump($this->get('security.token_storage')->getToken());
+        return $this->render('vistas/dashboard.html.twig',
+            array ('username' => $lastusername->getUsername(), 'variable' => $_SESSION['variable']
+        ));
     }
     /**
      * @Route("/login", name="login")
