@@ -13,8 +13,8 @@ parameters:
 
 # database en postgresql connection string -> cambiar parametros
     psql_database_driver: pdo_pgsql
-    psql_database_host: 127.0.0.1
+    psql_database_host: 34.201.70.229
     psql_database_port: 5432
     psql_database_name: haciendatest
     psql_database_user: postgres
-    psql_database_password: toor
+    psql_database_password: postgres

@@ -48,6 +48,10 @@ class User implements UserInterface, \Serializable
     {
         $this->isActive = true;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
 
     public function getUsername()
     {
