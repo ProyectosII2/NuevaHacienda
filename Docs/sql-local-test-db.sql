@@ -23,7 +23,7 @@ create table public."app_users"
 (
 	"id" integer primary key,
     "username" Varchar(20) NOT NULL,
-    "password" Varchar(50) NOT NULL,
+    "password" Varchar(70) NOT NULL,
     "role" varchar(20) NOT NULL,
     "email" varchar(20) NOT NULL,
     "is_active" boolean NOT NULL DEFAULT 1,
