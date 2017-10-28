@@ -24,7 +24,7 @@ create table public."app_users"
 	"id" Serial primary key,
     "username" Varchar(20) NOT NULL,
     "password" Varchar(50) NOT NULL,
-    "rol" varchar(20) NOT NULL,
+    "role" varchar(20) NOT NULL,
     "email" varchar(20) NOT NULL,
     "isActive" integer NOT NULL DEFAULT 1,
     Constraint Ukey1 Unique ("username"),
@@ -36,15 +36,15 @@ Alter table public."app_users" OWNER TO postgres;
 
 
 /* inserts despues de mapear proyecto en symfony con php
-md5 hash*/
+bcrypt hash*/
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
-VALUES (nextval('user_gen'),'julio', '912EC803B2CE49E4A541068D495AB570', 'ROLE_ADMIN','some@mail.com',true);
+VALUES (nextval('user_gen'),'julio', '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G', 'ROLE_ADMIN','some@mail.com',true);
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
-VALUES (nextval('user_gen'),'roberto', '912EC803B2CE49E4A541068D495AB570', 'ROLE_USER','algun@mail.com',true);
+VALUES (nextval('user_gen'),'roberto', 'asdf', 'ROLE_USER','algun@mail.com',true);
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
-VALUES (nextval('user_gen'),'barrios', '912EC803B2CE49E4A541068D495AB570', 'ROLE_ADMIN','random@mail.com',false);
+VALUES (nextval('user_gen'),'barrios', '$2y$10$yPxcJW8RINjn4CQCSmieNub.U.S9odD6/KHAQ4oRTkgPSjPJlJUYa', 'ROLE_ADMIN','random@mail.com',true);
 INSERT INTO public."app_users" ("id","username", "password","role","email","is_active")
-VALUES (nextval('user_gen'),'xep', '912EC803B2CE49E4A541068D495AB570', 'ROLE_USER','whos@mail.com',false);
+VALUES (nextval('user_gen'),'xep', '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G', 'ROLE_USER','whos@mail.com',false);
 
 select * from public."app_users"
 
