@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DashboardController extends Controller
 {
     /**
-     * @Route("/dash")
+     * @Route("/dashboards")
      */
     public function Mostrar()
     {       

@@ -17,11 +17,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends Controller
 {
-    /**
-     * @Route("/",name="homepage")
-     * @Security("has_role('ROLE_USER')") 
-     * 
-     */
     public function loadLanding(Request $request)
     {
         //$lastusername -> getName();
