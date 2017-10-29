@@ -39,22 +39,22 @@ twig:
     strict_variables: '%kernel.debug%'
 
 #Doctrine Configuration
-#doctrine:
-    #dbal:
-        #default_connection: pgsql
-        #connections:
-            #pgsql:
-                #driver: pdo_pgsql
-                #host: 34.201.70.229
-                #port: 5432
-                #dbname: haciendatest
-                #user: postgres
-                #password: postgres
-                #charset:  UTF8
-    #orm:
-        #auto_generate_proxy_classes: '%kernel.debug%'
-        #naming_strategy: doctrine.orm.naming_strategy.underscore
-        #auto_mapping: true
+doctrine:
+    dbal:
+        default_connection: pgsql
+        connections:
+            pgsql:
+                driver: pdo_pgsql
+                host: haciendareal.ca3gjctx58mi.us-east-1.rds.amazonaws.com
+                port: 5432
+                dbname: haciendatest
+                user: postgres
+                password: postgres
+                charset:  UTF8
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:

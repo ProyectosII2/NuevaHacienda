@@ -49,9 +49,7 @@ class LoginController extends Controller
         $lastUsername = $utils->getLastUsername();
         dump($error,$lastUsername,$request);
 
-        if ($error != null){
-            $error = "Error de usuario o contraseña";
-        }
+        $_SESSION['variable'] = "esta es una variable de sesion";
         return $this->render('vistas/login.html.twig',
             array ('error'=>$error)
         );
@@ -69,13 +67,5 @@ class LoginController extends Controller
             return $this->render('logintest/login.html.twig');
         }
         */
-    }
-
-    /**
-     * @Route("/usuarios")
-     */
-    public function MostrarListaUsuarios()
-    {       
-        return $this->render('vistas/tablaUsuarios.html.twig');
     }
 }
