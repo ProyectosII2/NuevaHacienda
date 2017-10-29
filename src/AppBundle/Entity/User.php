@@ -25,7 +25,7 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=80)
+     * @ORM\Column(type="string", length=70)
      */
     private $password;
 
@@ -47,6 +47,10 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+    }
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     public function getUsername()

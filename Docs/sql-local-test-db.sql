@@ -21,12 +21,12 @@ COMMENT ON DATABASE haciendatest
 
 create table public."app_users"
 (
-	"id" Serial primary key,
+	"id" integer primary key,
     "username" Varchar(20) NOT NULL,
-    "password" Varchar(50) NOT NULL,
+    "password" Varchar(70) NOT NULL,
     "role" varchar(20) NOT NULL,
     "email" varchar(20) NOT NULL,
-    "isActive" integer NOT NULL DEFAULT 1,
+    "is_active" boolean NOT NULL DEFAULT 1,
     Constraint Ukey1 Unique ("username"),
     Constraint Ukey2 Unique ("mail")
 );

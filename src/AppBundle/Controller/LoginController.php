@@ -17,7 +17,24 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends Controller
 {
+<<<<<<< HEAD
     public function loadLanding(Request $request)
+=======
+    /**
+     * @Route("/", name="homepage")
+     * 
+     */
+    public function loginLanding(Request $request, AuthenticationUtils $utils)
+    {
+        return $this->render('logintest/landing.html.twig');
+    }
+    /**
+     * @Route("/dashboard",name="dashboard")
+     * @Security("has_role('ROLE_USER')") 
+     * 
+     */
+    public function loadDashboard(Request $request)
+>>>>>>> master
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
@@ -37,9 +54,9 @@ class LoginController extends Controller
         dump($error,$lastUsername,$request);
 
         $_SESSION['variable'] = "esta es una variable de sesion";
-        return $this->render('vistas/login.html.twig');
-            //array ('error'=>$error)
-        //);
+        return $this->render('vistas/login.html.twig',
+            array ('error'=>$error)
+        );
 
         /*
         $session->set('name', $request->request->get('_username'));

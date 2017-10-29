@@ -3,14 +3,13 @@
 security:
     encoders:
         #comentar si se quiere usar bd
-        #Symfony\Component\Security\Core\User\User:
-        #    algorithm: md5
-        #    encode_as_base64: false
-        #    iterations: 0
-        #comentar si se quiere usar memoria quemada (y se necesita cambiar alortimo de encrypción)
-        AppBundle\Entity\User:
+        Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt
             cost: 12
+        #comentar si se quiere usar memoria quemada (y se necesita cambiar alortimo de encrypción)
+        #AppBundle\Entity\User:
+        #    algorithm: bcrypt
+        #    cost: 12
             #algorithm: md5
             #encode_as_base64: false
             #iterations: 0
@@ -20,20 +19,20 @@ security:
         ROLE_ADMIN: 'ROLE_USER'
     providers:
         #usuario quemado
-        #in_memory:
-        #    memory:
-        #        users:
-        #            memory:
-        #                password: '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G'
-        #                roles: 'ROLE_ADMIN'
-        #            someuser:
-        #                password: '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G'
-        #                roles: 'ROLE_USER'
+        in_memory:
+            memory:
+                users:
+                    memory:
+                        password: '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G'
+                        roles: 'ROLE_ADMIN'
+                    someuser:
+                        password: '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G'
+                        roles: 'ROLE_USER'
         #usuario en base de datos (query en UserRepository.php)
-        pgsql:
-            entity:
-                class: AppBundle:User
-                property: username
+        #pgsql:
+        #    entity:
+        #        class: AppBundle:User
+        #        property: username
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -45,12 +44,12 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: homepage
+                default_target_path: dashboard
 
             #descomentar para permitir conexion a bd!!
-            pattern: ^/
-            http_basic:
-                provider: pgsql
+            #pattern: ^/
+            #http_basic:
+            #    provider: pgsql
 
             # activate different ways to authenticate
 
