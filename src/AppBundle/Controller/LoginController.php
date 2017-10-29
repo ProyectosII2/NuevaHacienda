@@ -49,8 +49,9 @@ class LoginController extends Controller
         $lastUsername = $utils->getLastUsername();
         dump($error,$lastUsername,$request);
 
-        $_SESSION['resultado_error'] = "esta es una variable de sesion";
-        
+        if ($error != null){
+            $error = "Error de usuario o contraseña";
+        }
         return $this->render('vistas/login.html.twig',
             array ('error'=>$error)
         );
