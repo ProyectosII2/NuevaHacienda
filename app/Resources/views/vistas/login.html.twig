@@ -10,20 +10,18 @@
 -->
 <div class="row">
     <div class="col-md-3"></div>
-
-    <div class="col-md-6">
-        <div class="mdl-card mdl-shadow--2dp through mdl-shadow--16dp">
-                <div class="row" id = "contenedor">
-                 <div class="col-md-8">
-                     <div class="mdl-card__media">
-                        <img class="img" src="https://hdqwalls.com/wallpapers/black-green-material-design-hd.jpg">
+        <div class="col-md-6">
+            <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+                <div class="row" id="contenedor">
+                    <div class="col-md-8">
+                        <div class="mdl-card__media">
+                            <img class="img" src="https://hdqwalls.com/wallpapers/black-green-material-design-hd.jpg">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4" id="datos">
-                    <p class="titulo" size="3"><strong> Ingreso Nueva Hacienda</strong></p>
-
-                        <form action={{path( "login")}} method="post">
-                            <div class="mdl-card__supporting-text">
+                    <div class="col-md-4">
+                        <div class="mdl-card" id="data">
+                            <form action={{path( "login")}} method="post">
+                                <p class="titulo"><strong> <h6>Ingreso Nueva Hacienda</h6></strong></p>
                                 <!--Div para User y Pass-->
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <input class="mdl-textfield__input" type="text" name="_username" id="user">
@@ -34,16 +32,16 @@
                                     <input class="mdl-textfield__input" type="password" name="_password" id="password_user">
                                     <label class="mdl-textfield__label" for="password_user">Contraseña</label>
                                 </div>
-                            </div>
                             <!--Button-->
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary" align="right">
+                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
                                 Ingresar
                             </button>
+                                <p name="resultado_error"> </p>
                         </form>
-                </div>                
+                        </div>
+                    </div>
+            </div>
         </div>
-    </div>
-    
     <div class="col-md-3"></div>
 </div>
 
@@ -55,23 +53,28 @@ body {
     background: #263238;
 }
 
-.mdl-card{   
-    align-items: center;
+.mdl-card{       
+     text-align: center;
      width: 100%;
      height: 150%; 
      top: 50%;   
 }
 
-.img{
-     width: 100%;
+#data{ 
+     top: 25%; 
 }
 
-#datos{    
-    align:center;
+.mdl-card__media{
+     width: 100%;
+     height: 150%;
 }
-#contenedor{
-    
-    align:center;
+.img{
+     width: 100%;
+     height: 150%;
+}
+
+.mdl-textfield{
+    width: 100%;
 }
 </style>
 {% endblock %}

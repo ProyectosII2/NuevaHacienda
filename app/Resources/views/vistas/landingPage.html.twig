@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="cover">
-  <div class="bg"></div>
-
-  <div class="title">
-  <form class = "logo" method="post">
-    
-    <a href="{{path('dashboard')}}"><div class="logo" type="submit"></div></a>
-    
-   </form> 
-    <div class="text">
-      Hacienda Real
+    <div class="bg"></div>
+    <div class="title">
+        <form method="post">
+            <a href="{{path('dashboard')}}">
+                <img class="logo" style="border: 0;" src="http://publish.uwo.ca/~hamendt/WD%20final%20Project/images/home.png" />
+            </a>
+        </form>
+        <div class="text">
+            Hacienda Real
+        </div>
+        <div class="desc">
+            Bienvenidos a la Hacienda Real.
+        </div>
     </div>
-    <div class="desc">
-      Bienvenidos a la Hacienda Real.
-    </div>
-  </div>
 </div>
 {% endblock %}
 
@@ -55,11 +54,10 @@
   text-align: center;
   transition: all 1000ms;
 }
-
+/*
 .cover:hover .title {
   filter: blur(2px);
-  -webkit-filter: blur(2px);
-}
+}*/
 
 .title .text {
   font-size: 35px;
@@ -74,15 +72,11 @@
 }
 
 .logo {
-  background: url(http://publish.uwo.ca/~hamendt/WD%20final%20Project/images/home.png);
-  width: 180px;
-  height: 180px;
-  left: 50%;
+  width: 125px;
+  height: 125px;
   position: relative;
-  margin-left: -90px;
   margin-top: 10px;
-  background-size: 180px;
+  background-size: 125px;
 }
-
 </style>
 {% endblock %}
