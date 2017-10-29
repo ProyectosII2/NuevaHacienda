@@ -17,6 +17,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends Controller
 {
+<<<<<<< HEAD
+    public function loadLanding(Request $request)
+=======
     /**
      * @Route("/", name="homepage")
      * 
@@ -31,6 +34,7 @@ class LoginController extends Controller
      * 
      */
     public function loadDashboard(Request $request)
+>>>>>>> master
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();

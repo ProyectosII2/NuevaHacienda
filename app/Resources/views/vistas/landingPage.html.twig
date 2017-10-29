@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="cover">
+  <div class="bg"></div>
+
+  <div class="title">
+  <form class = "logo" method="post">
+    <div class="logo" type="submit">
+    </div>
+   </form> 
+    <div class="text">
+      Hacienda Real
+    </div>
+    <div class="desc">
+      Bienvenidos a la Hacienda Real.
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+.bg {
+  background-image: url(https://www.artescritorio.com/wp-content/uploads/2011/07/wallpaper-1005817.jpg);
+  filter: blur(10px);
+  height: 110%;
+  width: 110%;
+  position: fixed;
+  top: -10px;
+  left: -10px;
+  right: 0;
+  transition: all 1000ms;
+  background-size: 100%;
+  background-position: center;
+}
+
+.bg:hover{
+  filter: blur(0px);
+  background-size: 110%;
+  background-position: center;
+}
+
+.title {
+  font-family: Raleway;
+  width: 300px;
+  height: 350px;
+  z-index: 3;
+  top: 50%;
+  margin-top: -175px;
+  left: 50%;
+  margin-left: -140px;
+  position: absolute;
+  color: #fff;
+  text-align: center;
+  transition: all 1000ms;
+}
+
+.cover:hover .title {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.title .text {
+  font-size: 35px;
+  font-weight: 200;
+  margin-top: 20px;
+}
+
+.title .desc {
+  font-size: 15px;
+  font-weight: 400;
+  margin-top: 30px;
+}
+
+.logo {
+  background: url(http://publish.uwo.ca/~hamendt/WD%20final%20Project/images/home.png);
+  width: 180px;
+  height: 180px;
+  left: 50%;
+  position: relative;
+  margin-left: -90px;
+  margin-top: 10px;
+  background-size: 180px;
+}
+
+</style>
+{% endblock %}
