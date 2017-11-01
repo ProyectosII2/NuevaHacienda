@@ -21,7 +21,7 @@ class LoginController extends Controller
      * @Route("/", name="homepage")
      * 
      */
-    public function loginLanding(Request $request, AuthenticationUtils $utils)
+    public function loadLanding(Request $request, AuthenticationUtils $utils)
     {
         return $this->render('vistas/landingPage.html.twig');
     }
@@ -34,7 +34,7 @@ class LoginController extends Controller
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        dump($this->get('security.token_storage')->getToken());
+        //dump($this->get('security.token_storage')->getToken());
         return $this->render('vistas/dashboard.html.twig',
             array ('username' => $lastusername->getUsername(), 'variable' => $_SESSION['variable']
         ));
@@ -47,7 +47,10 @@ class LoginController extends Controller
     {
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
-        dump($error,$lastUsername,$request);
+        if($error != null)
+        {
+            $error = "Crendenciales erroneas";
+        }
 
         $_SESSION['variable'] = "esta es una variable de sesion";
         return $this->render('vistas/login.html.twig',
