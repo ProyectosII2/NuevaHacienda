@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<!doctype html>
+<form action={{path( "adduser")}} method="post">
+<div style="text-align:center;">
+	Username:<input name="usuario" type="text"  tabindex="1" value=""> <br/>
+	EMail: <input type="text" name="mail" tabindex="2"> <br/>
+	Reingrese EMail: <input type="text" name="secondmail" tabindex="3"> <br/>
+	Contraseña: <input type="password" name="pass" tabindex="4"> <br/>
+	Reingresar Contraseña: <input type="password" name="secondpass" tabindex="5"> <br/>
+	ROL:
+	  <select name="rol" tabindex="6">
+		  <option value="ROLE_USER">Usuario</option>
+		  <option value="ROLE_ADMIN">Administrador</option>
+		</select> <br/>
+	<input type="reset" tabindex="8" value="Resetear"> 
+	<button type="submit" tabindex="7"> Agregar </button>
+    <br/>
+    <label style="color:red;">{{error}}</label>
+</div>
+</form>
+{% endblock %}

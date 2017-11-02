@@ -34,9 +34,10 @@ class LoginController extends Controller
     {
         //$lastusername -> getName();
         $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        //dump($this->get('security.token_storage')->getToken());
+        dump($this->get('security.token_storage')->getToken());
         return $this->render('vistas/dashboard.html.twig',
-            array ('username' => $lastusername->getUsername(), 'variable' => $_SESSION['variable']
+            array ('username' => $lastusername->getUsername(), 
+            'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()
         ));
     }
     /**
@@ -45,6 +46,8 @@ class LoginController extends Controller
      */
     public function loginAction(Request $request, AuthenticationUtils $utils)
     {
+        //Session Variables
+        $_SESSION['error'] = null;
         $error = $utils->getLastAuthenticationError();
         $lastUsername = $utils->getLastUsername();
         if($error != null)
