@@ -40,10 +40,16 @@ class UsersController extends Controller
             $rol = $request->request->get('rol');
             if($this->AddAppUser($username, $password, $checkpassword,$mail, $checkmail, $rol))
             {
-                $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
-                $encodedPassword = $encoder->encodePassword($password,null);
-                dump($password, $encodedPassword);
-                $this->Insert($username, $encodedPassword, $mail, $rol);
+                try
+                {
+                    $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
+                    $encodedPassword = $encoder->encodePassword($password,null);
+                    $this->Insert($username, $encodedPassword, $mail, $rol);
+                } 
+                catch(Exception $ex)
+                {
+                    dump($ex->getMessage());
+                }
                 return $this->render('vistas_test/exito.html.twig',
                 array('var'=>'Usuario Ingresado'));
             }
