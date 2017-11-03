@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
@@ -43,7 +44,15 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-
+   // $username, $pass, $mail, $rol
+    public function constructor($puser, $ppass, $pemail, $prole)
+    {
+        $this->username = $puser;
+        $this->password = $ppass;
+        $this->email = $pemail;
+        $this->role = $prole;
+        $this->isActive = true;
+    }
     public function __construct()
     {
         $this->isActive = true;

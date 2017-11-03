@@ -11,12 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use AppBunlde\Repository;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
+use AppBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class UsersController extends Controller
 {
 
-    
     /**
      * @Route("/adduser",name="adduser")
      * @Security("has_role('ROLE_ADMIN')") 
@@ -37,6 +40,10 @@ class UsersController extends Controller
             $rol = $request->request->get('rol');
             if($this->AddAppUser($username, $password, $checkpassword,$mail, $checkmail, $rol))
             {
+                $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
+                $encodedPassword = $encoder->encodePassword($password,null);
+                dump($password, $encodedPassword);
+                $this->Insert($username, $encodedPassword, $mail, $rol);
                 return $this->render('vistas_test/exito.html.twig',
                 array('var'=>'Usuario Ingresado'));
             }
@@ -75,6 +82,7 @@ class UsersController extends Controller
         return $this->StrenghtPass($password);
 
     }
+    //Contraseña Segura
     private function StrenghtPass($pass)
     {
         if (strlen($pass) < 8) {
@@ -92,5 +100,21 @@ class UsersController extends Controller
             return false;
         }     
         return true;
+    }
+    //Insert
+    public function Insert($username, $pass, $mail, $rol)
+    {
+        // you can fetch the EntityManager via $this->getDoctrine()
+        // or you can add an argument to your action: createAction(EntityManagerInterface $em)
+        $em = $this->getDoctrine()->getManager();
+        
+        $user = new User();
+        $user->constructor($username, $pass, $mail, $rol);
+    
+        // tells Doctrine you want to (eventually) save the Product (no queries yet)
+        $em->persist($user);
+    
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
     }
 }
