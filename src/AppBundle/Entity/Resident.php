@@ -91,12 +91,12 @@ class Resident
 	
 	public function getCreated_at()
 	{
-		return this->created_at
+		return this->created_at;
 	}
 	
 	public function getUpdated_at()
 	{
-		return this->updated_at
+		return this->updated_at;
 	}
 }
 ?>
