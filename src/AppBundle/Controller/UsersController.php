@@ -13,9 +13,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-use AppBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use AppBundle\Entity\User;
+use AppBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 class UsersController extends Controller
 {
@@ -40,10 +43,10 @@ class UsersController extends Controller
             $rol = $request->request->get('rol');
             if($this->AddAppUser($username, $password, $checkpassword,$mail, $checkmail, $rol))
             {
+                $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
+                $encodedPassword = $encoder->encodePassword($password,null);
                 try
                 {
-                    $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
-                    $encodedPassword = $encoder->encodePassword($password,null);
                     $this->Insert($username, $encodedPassword, $mail, $rol);
                 } 
                 catch(Exception $ex)
@@ -56,6 +59,19 @@ class UsersController extends Controller
         }
         return $this->render('vistas_test/formadduser.html.twig',
         array('error'=>$_SESSION['error']));
+    }
+    
+    /**
+     * @Route("/allusers",name="allusers")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * 
+     */
+    public function formGetAll(Request $request)
+    {
+        dump($this->Get_All());
+        return $this->render('vistas_test/gridusers.html.twig',
+        array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
+    ));
     }
     //Chequear 
     private function AddAppUser($username, $password, $checkpassword, $email, $checkmail, $rol)
@@ -107,8 +123,9 @@ class UsersController extends Controller
         }     
         return true;
     }
+    ///Querys-----------------------------------------------------
     //Insert
-    public function Insert($username, $pass, $mail, $rol)
+    private function Insert($username, $pass, $mail, $rol)
     {
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to your action: createAction(EntityManagerInterface $em)
@@ -123,4 +140,19 @@ class UsersController extends Controller
         // actually executes the queries (i.e. the INSERT query)
         $em->flush();
     }
+    //Get all
+    private function Get_All()
+    {
+        /*$result = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findAll();
+        return $result;
+         */
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u');
+        $users = $query->getResult();
+        return $users;
+    
+    }
+    
 }
