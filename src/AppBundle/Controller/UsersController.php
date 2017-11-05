@@ -57,7 +57,7 @@ class UsersController extends Controller
                 array('var'=>'Usuario Ingresado'));
             }
         }
-        return $this->render('vistas_test/formadduser.html.twig',
+        return $this->render('vistas/registro.html.twig',
         array('error'=>$_SESSION['error']));
     }
     
