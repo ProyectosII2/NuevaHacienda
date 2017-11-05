@@ -33,11 +33,12 @@ class LoginController extends Controller
     public function loadDashboard(Request $request)
     {
         //$lastusername -> getName();
-        $lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        dump($this->get('security.token_storage')->getToken());
+        //$lastusername = $this->get('security.token_storage')->getToken()->getUser();
+        //dump($this->get('security.token_storage')->getToken());
         return $this->render('vistas/dashboard.html.twig',
-            array ('username' => $lastusername->getUsername(), 
-            'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()
+            array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'formuser' => null
         ));
     }
     /**

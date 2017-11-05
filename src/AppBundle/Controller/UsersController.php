@@ -53,8 +53,11 @@ class UsersController extends Controller
                 {
                     dump($ex->getMessage());
                 }
-                return $this->render('vistas_test/exito.html.twig',
-                array('var'=>'Usuario Ingresado'));
+                return $this->render('vistas/dashboard.html.twig',
+                array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+                'formuser' => 'Usuario Ingresado'
+                ));
             }
         }
         return $this->render('vistas/registro.html.twig',
