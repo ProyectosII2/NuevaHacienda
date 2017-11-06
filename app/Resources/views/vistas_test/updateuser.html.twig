@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div style="text-align:center;">
-    <br/>
-	<h1 syte="color:green;">Success</h1>
-    <br/>
-    {{var}}
-    <br/>
-    <br/>
-    <a href="{{path('dashboard')}}">
-    <button style="background-color:#4cAF50; color:white; padding:15px 32px; text-decoration:none;
-    display:inline-block;font-size:18px;">Regresar al Dashboard</button>
-    </a>
+
+<form form action={{path( "updateuser")}} method="post">
+<div style="text-align: center">
+	Usuario: <input type="text" name="newusername" tabindex="1"><br/>
+	Email <input type="text" name="mail" tabindex="4"> <br/>
+	Reingrese Email: <input type="text" name="mailcheck"> <br/>
+	Rol: <select name="role">
+		<option value="ROLE_USER">Usuario</option>
+		<option value="ROLE_ADMIN">Administrador</option>
+	</select> <br/> 
+	<input type="checkbox" value="habilitado" name="habilitado" checked> Habilitado <br>
+	<button type="submit">Guardar </button>
 </div>
+</form>
 {% endblock %}

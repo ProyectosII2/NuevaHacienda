@@ -40,6 +40,7 @@ class LoginController extends Controller
             'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'formuser' => null
         ));
+        
     }
     /**
      * @Route("/login", name="login")

@@ -75,7 +75,17 @@ class UsersController extends Controller
         return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
     ));
+    }/**
+     * @Route("/updateuser/{username}",name="updateuser")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * 
+     */
+    public function loadupdateUser(Request $request)
+    {
+        dump($username);
+        return $this->render('vistas_test/updateuser.html.twig');
     }
+
     //Chequear 
     private function AddAppUser($username, $password, $checkpassword, $email, $checkmail, $rol)
     {
