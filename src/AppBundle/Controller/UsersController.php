@@ -97,7 +97,9 @@ class UsersController extends Controller
      */
     public function checkupdate(Request $request)
     { 
-        return null;
+        dump($request->request);
+        return $this->render('vistas_test/exito.html.twig',
+        array ('var'=>'nada importante'));
     }
     //Get_by_username 
     private function Get_by_User($username)

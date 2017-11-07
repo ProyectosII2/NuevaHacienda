@@ -3,6 +3,7 @@
 
 <form form action={{path("checkupdate")}} method="post">
 <div style="text-align: center">
+	<input type="hidden" name="oldusername" value={{username}}>
 	Usuario: <input type="text" name="newusername" tabindex="1" value={{name}}><br/>
 	Email <input type="text" name="mail" tabindex="4" value={{mail}}> <br/>
 	Reingrese Email: <input type="text" name="mailcheck" tabindex="5" value={{mail}}> <br/>
