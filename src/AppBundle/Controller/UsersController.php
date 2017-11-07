@@ -75,17 +75,39 @@ class UsersController extends Controller
         return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
     ));
-    }/**
-     * @Route("/updateuser/{username}",name="updateuser")
-     * @Security("has_role('ROLE_ADMIN')") 
-     * 
-     */
-    public function loadupdateUser(Request $request)
-    {
-        dump($username);
-        return $this->render('vistas_test/updateuser.html.twig');
     }
-
+    /**
+     * @Route("/updateuser/{username}", name="updateuser")
+     * @Security("has_role('ROLE_ADMIN')") 
+     */
+    public function loadupdateUser(Request $request, $username)
+    {
+        $temp = $this->Get_by_User($username);
+        return $this->render('vistas_test/updateuser.html.twig',
+        array('username'=>$username,
+        'name'=>$temp[0]['username'],
+        'mail'=>$temp[0]['email'],
+        'rol'=>$temp[0]['role'], 
+        'active'=>$temp[0]['isActive']));
+     }
+     /**
+     * @Route("/checkupdate", name="checkupdate")
+     * @Security("has_role('ROLE_ADMIN')") 
+     */
+    public function checkupdate(Request $request)
+    { 
+        return null;
+    }
+    //Get_by_username 
+    private function Get_by_User($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u 
+                                WHERE u.username = :username')
+        ->setParameter('username', $username);
+        return $user->getResult();
+    
+    }
     //Chequear 
     private function AddAppUser($username, $password, $checkpassword, $email, $checkmail, $rol)
     {
