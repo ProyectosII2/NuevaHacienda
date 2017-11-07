@@ -13,46 +13,27 @@
                             <th>Email</th>
                             <th>Rol</th>
                             <th>Activo</th>
+                            <th>Accion</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>101001</td>
-                            <td>Ludwing Cano</td>
-                            <td>11 avenida 22- 69</td>
-                            <td>SI</td>
-                        </tr>
-                        <tr>
-                            <td>101002</td>
-                            <td>Kevin Ponce</td>
-                            <td>Universidad</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>101001</td>
-                            <td>Ludwing Cano</td>
-                            <td>11 avenida 22- 69</td>
-                            <td>SI</td>
-                        </tr>
-                        <tr>
-                            <td>101002</td>
-                            <td>Kevin Ponce</td>
-                            <td>Universidad</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>101001</td>
-                            <td>Ludwing Cano</td>
-                            <td>11 avenida 22- 69</td>
-                            <td>SI</td>
-                        </tr>
-                        <tr>
-                            <td>101002</td>
-                            <td>Kevin Ponce</td>
-                            <td>Universidad</td>
-                            <td>No</td>
-                        </tr>
+                        
+                            {% for i in usuarios|keys %}
+                            <tr>
+                                <form action={{path( "login")}} id= {{ usuarios[i]['username']}} method="post">
+                                    <td> {{ usuarios[i]['username']}} </td>
+                                    <td> {{ usuarios[i]['email']}} </td>
+                                    <td> {{ usuarios[i]['role']}} </td>
+                                    <td> {{ usuarios[i]['isActive']}} </td>
+                                    <td> 
+                                        <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </td>                  
+                                </form>                          
+                            </tr>
+                            {% endfor %}                        
                     </tbody>
                 </table>
             </div>    
