@@ -71,7 +71,8 @@ class UsersController extends Controller
      */
     public function formGetAll(Request $request)
     {
-        dump($this->Get_All());
+        dump($this->Get_All());   
+
         return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
     ));
