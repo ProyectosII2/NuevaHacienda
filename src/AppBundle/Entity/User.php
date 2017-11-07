@@ -79,6 +79,10 @@ class User implements UserInterface, \Serializable
     {
         return null;
     }
+    public function getActive()
+    {
+        return $this->isActive;
+    }
 
     public function eraseCredentials()
     {
