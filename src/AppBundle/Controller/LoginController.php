@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-//$session = new Session();
-//$session->start();
-
 
 class LoginController extends Controller
 {
@@ -32,13 +29,13 @@ class LoginController extends Controller
      */
     public function loadDashboard(Request $request)
     {
-        //$lastusername -> getName();
-        //$lastusername = $this->get('security.token_storage')->getToken()->getUser();
-        //dump($this->get('security.token_storage')->getToken());
         return $this->render('vistas/dashboard.html.twig',
             array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            'formuser' => null
+            'formuser' => null,
+            'residences' => null,
+            'residents' => null,
+            'payments' => null,
         ));
         
     }
@@ -61,19 +58,5 @@ class LoginController extends Controller
         return $this->render('vistas/login.html.twig',
             array ('error'=>$error)
         );
-
-        /*
-        $session->set('name', $request->request->get('_username'));
-        if($request->request->has('username_parameter') && $request->request->has('password_parameter'))
-        {
-            //$vect = array('username'=>$request->request->get('username_u'),'password'=>$request->request->get('pass'));
-            //Hay post
-            return $this->redirectToRoute("success");
-
-        } else{
-            //NO hay Post
-            return $this->render('logintest/login.html.twig');
-        }
-        */
     }
 }
