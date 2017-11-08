@@ -56,7 +56,7 @@ class UsersController extends Controller
                 return $this->render('vistas/dashboard.html.twig',
                 array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
                 'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'formuser' => 'Usuario Ingresado'
+                'message' => 'Usuario Ingresado'
                 ));
             }
         }
@@ -89,7 +89,8 @@ class UsersController extends Controller
         'name'=>$temp[0]['username'],
         'mail'=>$temp[0]['email'],
         'rol'=>$temp[0]['role'], 
-        'active'=>$temp[0]['isActive']));
+        'active'=>$temp[0]['isActive'],
+        'error'=>""));
      }
      /**
      * @Route("/checkupdate", name="checkupdate")
@@ -97,9 +98,44 @@ class UsersController extends Controller
      */
     public function checkupdate(Request $request)
     { 
-        dump($request->request);
-        return $this->render('vistas_test/exito.html.twig',
-        array ('var'=>'nada importante'));
+        $_SESSION['error'] = "";
+        if($request->request->has('newusername') && 
+        $request->request->has('oldusername') && 
+        $request->request->has('mail') && 
+        $request->request->has('mailcheck') && 
+        $request->request->has('role'))
+        {
+            //campos
+            $olduser = strtolower($request->request->get('oldusername'));
+            $newuser = strtolower($request->request->get('newusername'));
+            $mail = strtolower($request->request->get('mail'));
+            $mailcheck = strtolower($request->request->get('mailcheck'));
+            $role = $request->request->get('role');
+            $active = false;
+            if($request->request->has('habilitado'))
+            {
+                $active = true;
+            }
+            //Validar
+            //dump($olduser, $newuser, $mail, $mailcheck, $role, $active);
+            
+            $res = "Falló";
+            return $this->render('vistas_test/exito.html.twig',
+            array ('var'=>$res));
+        }
+        else
+        {
+            //No hay campos
+            $_SESSION['error'] = "Llenar todos los campos";
+            $temp = $this->Get_by_User($username);
+            return $this->render('vistas_test/updateuser.html.twig',
+            array('username'=>$username,
+            'name'=>$temp[0]['username'],
+            'mail'=>$temp[0]['email'],
+            'rol'=>$temp[0]['role'], 
+            'active'=>$temp[0]['isActive'],
+            'error'=>$_SESSION['error']));
+        }
     }
     //Get_by_username 
     private function Get_by_User($username)
@@ -118,6 +154,12 @@ class UsersController extends Controller
         if(strlen($username)<=6)
         {
             $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            return false;
+        }
+        //Existe Usuario
+        if($this->Exist($username))
+        {
+            $_SESSION['error'] = "Usuario ya existe";
             return false;
         }
         //Match en pass
@@ -191,6 +233,16 @@ class UsersController extends Controller
         $users = $query->getResult();
         return $users;
     
+    }
+    //Check if User Exist
+    private function Exist($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->createQuery('SELECT u.username FROM AppBundle\Entity\User u 
+                                WHERE u.username = :username')
+        ->setParameter('username', $username);
+        if(empty($user->getResult())){ return false;}
+        return true;
     }
     
 }
