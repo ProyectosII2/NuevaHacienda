@@ -28,7 +28,7 @@ class UsersController extends Controller
      * @Security("has_role('ROLE_ADMIN')") 
      * 
      */
-    public function loadResidentAddForm(Request $request)
+    public function loadUserAddForm(Request $request)
     {   
         $_SESSION['error'] = null;
         if($request->request->has('usuario') && $request->request->has('mail') &&
@@ -56,7 +56,7 @@ class UsersController extends Controller
                 return $this->render('vistas/dashboard.html.twig',
                 array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
                 'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'formuser' => 'Usuario Ingresado'
+                'message' => 'Usuario Ingresado'
                 ));
             }
         }
@@ -71,10 +71,117 @@ class UsersController extends Controller
      */
     public function formGetAll(Request $request)
     {
-        dump($this->Get_All());
-        return $this->render('vistas_test/gridusers.html.twig',
+        dump($this->Get_All());   
+
+        return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
     ));
+    
+    }
+    /**
+     * @Route("/updateuser/{username}", name="updateuser")
+     * @Security("has_role('ROLE_ADMIN')") 
+     */
+    public function loadupdateUser(Request $request, $username)
+    {
+        $temp = $this->Get_by_User($username);
+        return $this->render('vistas_test/updateuser.html.twig',
+        array('username'=>$username,
+        'name'=>$temp[0]['username'],
+        'mail'=>$temp[0]['email'],
+        'rol'=>$temp[0]['role'], 
+        'active'=>$temp[0]['isActive'],
+        'error'=>""));
+     }
+     /**
+     * @Route("/checkupdate", name="checkupdate")
+     * @Security("has_role('ROLE_ADMIN')") 
+     */
+    public function checkupdate(Request $request)
+    { 
+        $_SESSION['error'] = "";
+        if($request->request->has('newusername') && 
+        $request->request->has('oldusername') && 
+        $request->request->has('mail') && 
+        $request->request->has('mailcheck') && 
+        $request->request->has('role'))
+        {
+            //campos
+            $olduser = strtolower($request->request->get('oldusername'));
+            $newuser = strtolower($request->request->get('newusername'));
+            $mail = strtolower($request->request->get('mail'));
+            $mailcheck = strtolower($request->request->get('mailcheck'));
+            $role = $request->request->get('role');
+            $active = false;
+            if($request->request->has('habilitado'))
+            {
+                $active = true;
+            }
+            //Validar
+            //dump($olduser, $newuser, $mail, $mailcheck, $role, $active);
+            if($this->ValidUpdate($olduser, $newuser, $mail, $mailcheck))
+            {
+                //Hacer Update
+                $this->UpdateUser($olduser, $newuser, $mail, $role, $active);
+                return $this->render('vistas/dashboard.html.twig',
+                array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+                'message' => 'Usuario Actualizado'
+                ));
+            }
+        }
+        else
+        {
+            $_SESSION['error']="Llenar todos los campos";
+        }
+        //No hay campos
+        $temp = $this->Get_by_User($username);
+        return $this->render('vistas_test/updateuser.html.twig',
+        array('username'=>$username,
+        'name'=>$temp[0]['username'],
+        'mail'=>$temp[0]['email'],
+        'rol'=>$temp[0]['role'], 
+        'active'=>$temp[0]['isActive'],
+        'error'=>$_SESSION['error']));
+    }
+    //Validar Update
+    private function ValidUpdate($oldusername, $newuser, $mail, $mailcheck)
+    {
+        //Longitud usuario
+        if(strlen($newuser)<=6)
+        {
+            $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            return false;
+        }
+        //Existe Usuario
+        if($this->Exist($newuser))
+        {
+            $_SESSION['error'] = "Usuario ya existe";
+            return false;
+        }
+        //Match en mail
+        if($mail != $mailcheck)
+        {
+            $_SESSION['error'] = "Emails no concuerdan";
+            return false;
+        }
+        //Mail Correcto
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
+        {
+            $_SESSION['error'] = "Email Incorrecto";
+            return false;
+        }
+        return true;
+    }
+    //Get_by_username 
+    private function Get_by_User($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u 
+                                WHERE u.username = :username')
+        ->setParameter('username', $username);
+        return $user->getResult();
+    
     }
     //Chequear 
     private function AddAppUser($username, $password, $checkpassword, $email, $checkmail, $rol)
@@ -83,6 +190,12 @@ class UsersController extends Controller
         if(strlen($username)<=6)
         {
             $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            return false;
+        }
+        //Existe Usuario
+        if($this->Exist($username))
+        {
+            $_SESSION['error'] = "Usuario ya existe";
             return false;
         }
         //Match en pass
@@ -156,6 +269,32 @@ class UsersController extends Controller
         $users = $query->getResult();
         return $users;
     
+    }
+    //Check if User Exist
+    private function Exist($username)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT u.username FROM AppBundle\Entity\User u 
+                                WHERE u.username = :username')
+        ->setParameter('username', $username);
+        if(empty($query->getResult())){ return false;}
+        return true;
+    }
+    //Update
+    private function UpdateUser($olduser, $newuser, $mail, $rol, $active)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT u.id FROM AppBundle\Entity\User u WHERE u.username = :username')
+        ->setParameter('username', $olduser);
+        $result= $query->getResult()[0];
+
+        $user = $em->getRepository(User::class)->find($result);
+    
+        $user->setUsername($newuser);
+        $user->setEmail($mail);
+        $user->setRol($rol);
+        $user->setActive($active);
+        $em->flush();
     }
     
 }
