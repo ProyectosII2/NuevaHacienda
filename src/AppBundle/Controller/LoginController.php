@@ -32,7 +32,10 @@ class LoginController extends Controller
         return $this->render('vistas/dashboard.html.twig',
             array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            'message' => null
+            'formuser' => null,
+            'residences' => null,
+            'residents' => null,
+            'payments' => null,
         ));
         
     }
