@@ -83,6 +83,22 @@ class User implements UserInterface, \Serializable
     {
         return $this->isActive;
     }
+    public function setUsername($puser)
+    {
+        $this->username = $puser;
+    }
+    public function setEmail($pemail)
+    {
+        $this->email = $pemail;
+    }
+    public function setRol($prole)
+    {
+        $this->role = $prole;
+    }
+    public function setActive($boole)
+    {
+        $this->isActive = $boole;
+    }
 
     public function eraseCredentials()
     {

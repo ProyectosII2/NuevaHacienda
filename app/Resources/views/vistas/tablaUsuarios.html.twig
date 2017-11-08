@@ -21,7 +21,7 @@
                         
                             {% for i in usuarios|keys %}
                             <tr>
-                                <form action={{path( "login")}} id= {{ usuarios[i]['username']}} method="post">
+                                <form action={{path("dashboard")}} id= {{ usuarios[i]['username']}} method="post">
                                     <td> {{ usuarios[i]['username']}} </td>
                                     <td> {{ usuarios[i]['email']}} </td>
                                     <td> {{ usuarios[i]['role']}} </td>
