@@ -45,6 +45,9 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: dashboard
+            logout:
+                path:   /logout
+                target: /
 
             #descomentar para permitir conexion a bd!!
             pattern: ^/

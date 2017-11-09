@@ -21,17 +21,21 @@
                         
                             {% for i in usuarios|keys %}
                             <tr>
-                                <form action={{path("dashboard")}} id= {{ usuarios[i]['username']}} method="post">
                                     <td> {{ usuarios[i]['username']}} </td>
                                     <td> {{ usuarios[i]['email']}} </td>
                                     <td> {{ usuarios[i]['role']}} </td>
-                                    <td> {{ usuarios[i]['isActive']}} </td>
+                                    {% if usuarios[i]['isActive']== true %}
+                                        <td> Activo </td>
+                                    {% else %}
+                                        <td> Deshabilitado </td>
+                                    {% endif %}
                                     <td> 
-                                        <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                    <a href="{{ url('updateuser',{'username': usuarios[i]['username']}) }}"
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                                             <i class="material-icons">edit</i>
                                         </button>
-                                    </td>                  
-                                </form>                          
+                                    </a>
+                                    </td>                         
                             </tr>
                             {% endfor %}                        
                     </tbody>

@@ -32,12 +32,16 @@ class LoginController extends Controller
         return $this->render('vistas/dashboard.html.twig',
             array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            'formuser' => null,
+            'message' => null,
             'residences' => null,
             'residents' => null,
             'payments' => null,
         ));
         
+    }
+    private function Dash(Request $request)
+    {
+        return null;
     }
     /**
      * @Route("/login", name="login")

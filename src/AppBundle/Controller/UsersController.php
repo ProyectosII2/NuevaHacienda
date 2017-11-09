@@ -56,8 +56,10 @@ class UsersController extends Controller
                 return $this->render('vistas/dashboard.html.twig',
                 array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
                 'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'message' => 'Usuario Ingresado'
-                ));
+                'message' => null,
+                'residences' => null,
+                'residents' => null,
+                'payments' => null, ));
             }
         }
         return $this->render('vistas/registro.html.twig',
@@ -71,7 +73,6 @@ class UsersController extends Controller
      */
     public function formGetAll(Request $request)
     {
-        dump($this->Get_All());   
 
         return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
@@ -99,15 +100,15 @@ class UsersController extends Controller
      */
     public function checkupdate(Request $request)
     { 
+        
+        $olduser = strtolower($request->request->get('oldusername'));
         $_SESSION['error'] = "";
         if($request->request->has('newusername') && 
-        $request->request->has('oldusername') && 
         $request->request->has('mail') && 
         $request->request->has('mailcheck') && 
         $request->request->has('role'))
         {
             //campos
-            $olduser = strtolower($request->request->get('oldusername'));
             $newuser = strtolower($request->request->get('newusername'));
             $mail = strtolower($request->request->get('mail'));
             $mailcheck = strtolower($request->request->get('mailcheck'));
@@ -118,7 +119,6 @@ class UsersController extends Controller
                 $active = true;
             }
             //Validar
-            //dump($olduser, $newuser, $mail, $mailcheck, $role, $active);
             if($this->ValidUpdate($olduser, $newuser, $mail, $mailcheck))
             {
                 //Hacer Update
@@ -126,8 +126,11 @@ class UsersController extends Controller
                 return $this->render('vistas/dashboard.html.twig',
                 array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
                 'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'message' => 'Usuario Actualizado'
-                ));
+                'message' => null,
+                'residences' => null,
+                'residents' => null,
+                'payments' => null,
+            ));
             }
         }
         else
@@ -135,9 +138,9 @@ class UsersController extends Controller
             $_SESSION['error']="Llenar todos los campos";
         }
         //No hay campos
-        $temp = $this->Get_by_User($username);
+        $temp = $this->Get_by_User($olduser);
         return $this->render('vistas_test/updateuser.html.twig',
-        array('username'=>$username,
+        array('username'=>$olduser,
         'name'=>$temp[0]['username'],
         'mail'=>$temp[0]['email'],
         'rol'=>$temp[0]['role'], 
@@ -154,10 +157,13 @@ class UsersController extends Controller
             return false;
         }
         //Existe Usuario
-        if($this->Exist($newuser))
+        if($newuser!=$oldusername)
         {
-            $_SESSION['error'] = "Usuario ya existe";
-            return false;
+            if($this->Exist($newuser))
+            {
+                $_SESSION['error'] = "Usuario ya existe";
+                return false;
+            }
         }
         //Match en mail
         if($mail != $mailcheck)
@@ -259,11 +265,6 @@ class UsersController extends Controller
     //Get all
     private function Get_All()
     {
-        /*$result = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
-        return $result;
-         */
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u');
         $users = $query->getResult();
