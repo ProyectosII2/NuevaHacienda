@@ -73,7 +73,6 @@ class UsersController extends Controller
      */
     public function formGetAll(Request $request)
     {
-        dump($this->Get_All());   
 
         return $this->render('vistas/tablaUsuarios.html.twig',
         array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
@@ -86,7 +85,6 @@ class UsersController extends Controller
      */
     public function loadupdateUser(Request $request, $username)
     {
-        dump($username);
         $temp = $this->Get_by_User($username);
         return $this->render('vistas_test/updateuser.html.twig',
         array('username'=>$username,
@@ -121,7 +119,6 @@ class UsersController extends Controller
                 $active = true;
             }
             //Validar
-            //dump($olduser, $newuser, $mail, $mailcheck, $role, $active);
             if($this->ValidUpdate($olduser, $newuser, $mail, $mailcheck))
             {
                 //Hacer Update

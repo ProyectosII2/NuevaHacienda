@@ -24,7 +24,11 @@
                                     <td> {{ usuarios[i]['username']}} </td>
                                     <td> {{ usuarios[i]['email']}} </td>
                                     <td> {{ usuarios[i]['role']}} </td>
-                                    <td> {{ usuarios[i]['isActive']}} </td>
+                                    {% if usuarios[i]['isActive']== true %}
+                                        <td> Activo </td>
+                                    {% else %}
+                                        <td> Deshabilitado </td>
+                                    {% endif %}
                                     <td> 
                                     <a href="{{ url('updateuser',{'username': usuarios[i]['username']}) }}"
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
