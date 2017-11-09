@@ -6,10 +6,10 @@
     <div class="col-md-3"></div>
     <div class="col-md-6"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
-            <div class="row" id="contenedor">
+            <div class="row" id="contenedor"> 
                 <div class="col-md-6">
                      <img class="img" src="http://www.nicolegibbonsstyle.com/wp-content/uploads/2016/06/Schlage-front-Door-Makeover-Hero-Gibbons.jpg">
-                </div>
+                </div>               
                 <div class="col-md-6">
                     <div class="mdl-card" id="data">
                         <form action={{path( "login")}} method="post">
@@ -24,6 +24,7 @@
                                 <input class="mdl-textfield__input" type="password" name="_password" id="password_user">
                                 <label class="mdl-textfield__label" for="password_user">Contraseña</label>
                             </div>
+                            <br></br>
                             <!--Button-->
                             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
                                 Ingresar
@@ -49,18 +50,20 @@ body {
 .mdl-card{   
     text-align: center;    
     width: 100%;
-    top:15%;  
+    top:25%;  
     height:auto;     
 }
 
-#data{
-    top: 25%;
-    right:5%;    
-    height:auto;
-}
 .img{
-    max-width: 100%;
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+
+#data{
+    top: 25%;   
     height:auto;
 }
+
 </style>
 {% endblock %}

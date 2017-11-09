@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">    
+	<div class="col-md-3"></div>
+        <div class="col-md-6">
+				<div class="mdl-card mdl-card--border mdl-shadow--16dp" id="contenido">
+					<div class="row">                
+						<div class="col-md-7">
+							<form form action={{path("checkupdate")}} method="post">
+								<p><strong> <h4>ACTUALIZAR USUARIO</h4></strong></p
+								<br></br>									
+									<div class="mdl-textfield mdl-js-textfield">
+										<p><strong> USUARIO	</strong></p>									
+										<input class="mdl-textfield__input" type="hidden" name="oldusername" value={{username}}>								
+										<input class="mdl-textfield__input" type="text" name="newusername" value={{name}}>
+									</div>							
+									<div class="mdl-textfield mdl-js-textfield">
+										<p><strong> EMAIL	</strong></p>
+										<input class="mdl-textfield__input" type="text" name="mail" value={{mail}}>
+									</div> 							
+									<div class="mdl-textfield mdl-js-textfield">								
+										<p><strong> REINGRESAR EMAIL	</strong></p>
+										<input  class="mdl-textfield__input" type="text" name="mailcheck" value={{mail}}>			
+									</div>
+								
+								<div class="mdl-textfield mdl-js-textfield">
+									<p><strong> ROL	</strong></p>
+									<select  class="mdl-textfield__input" name="role">
+										{% if rol == "ROLE_ADMIN" %}
+										<option value="ROLE_USER">Usuario</option>
+										<option value="ROLE_ADMIN" selected="selected">Administrador</option>
+										{% else %}
+										<option value="ROLE_USER" selected="selected">Usuario</option>
+										<option value="ROLE_ADMIN">Administrador</option>
+										{% endif %}
+									</select> 
+								</div>								 
+									{% if active %}
+										<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="habilitado">									
+										<input type="checkbox" value="habilitado" name="habilitado" id="habilitado" class="mdl-checkbox__input" checked>
+										<span class="mdl-checkbox__label">Habilitado</span>
+										</label>
+									{% else %}									 
+										<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="habilitado">									
+										<input type="checkbox" value="habilitado" name="habilitado" id="habilitado" class="mdl-checkbox__input">
+										<span class="mdl-checkbox__label">DesHabilitado</span>
+										</label>								
+									
+									{% endif %}
+									<br></br>
+									<button button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
+									
+									<label style="color:red">{{error}}</label>							
+							</form>	
+						</div>
+						<div class="col-md-5">
+							<img class="img" src="http://cdn.onlinewebfonts.com/svg/download_506119.png">					
+						</div>
+					</div>				
+				</div>
+		</div>
+	<div class="col-md-3"></div>
+	</div>
+</div>	
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+#contenido{
+	background-color: #009688;
+	color:#FFFFFF;
+}
+
+.mdl-card{    
+	padding:5%;   
+    width: 100%;
+    top:10%;  
+    height:auto;
+}
+
+.mdl-button.mdl-button--colored {
+	width: 100%;
+    color: #009688;
+	background: #F5F5F5;
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 100%;
+}
+.mdl-textfield__input{
+	background-color: #00796B;
+}
+	
+.mdl-checkbox__tick-outline{
+	color:#212121;;
+}
+
+.mdl-checkbox.is-checked .mdl-checkbox__tick-outline{
+	background-color: #FFFFFF;
+}
+.img{
+    width: 100%;
+    height:100%;
+    object-fit: scale-down;
+}
+</style>
+{% endblock %}
