@@ -18,12 +18,13 @@ class DashboardController extends Controller
     * @Route("/dashboard",name="dashboard")
      * @Security("has_role('ROLE_USER')") 
     */
-    public function loaddash(Request $request)
+    public function loaddash(Request $request, $message=null)
     {
+        dump($message);
         return $this->render('vistas/dashboard.html.twig',
         array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
         'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-        'message' => null,
+        'message' => $message,
         'residences' => null,
         'residents' => null,
         'payments' => null, ));

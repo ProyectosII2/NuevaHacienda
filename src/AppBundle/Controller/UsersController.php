@@ -44,6 +44,7 @@ class UsersController extends Controller
             {
                 $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
                 $encodedPassword = $encoder->encodePassword($password,null);
+                $message = "Se ingreso con exíto";
                 try
                 {
                     $this->Insert($username, $encodedPassword, $mail, $rol);
@@ -51,8 +52,10 @@ class UsersController extends Controller
                 catch(Exception $ex)
                 {
                     dump($ex->getMessage());
+                    $message = "Fallo en ingreso";
                 }
-                return $this->forward('AppBundle\Controller\DashboardController::loaddash');
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash', 
+                array("message"=>$message));
             }
         }
         return $this->render('vistas/registro.html.twig',
@@ -116,7 +119,8 @@ class UsersController extends Controller
             {
                 //Hacer Update
                 $this->UpdateUser($olduser, $newuser, $mail, $role, $active);
-                return $this->forward('AppBundle\Controller\DashboardController::loaddash');
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+                array("message"=>"Actualización exitosa"));
             }
         }
         else
@@ -125,7 +129,7 @@ class UsersController extends Controller
         }
         //No hay campos
         $temp = $this->Get_by_User($olduser);
-        return $this->render('vistas_test/updateuser.html.twig',
+        return $this->render('vistas/updateuser.html.twig',
         array('username'=>$olduser,
         'name'=>$temp[0]['username'],
         'mail'=>$temp[0]['email'],
@@ -252,7 +256,7 @@ class UsersController extends Controller
     private function Get_All()
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u');
+        $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u ORDER BY u.id');
         $users = $query->getResult();
         return $users;
     
