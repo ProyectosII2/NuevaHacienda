@@ -26,8 +26,8 @@
   height: 110%;
   width: 110%;
   position: fixed;
-  top: -10px;
-  left: -10px;
+  top: -1%;
+  left: -1%;
   right: 0;
   transition: all 1000ms;
   background-size: 100%;
@@ -42,13 +42,13 @@
 
 .title {
   font-family: Raleway;
-  width: 300px;
-  height: 350px;
+  max-width: 25%;
+  height: auto;
   z-index: 3;
   top: 50%;
-  margin-top: -175px;
+  margin-top: -15%;
   left: 50%;
-  margin-left: -140px;
+  margin-left: -14%;
   position: absolute;
   color: #fff;
   text-align: center;
@@ -59,24 +59,24 @@
   filter: blur(2px);
 }*/
 
-.title .text {
-  font-size: 35px;
-  font-weight: 200;
-  margin-top: 20px;
+.text {
+  max-width: 100%;
+  height:auto;
+  font-size: 200%;
+  margin-top: 25%;
 }
 
-.title .desc {
-  font-size: 15px;
-  font-weight: 400;
-  margin-top: 30px;
+.desc {
+  max-width: 100%;
+  height:auto;
+  font-size: 150%;
+  margin-top: 10%;
 }
 
 .logo {
-  width: 125px;
-  height: 125px;
-  position: relative;
+  max-width: 65%;
+  height: auto;
   margin-top: 10px;
-  background-size: 125px;
 }
 </style>
 {% endblock %}

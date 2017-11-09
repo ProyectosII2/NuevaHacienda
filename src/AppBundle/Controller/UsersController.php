@@ -86,7 +86,7 @@ class UsersController extends Controller
     public function loadupdateUser(Request $request, $username)
     {
         $temp = $this->Get_by_User($username);
-        return $this->render('vistas_test/updateuser.html.twig',
+        return $this->render('vistas/updateuser.html.twig',
         array('username'=>$username,
         'name'=>$temp[0]['username'],
         'mail'=>$temp[0]['email'],
