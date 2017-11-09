@@ -2,12 +2,11 @@
 {% block body %}
 <div style="text-align:center;">
     <br/>
-	<h1 syte="color:green;">Success</h1>
+	<h1 syte="color:green;">REGRESAR</h1>
     <br/>
     <br/>
-    {% set foo = '\"julio\"' %}
-    <label>{{foo}}</label> <br/>
-    <a href={{path('updateuser', {'username': "julio" })}}>
+    {% set dir = 'dashboard' %}
+    <a href={{path(dir)}}>
     <br/>
     <button style="background-color:#4cAF50; color:white; padding:15px 32px; text-decoration:none;
     display:inline-block;font-size:18px;">Regresar al Dashboard</button>

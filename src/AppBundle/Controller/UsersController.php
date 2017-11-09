@@ -21,8 +21,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
 
 class UsersController extends Controller
-{
-
+{ 
     /**
      * @Route("/adduser",name="adduser")
      * @Security("has_role('ROLE_ADMIN')") 
@@ -53,13 +52,7 @@ class UsersController extends Controller
                 {
                     dump($ex->getMessage());
                 }
-                return $this->render('vistas/dashboard.html.twig',
-                array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'message' => null,
-                'residences' => null,
-                'residents' => null,
-                'payments' => null, ));
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash');
             }
         }
         return $this->render('vistas/registro.html.twig',
@@ -123,14 +116,7 @@ class UsersController extends Controller
             {
                 //Hacer Update
                 $this->UpdateUser($olduser, $newuser, $mail, $role, $active);
-                return $this->render('vistas/dashboard.html.twig',
-                array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'message' => null,
-                'residences' => null,
-                'residents' => null,
-                'payments' => null,
-            ));
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash');
             }
         }
         else
