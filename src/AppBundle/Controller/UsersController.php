@@ -268,11 +268,6 @@ class UsersController extends Controller
     //Get all
     private function Get_All()
     {
-        /*$result = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
-        return $result;
-         */
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u');
         $users = $query->getResult();

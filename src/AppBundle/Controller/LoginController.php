@@ -39,6 +39,10 @@ class LoginController extends Controller
         ));
         
     }
+    private function Dash(Request $request)
+    {
+        return null;
+    }
     /**
      * @Route("/login", name="login")
      * 
