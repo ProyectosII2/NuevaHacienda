@@ -22,6 +22,18 @@ use Doctrine\ORM\EntityManager;
 
 class UsersController extends Controller
 {
+    /**
+     * @Route("/test",name="test")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * 
+     */
+    public function test(Request $request)
+    {
+        
+        return $this->render('vistas_test/exito.html.twig',
+        array ('var' => "julio"
+        ));
+    }
 
     /**
      * @Route("/adduser",name="adduser")
