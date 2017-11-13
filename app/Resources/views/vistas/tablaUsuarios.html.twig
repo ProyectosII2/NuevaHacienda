@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseNav.html.twig' %}
 
 {% block body %}
 
@@ -6,7 +6,7 @@
     <div class="row">      
         <div class="col-md-3"></div>
         <div class="col-md-6">
-                <table class="mdl-data-table mdl-js-data-table " cellspacing="0" height="auto" max-width="100%" width="100%">
+                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp through mdl-shadow--16dp" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
                             <th>Username</th>
@@ -51,10 +51,10 @@
 {% block stylesheets %}
 <style>
 body {
-    background: #B2DFDB;
+    background: #263238;
 }
 .mdl-data-table{
-    top:50%;
+    top:40%;
 }
 
 .mdl-data-table th {
