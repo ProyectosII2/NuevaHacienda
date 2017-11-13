@@ -22,6 +22,7 @@ class ResidentController extends Controller
      */
     public function loadResidentAddForm(Request $request)
     {
-
+        return $this->render('vistas/addvecino.html.twig');
     }
+
 }
