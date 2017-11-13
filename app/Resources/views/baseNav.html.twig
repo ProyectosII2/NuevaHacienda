@@ -26,17 +26,17 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="">Home</a>
-        <a class="mdl-navigation__link" href="">Salir</a>
+        <a class="mdl-navigation__link" href={{path("dashboard")}}>Home</a>
+        <a class="mdl-navigation__link" href={{path("logout")}}>Salir</a>
       </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Hacienda</span>
     <nav class="mdl-navigation">      
-        <a class="mdl-navigation__link" href="">Home</a>
-        <a class="mdl-navigation__link" href="">Usuarios</a>
-        <a class="mdl-navigation__link" href="">Agregar Usuarios</a>
+        <a class="mdl-navigation__link" href={{path("dashboard")}}>Home</a>
+        <a class="mdl-navigation__link" href={{path("allusers")}}>Usuarios</a>
+        <a class="mdl-navigation__link" href={{path("addusers")}}>Agregar Usuarios</a>
         <a class="mdl-navigation__link" href="">Pagos</a>
         <a class="mdl-navigation__link" href="">Vecinos</a>
         <a class="mdl-navigation__link" href="">Agregar Vecinos</a>
