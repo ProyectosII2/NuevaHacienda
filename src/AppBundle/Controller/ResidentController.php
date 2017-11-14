@@ -25,4 +25,13 @@ class ResidentController extends Controller
         return $this->render('vistas/addvecino.html.twig');
     }
 
+    /**
+     * @Route("/updateresident",name="updateresident")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * 
+     */
+    public function updateResidentForm(Request $request)
+    {
+        return $this->render('vistas/updatevecino.html.twig');
+    }
 }
