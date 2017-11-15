@@ -18,7 +18,10 @@ class ResidentRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('a')
                              ->select('r.resident_code, r.first_name, r.last_name')
                              ->from('AppBundle:resident', 'r')
-                             ->getQuery()->getResult();
+                             ->where('r.id_resident = :id_resident')
+                             ->setParameter(':id_resident', $id_resident)
+                             ->getQuery()
+                             ->getOneOrNullResult();
 
         return $queryBuilder;
     }
