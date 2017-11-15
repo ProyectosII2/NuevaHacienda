@@ -5,15 +5,23 @@
 <div class="container-fluid">
     <div class="row">      
         <div class="col-md-3"></div>
-        <div class="col-md-6">
-                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp through mdl-shadow--16dp" cellspacing="0" height="auto" max-width="100%" width="100%">
+        <div class="col-md-6">  
+ <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+        <div align="right" background-color="#607D8B">          
+            <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser">
+                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                 <i class="material-icons">person_add</i>
+                 </button>
+            </a>
+        </div>    
+                <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                            <th>Activo</th>
-                            <th>Accion</th>
+                            <th>USUARIO</th>
+                            <th>CORREO</th>
+                            <th>ROL</th>
+                            <th>ACTIVO</th>
+                            <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,10 +47,12 @@
                             {% endfor %}                        
                     </tbody>
                 </table>
-            </div>    
+            </div>   
+            </div> 
         <div class="col-md-3"></div>
     </div>
 </div>
+
 {% endblock %}
 
 
@@ -54,7 +64,6 @@ body {
     background: #F5F5F5;
 }
 .mdl-data-table{
-    top:40%;
 }
 
 .mdl-data-table th {
@@ -62,5 +71,21 @@ body {
     color: #ffffff;
 }
 
+.logo {
+  max-width: 10%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.mdl-card{       
+    width: 100%;
+    top:20%;  
+    height:auto;    
+}
+
+.mdl-button.mdl-button--accent:hover{
+	background-color: #F8BBD0;
+	color:#212121;
+}
 </style>
 {% endblock %}
