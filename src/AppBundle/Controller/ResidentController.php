@@ -34,4 +34,18 @@ class ResidentController extends Controller
     {
         return $this->render('vistas/updatevecino.html.twig');
     }
+
+    /**
+     * @Route("/allvecinos",name="allvecinos")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * 
+     */
+    public function formGetAll(Request $request)
+    {
+        $usuarios [] = "";
+        return $this->render('vistas/tablaVecinos.html.twig',
+        array('error'=>$_SESSION['error']
+    ));
+    
+    }
 }
