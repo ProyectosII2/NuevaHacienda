@@ -4,21 +4,15 @@
 <!-- The drawer is always open in large screens. The header is always shown,
   even in small screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-        <label class="mdl-button mdl-js-button mdl-button--icon"
-               for="fixed-header-drawer-exp">
-          <i class="material-icons">search</i>
-        </label>
-        <div class="mdl-textfield__expandable-holder">
-          <input class="mdl-textfield__input" type="text" name="sample"
-                 id="fixed-header-drawer-exp">
-        </div>
-      </div>
-    </div>
-  </header>
+             <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                  <nav class="mdl-navigation mdl-layout--large-screen-only">
+                      <a class="mdl-navigation__link" href={{path("dashboard")}} href="dashboard">Home</a>
+                      <a class="mdl-navigation__link" href={{path("logout")}} href="/">Salir</a>
+                  </nav>  
+                </div>
+              </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title"><strong>Hacienda Real</strong></span>   
     <div class="avatarusuario" align="center"> 
@@ -45,79 +39,10 @@
     </nav>
   </div>
   <main class="mdl-layout__content">
-    <div class="page-content">
-    
+    <div class="page-content">    
     <div class="mdl-grid">
-          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
-            <h4 style="margin:0; margin-bottom:10px;">Residencias activas</h4>
-            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
-                <thead>
-                    <tr>
-                      <th>Código de residencia</th>
-                      <th>Dirección</th>
-                      <th>Teléfono</th>
-                      <th>Sector</th>
-                      <th>Encargado</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {% for residence in residences %}
-                      <tr>
-                        {% for field in fields %}
-                          <td>{{ attribute(residence, field) }}</td>
-                        {% endfor %}
-                      </tr>
-                      {% endfor %}
-                  </tbody>
-            </table>
-          </div>
-          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
-            <h4 style="margin:0; margin-bottom:10px;">Condóminos activos</h4>
-            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
-                <thead>
-                    <tr>
-                      <th>Código de residente</th>
-                      <th>Nombre</th>
-                      <th>Email</th>
-                      <th>Teléfono</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for resident in residents %}
-                    <tr>
-                      {% for field in fields %}
-                        <td>{{ attribute(resident, field) }}</td>
-                      {% endfor %}
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-            </table>
-          </div>
-          <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
-            <h4 style="margin:0; margin-bottom:10px;">Último pagos</h4>
-            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%;">
-                <thead>
-                    <tr>
-                      <th>Código de residencia</th>
-                      <th>Nombre de residente</th>
-                      <th>Monto</th>
-                      <th>Fecha</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {% for payment in payments %}
-                    <tr>
-                      {% for field in fields %}
-                        <td>{{ attribute(payment, field) }}</td>
-                      {% endfor %}
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-            </table>
-          </div>
-        </div>
-    
-    
+          <h1> BIENVENIDO </h1>
+    </div>  
     </div>
   </main>
 </div>
