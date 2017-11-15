@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use Doctrine\ORM\EntityManagerInterface;
+use AppBundle\Entity\Resident;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
+
 class ResidentController extends Controller
 {
 
@@ -22,7 +27,18 @@ class ResidentController extends Controller
      */
     public function loadResidentAddForm(Request $request)
     {
-        return $this->render('vistas/addvecino.html.twig');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $sandbox = $em->getRepository(Resident::class)->loadResidentDataByIdResident(1);
+
+        print_r($sandbox);
+
+        die();
+
+        return $this->render(
+            'vistas/addvecino.html.twig'
+        );
     }
 
     /**
@@ -32,6 +48,8 @@ class ResidentController extends Controller
      */
     public function updateResidentForm(Request $request)
     {
-        return $this->render('vistas/updatevecino.html.twig');
+        return $this->render(
+            'vistas/updatevecino.html.twig'
+        );
     }
 }
