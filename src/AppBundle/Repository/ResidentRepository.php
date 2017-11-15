@@ -2,6 +2,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Resident;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,7 +15,10 @@ class ResidentRepository extends EntityRepository
      */
     public function loadResidentDataByIdResident($id_resident)
     {
-        $queryBuilder = $this->createQueryBuilder();
+        $queryBuilder = $this->createQueryBuilder('a')
+                             ->select('r.resident_code, r.first_name, r.last_name')
+                             ->from('AppBundle:resident', 'r')
+                             ->getQuery()->getResult();
 
         return $queryBuilder;
     }

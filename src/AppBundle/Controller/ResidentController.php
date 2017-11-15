@@ -32,7 +32,7 @@ class ResidentController extends Controller
 
         $sandbox = $em->getRepository(Resident::class)->loadResidentDataByIdResident(1);
 
-        print_r($sandbox);
+        echo "<pre>"; print_r($sandbox); echo "</pre>";
 
         die();
 
