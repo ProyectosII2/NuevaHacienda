@@ -8,9 +8,17 @@
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">                
                 <div class="col-md-12">
-                    <div class="mdl-card" id="data">
-                        <form action={{path( "adduser")}} method="post">
-                            <p class="titulo"><strong> <h6>Registro Usuarios</h6></strong></p>
+                    <div align="left">
+                        <a class="mdl-navigation__link" href={{path("allusers")}} href="/allusers" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                    </div>
+                        
+                        <form action={{path( "adduser")}} method="post">                        
+                            <p><strong> <h4>REGISTRO USUARIO</h4></strong></p>
+                            <br></br>	
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" name="usuario" id="user">
@@ -46,16 +54,16 @@
                             </div> 
                             <br></br>
                             <!--Button-->
-                            <button type="reset" value="Resetear" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
                                 Reiniciar
                             </button>
-                            
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
                                 Agregar
                             </button>
                             <p style="color:red;">{{error}} </p>
                         </form>
-                    </div>
+                    
                 </div>
                 <!--Button
                 <div class="col-md-6">
@@ -76,22 +84,33 @@ body {
     background: #F5F5F5;
 }
 
-.mdl-card{     
-    text-align: center;    
+.mdl-card{  
+    text-align: center;   
+	padding:5%;   
     width: 100%;
     top:5%;  
     height:auto;
 }
 
+.mdl-button.mdl-button--colored {
+	
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 100%;
+}
+
 .img{
     width: 100%;
     height:100%;
-    object-fit: cover;
+    object-fit: scale-down;
 }
 
-#data{;
-    top: 0%;
-    height:auto;
-}
+
 </style>
 {% endblock %}

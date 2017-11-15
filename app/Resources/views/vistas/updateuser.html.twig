@@ -8,8 +8,15 @@
 				<div class="mdl-card mdl-card--border mdl-shadow--16dp" id="contenido">
 					<div class="row">                
 						<div class="col-md-12">
+						 <div align="left">
+                        <a class="mdl-navigation__link" href={{path("allusers")}} href="/allusers" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                    </div>
 							<form form action={{path("checkupdate")}} method="post">
-								<p><strong> <h4>ACTUALIZAR USUARIO</h4></strong></p
+								<p><strong> <h4>ACTUALIZAR USUARIO</h4></strong></p>
 								<br></br>	
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                             		    <input class="mdl-textfield__input" type="text" name="newusername" value={{name}} id="user">
@@ -48,7 +55,9 @@
 									
 									{% endif %}
 									<br></br>
-									<button button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
+									<br></br>
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Eliminar </button>
 									
 									<label style="color:red">{{error}}</label>							
 							</form>	
@@ -71,8 +80,9 @@ body {
     background: #F5F5F5;
 }
 
-.mdl-card{    
-	  padding:5%;   
+.mdl-card{  
+    text-align: center;   
+	padding:5%;   
     width: 100%;
     top:5%;  
     height:auto;
@@ -80,6 +90,15 @@ body {
 
 .mdl-button.mdl-button--colored {
 	width: 100%;
+}
+
+.mdl-button.mdl-button--accent {
+	width: 100%;
+}
+
+.mdl-button.mdl-button--accent:hover{
+	background-color: #F8BBD0;
+	color:#212121;
 }
 
 .mdl-button.mdl-button--colored:hover{
