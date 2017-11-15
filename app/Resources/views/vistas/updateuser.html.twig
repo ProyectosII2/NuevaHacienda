@@ -7,36 +7,34 @@
         <div class="col-md-6">
 				<div class="mdl-card mdl-card--border mdl-shadow--16dp" id="contenido">
 					<div class="row">                
-						<div class="col-md-7">
+						<div class="col-md-12">
 							<form form action={{path("checkupdate")}} method="post">
 								<p><strong> <h4>ACTUALIZAR USUARIO</h4></strong></p
-								<br></br>									
-									<div class="mdl-textfield mdl-js-textfield">
-										<p><strong> USUARIO	</strong></p>									
-										<input class="mdl-textfield__input" type="hidden" name="oldusername" value={{username}}>								
-										<input class="mdl-textfield__input" type="text" name="newusername" value={{name}}>
-									</div>							
-									<div class="mdl-textfield mdl-js-textfield">
-										<p><strong> EMAIL	</strong></p>
-										<input class="mdl-textfield__input" type="text" name="mail" value={{mail}}>
+								<br></br>	
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            		    <input class="mdl-textfield__input" type="text" name="newusername" value={{name}} id="user">
+                                		<label class="mdl-textfield__label" for="user">Usuario</label>
+                            		</div>
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="mail" name="mail" value={{mail}} id="usermail">
+                                		<label class="mdl-textfield__label" for="usermail">Email</label>
 									</div> 							
-									<div class="mdl-textfield mdl-js-textfield">								
-										<p><strong> REINGRESAR EMAIL	</strong></p>
-										<input  class="mdl-textfield__input" type="text" name="mailcheck" value={{mail}}>			
-									</div>
-								
-								<div class="mdl-textfield mdl-js-textfield">
-									<p><strong> ROL	</strong></p>
-									<select  class="mdl-textfield__input" name="role">
-										{% if rol == "ROLE_ADMIN" %}
+																		
+
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" name="rol" id="roluser">
+                                    {% if rol == "ROLE_ADMIN" %}
 										<option value="ROLE_USER">Usuario</option>
 										<option value="ROLE_ADMIN" selected="selected">Administrador</option>
 										{% else %}
 										<option value="ROLE_USER" selected="selected">Usuario</option>
 										<option value="ROLE_ADMIN">Administrador</option>
 										{% endif %}
-									</select> 
-								</div>								 
+                                    </select>
+                                <label class="mdl-textfield__label" for="roluser">Rol</label>
+                            </div> 
+
 									{% if active %}
 										<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="habilitado">									
 										<input type="checkbox" value="habilitado" name="habilitado" id="habilitado" class="mdl-checkbox__input" checked>
@@ -55,9 +53,11 @@
 									<label style="color:red">{{error}}</label>							
 							</form>	
 						</div>
+						<!--Button
 						<div class="col-md-5">
 							<img class="img" src="http://cdn.onlinewebfonts.com/svg/download_506119.png">					
 						</div>
+						-->
 					</div>				
 				</div>
 		</div>
@@ -68,7 +68,7 @@
 {% block stylesheets %}
 <style>
 body {
-    background: #263238;
+    background: #F5F5F5;
 }
 
 .mdl-card{    

@@ -7,7 +7,7 @@
     <div class="col-md-6"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">                
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="mdl-card" id="data">
                         <form action={{path( "adduser")}} method="post">
                             <p class="titulo"><strong> <h6>Registro Usuarios</h6></strong></p>
@@ -47,7 +47,7 @@
                             <br></br>
                             <!--Button-->
                             <button type="reset" value="Resetear" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                Resetear
+                                Reiniciar
                             </button>
                             
                             <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
@@ -57,9 +57,11 @@
                         </form>
                     </div>
                 </div>
+                <!--Button
                 <div class="col-md-6">
                      <img class="img" src="https://static.pexels.com/photos/7294/garden.jpg">              
                  </div>
+                 -->
             </div>
           </div>
     </div>
@@ -71,13 +73,13 @@
 {% block stylesheets %}
 <style>
 body {
-    background: #263238;
+    background: #F5F5F5;
 }
 
 .mdl-card{     
     text-align: center;    
     width: 100%;
-    top:15%;  
+    top:5%;  
     height:auto;
 }
 
@@ -87,8 +89,7 @@ body {
     object-fit: cover;
 }
 
-#data{
-    left:5%;
+#data{;
     top: 0%;
     height:auto;
 }
