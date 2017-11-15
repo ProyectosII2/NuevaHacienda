@@ -7,10 +7,18 @@
     <div class="col-md-6"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">                
-                <div class="col-md-6">
-                    <div class="mdl-card" id="data">
+                <div class="col-md-12">
+                <div align="left">
+                        <a class="mdl-navigation__link" href={{path("allvecinos")}} href="/allvecinos" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                           </div>
                         <form action={{path( "addresident")}} method="post">
-                            <p class="titulo"><strong> <h6>Registro Vecinos</h6></strong></p>
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:15%;height:15%;">
+                        <p><strong> <h4>REGISTRO VECINO</h4></strong></p>
+                           
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" name="vecino" id="vecino">
@@ -41,20 +49,21 @@
 
                             <br></br>
                             <!--Button-->
-                            <button type="reset" value="Resetear" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
                                 Reiniciar
                             </button>
-                            
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
                                 Agregar
                             </button>
                             <p style="color:red;"></p>
                         </form>
                     </div>
-                </div>
+                <!--Button
                 <div class="col-md-6">
                      <img class="img" src="http://cubacute.com/wp-content/uploads/2016/10/abeja-10.jpg">              
                  </div>
+                 -->
             </div>
           </div>
     </div>
@@ -69,11 +78,25 @@ body {
     background: #F5F5F5;
 }
 
-.mdl-card{     
-    text-align: center;    
+.mdl-card{  
+    text-align: center;   
+	padding:5%;   
     width: 100%;
-    top:15%;  
+    top:5%;  
     height:auto;
+}
+
+.mdl-button.mdl-button--colored {
+	
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 100%;
 }
 
 .img{
@@ -82,10 +105,5 @@ body {
     object-fit: cover;
 }
 
-#data{
-    left:5%;
-    top: 0%;
-    height:auto;
-}
 </style>
 {% endblock %}

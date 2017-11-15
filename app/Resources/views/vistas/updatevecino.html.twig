@@ -7,10 +7,16 @@
     <div class="col-md-6"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">              
-                <div class="col-md-6">
-                    <div class="mdl-card" id="data">
+                <div class="col-md-12">  
+                <div align="left">
+                        <a class="mdl-navigation__link" href={{path("allvecinos")}} href="/allvecinos" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                    </div>            
                         <form action={{path( "addresident")}} method="post">
-                            <p class="titulo"><strong> <h6>Update Vecinos</h6></strong></p>
+                            <p><strong> <h4>ACTUALIZAR VECINO</h4></strong></p>
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="text" name="vecino" id="vecino" value="Pablo  Queme">
@@ -46,21 +52,18 @@
 						    									 
 															
                             <br></br>
-                            <!--Button-->
-                            <button type="reset" value="Resetear" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                                Cancelar
-                            </button>
-                            
-                            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--primary">
-                                Actualizar
-                            </button>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
+							<br></br>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Eliminar </button>
+									
                             <p style="color:red;"></p>
                         </form>
-                    </div>
                 </div> 
+                <!--Button
                 <div class="col-md-6">
                      <img class="img" src="http://artshomeremodeling.com/wp-content/uploads/2015/03/to-build-a-home.jpg">              
-                </div>                 
+                </div>  
+                -->               
             </div>
           </div>
     </div>
@@ -75,11 +78,34 @@ body {
     background: #F5F5F5;
 }
 
-.mdl-card{     
-    text-align: center;    
+.mdl-card{  
+    text-align: center;   
+	padding:5%;   
     width: 100%;
-    top:15%;  
+    top:5%;  
     height:auto;
+}
+
+.mdl-button.mdl-button--colored {
+	width: 100%;
+}
+
+.mdl-button.mdl-button--accent {
+	width: 100%;
+}
+
+.mdl-button.mdl-button--accent:hover{
+	background-color: #F8BBD0;
+	color:#212121;
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 100%;
 }
 
 .img{
@@ -88,10 +114,5 @@ body {
     object-fit: cover;
 }
 
-#data{
-    left:5%;
-    top: 0%;
-    height:auto;
-}
 </style>
 {% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'baseNav.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">      
+        <div class="col-md-3"></div>
+        <div class="col-md-6">  
+ <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+        <div align="right" background-color="#607D8B">          
+            <a class="mdl-navigation__link" href={{path("addresident")}} href="/addresident">
+                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                 <i class="material-icons">person_add</i>
+                 </button>
+            </a>
+        </div>    
+                <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
+                    <thead>
+                        <tr>
+                            <th>USUARIO</th>
+                            <th>DPI</th>
+                            <th>EMAIL</th>
+                            <th>TELEFONO</th>
+                            <th>EDITAR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                                    <td> Ludiwng </td>
+                                    <td> ludwign238@gmial.com </td>
+                                    <td> 251178564 </td>                                    
+                                    <td> 5865432 </td> 
+                                    <td> 
+                                    <a href="{{ url('updateresident')}}"
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </a>
+                                    </td>                         
+                            </tr>                       
+                    </tbody>
+                </table>
+            </div>   
+            </div> 
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+.mdl-data-table{
+}
+
+.mdl-data-table th {
+    background-color: rgb(0,150,136);
+    color: #ffffff;
+}
+
+.mdl-card{       
+    width: 100%;
+    top:20%;  
+    height:auto;    
+}
+
+.mdl-button.mdl-button--accent:hover{
+	background-color: #F8BBD0;
+	color:#212121;
+}
+</style>
+{% endblock %}
