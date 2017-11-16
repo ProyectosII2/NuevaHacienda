@@ -25,90 +25,104 @@ class UsersController extends Controller
     /**
      * @Route("/adduser",name="adduser")
      * @Security("has_role('ROLE_ADMIN')") 
-     * 
+     * Recibe POST con los parmametros para agregar usuario
      */
     public function loadUserAddForm(Request $request)
     {   
-        $_SESSION['error'] = null;
+        $_SESSION['error']=null;
+        //Revisa si no falta algun parametro
         if($request->request->has('usuario') && $request->request->has('mail') &&
             $request->request->has('secondmail') && $request->request->has('pass') &&  
             $request->request->has('secondpass') && $request->request->has('rol'))
         {
+            //Pasar todo a minuscula a variables
             $username = strtolower($request->request->get('usuario'));
-            $password =$request->request->get('pass');
+            $password =$request->request->get('pass'); //pass en plaintext
             $checkpassword = $request->request->get('secondpass');
             $mail = strtolower($request->request->get('mail'));
             $checkmail = strtolower($request->request->get('secondmail'));
-            $rol = $request->request->get('rol');
-            if($this->AddAppUser($username, $password, $checkpassword,$mail, $checkmail, $rol))
+            $rol = $request->request->get('rol'); //Rol es ROLE_USER o ROLE_ADMIN
+            //Funcion para validar parametros
+            if($this->UserChecker($username, $password, $checkpassword,$mail, $checkmail, $rol))
             {
-                $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
-                $encodedPassword = $encoder->encodePassword($password,null);
-                $message = "Se ingreso con exíto";
+                $message = "Fallo en ingreso a la base de datos";
                 try
                 {
-                    $this->Insert($username, $encodedPassword, $mail, $rol);
+                    $this->getDoctrine()->getManager()->getRepository(User::class)->InsertUser(
+                        $username, 
+                        $this->EncodePassword($password),
+                        $mail, 
+                        $rol);
+                    $message = "Se ingresó con exíto";
                 } 
-                catch(Exception $ex)
+                catch(\Exception $ex)
                 {
-                    dump($ex->getMessage());
-                    $message = "Fallo en ingreso";
+                    dump($ex);
+                    //retorna la vista
+                    return $this->render('vistas/registro.html.twig',
+                    array('error'=>$message));
                 }
+                //retorna Dashboard con menssage
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash', 
                 array("message"=>$message));
             }
         }
+        //Retorna vista original con mensaje de error
         return $this->render('vistas/registro.html.twig',
         array('error'=>$_SESSION['error']));
     }
-    
     /**
      * @Route("/allusers",name="allusers")
      * @Security("has_role('ROLE_ADMIN')") 
-     * 
+     * Renderiza array de usuarios
      */
-    public function formGetAll(Request $request)
+    public function loadAllUsersForm(Request $request)
     {
-
+        $usuarios = $this->getDoctrine()->getManager()->getRepository(User::class)->GetAll();
         return $this->render('vistas/tablaUsuarios.html.twig',
-        array('error'=>$_SESSION['error'], 'usuarios'=>$this->Get_ALL()
-    ));
+        array('error'=>$_SESSION['error'], 'usuarios'=>$usuarios
+        ));
     
     }
     /**
      * @Route("/updateuser/{username}", name="updateuser")
-     * @Security("has_role('ROLE_ADMIN')") 
+     * @Security("has_role('ROLE_ADMIN')")
+     * Obtiene usuario del parametro y renderiza la vista para editar
      */
-    public function loadupdateUser(Request $request, $username)
+    public function loadUpdateUserForm(Request $request, $username)
     {
-        $temp = $this->Get_by_User($username);
-        return $this->render('vistas/updateuser.html.twig',
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($username);
+        return $this->render('vistas/updateuser.html.twig', 
         array('username'=>$username,
-        'name'=>$temp[0]['username'],
-        'mail'=>$temp[0]['email'],
-        'rol'=>$temp[0]['role'], 
-        'active'=>$temp[0]['isActive'],
+        'name'=>$user->getUsername(),
+        'mail'=>$user->getEmail(),
+        'rol'=>$user->getRoles(), 
+        'active'=>$user->getActive(),
         'error'=>""));
      }
+
      /**
      * @Route("/checkupdate", name="checkupdate")
      * @Security("has_role('ROLE_ADMIN')") 
+     * Check User new data and update
      */
+   
     public function checkupdate(Request $request)
     { 
         
         $olduser = strtolower($request->request->get('oldusername'));
         $_SESSION['error'] = "";
+        //check if there are parameters
         if($request->request->has('newusername') && 
         $request->request->has('mail') && 
         $request->request->has('mailcheck') && 
         $request->request->has('role'))
         {
-            //campos
+            //coloca campos a minuscula
             $newuser = strtolower($request->request->get('newusername'));
             $mail = strtolower($request->request->get('mail'));
             $mailcheck = strtolower($request->request->get('mailcheck'));
-            $role = $request->request->get('role');
+            $role = $request->request->get('role'); //Role puede ser ROLE_USER y ROLE_ADMIN
             $active = false;
             if($request->request->has('habilitado'))
             {
@@ -128,13 +142,14 @@ class UsersController extends Controller
             $_SESSION['error']="Llenar todos los campos";
         }
         //No hay campos
-        $temp = $this->Get_by_User($olduser);
+        $oldus = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($olduser);
+        dump($olduser,$oldus);
         return $this->render('vistas/updateuser.html.twig',
         array('username'=>$olduser,
-        'name'=>$temp[0]['username'],
-        'mail'=>$temp[0]['email'],
-        'rol'=>$temp[0]['role'], 
-        'active'=>$temp[0]['isActive'],
+        'name'=>$oldus->getUsername(),
+        'mail'=>$oldus->getEmail(),
+        'rol'=>$oldus->getRoles(), 
+        'active'=>$oldus->getActive(),
         'error'=>$_SESSION['error']));
     }
     //Validar Update
@@ -169,26 +184,21 @@ class UsersController extends Controller
         }
         return true;
     }
-    //Get_by_username 
-    private function Get_by_User($username)
+    //-----------------------------------FUNCIONES DE APOYO------------------------------
+    /**
+     * Chequear que los parametros estén correctos
+     * Retorna True si no hay problema
+     * Retorna False si hay problema y error en variable error de session
+     */
+    private function UserChecker($username, $password, $checkpassword, $email, $checkmail, $rol)
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u 
-                                WHERE u.username = :username')
-        ->setParameter('username', $username);
-        return $user->getResult();
-    
-    }
-    //Chequear 
-    private function AddAppUser($username, $password, $checkpassword, $email, $checkmail, $rol)
-    {
-        //Longitud usuario
+        //Longitud usuario no menor a 6
         if(strlen($username)<=6)
         {
             $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
             return false;
         }
-        //Existe Usuario
+        //Si ya existe usuario
         if($this->Exist($username))
         {
             $_SESSION['error'] = "Usuario ya existe";
@@ -206,7 +216,7 @@ class UsersController extends Controller
             $_SESSION['error'] = "Emails no concuerdan";
             return false;
         }
-        //Mail Correcto
+        //Regex de mail y longitud no menor a 10
         if(!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email)<10) 
         {
             $_SESSION['error'] = "Email Incorrecto";
@@ -216,51 +226,39 @@ class UsersController extends Controller
         return $this->StrenghtPass($password);
 
     }
-    //Contraseña Segura
+    /**
+     * Revisa que la contraseña sea fuerte, debe contener por lo menos una letra y un número
+     * Retorna True si pasa el chequeo
+     * Retorna Falso si no, error en variable de Session
+     */
     private function StrenghtPass($pass)
     {
+        //Longitud no menor de 8
         if (strlen($pass) < 8) {
             $_SESSION['error'] = "Contraseña debe ser de 8 caracteres mínimo";
             return false;
         }
-    
+        //Cotiene un número
         if (!preg_match("#[0-9]+#", $pass)) {
             $_SESSION['error'] = "Contraseña debe contener por lo menos un número";
             return false;
         }
-    
+        //Contiene una letra
         if (!preg_match("#[a-zA-Z]+#", $pass)) {
             $_SESSION['error'] = "Contraseña debe contener por lo menos una letra";
             return false;
         }     
         return true;
     }
-    ///Querys-----------------------------------------------------
-    //Insert
-    private function Insert($username, $pass, $mail, $rol)
+    /**
+     * Codifica texto a metodo usado en para Users
+     */
+    private function EncodePassword($plain)
     {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to your action: createAction(EntityManagerInterface $em)
-        $em = $this->getDoctrine()->getManager();
-        
-        $user = new User();
-        $user->constructor($username, $pass, $mail, $rol);
-    
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
-        $em->persist($user);
-    
-        // actually executes the queries (i.e. the INSERT query)
-        $em->flush();
+        $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
+        return $encoder->encodePassword($plain,null);
     }
-    //Get all
-    private function Get_All()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive FROM AppBundle\Entity\User u ORDER BY u.id');
-        $users = $query->getResult();
-        return $users;
-    
-    }
+    //------------------------------------Querys-----------------------------------------------------
     //Check if User Exist
     private function Exist($username)
     {

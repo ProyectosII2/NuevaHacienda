@@ -20,7 +20,6 @@ class DashboardController extends Controller
     */
     public function loaddash(Request $request, $message=null)
     {
-        
         return $this->render(
             'vistas/dashboard.html.twig', 
             array (
