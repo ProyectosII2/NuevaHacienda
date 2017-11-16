@@ -20,13 +20,17 @@ class DashboardController extends Controller
     */
     public function loaddash(Request $request, $message=null)
     {
-        dump($message);
-        return $this->render('vistas/dashboard.html.twig',
-        array ('username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-        'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-        'message' => $message,
-        'residences' => null,
-        'residents' => null,
-        'payments' => null, ));
+        
+        return $this->render(
+            'vistas/dashboard.html.twig', 
+            array (
+                'username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+                'message' => $message,
+                'residences' => null,
+                'residents' => null,
+                'payments' => null, 
+            )
+        );
     }
 }

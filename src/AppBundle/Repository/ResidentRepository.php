@@ -3,6 +3,8 @@ namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\Resident;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,22 +33,19 @@ class ResidentRepository extends EntityRepository
      */
     public function createResident($resident_code, $firstname, $lastname, $email, $phone){
 
-        $em = $this->getDoctrine()->getManager();
-
-        $resident = new Resident();
-        $resident->constructor(
-            $resident_code,
-            $firstname,
-            $lastname,
-            $email,
-            $phone,
-            date('dd-mm-yyyy'),
-            date('dd-mm-yyyy')
-        );
-
+        $resident = new Resident($resident_code, 
+                                 $firstname,
+                                 $lastname,
+                                 $email,
+                                 $phone
+                                );
+        
+        $em = $this->getEntityManager();
         $em->persist($resident);
+        $em->flush();
 
-        $em->flush();    
+
+        return $resident;
     }
 }
 ?>

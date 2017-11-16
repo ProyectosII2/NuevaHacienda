@@ -30,7 +30,14 @@ class ResidentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $sandbox = $em->getRepository(Resident::class)->loadResidentDataByIdResident(1);
+        //$sandbox = $em->getRepository(Resident::class)->loadResidentDataByIdResident(1);
+        $sandbox = $em->getRepository(Resident::class)->createResident(
+            2,
+            'Prueba',
+            'Sandbox',
+            'correo',
+            5
+        );
 
         echo "<pre>"; print_r($sandbox); echo "</pre>";
 
