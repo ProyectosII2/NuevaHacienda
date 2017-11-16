@@ -60,4 +60,27 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
         ->getQuery()
         ->getOneOrNullResult();
     }
+    /**
+     * Chequea si existe usuario por username
+     * True si existe, False si no
+     */
+    public function Exist($username)
+    {
+        $res = $this->Get_by_User($username);
+        if(empty($res)){ return false; }
+        return true;
+    }
+    /**
+     * Recibe entidad (olduser), modifica parametros y escribe
+     */
+    public function UpdateUser($olduser, $newuser, $mail, $rol, $active)
+    {
+        $olduser->setUsername($newuser);
+        $olduser->setEmail($mail);
+        $olduser->setRol($rol);
+        $olduser->setActive($active);
+        $em = $this->getEntityManager();
+        $em->flush();
+        return true;
+    }
 }

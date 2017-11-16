@@ -106,11 +106,10 @@ class UsersController extends Controller
      * @Security("has_role('ROLE_ADMIN')") 
      * Check User new data and update
      */
-   
     public function checkupdate(Request $request)
     { 
         
-        $olduser = strtolower($request->request->get('oldusername'));
+        $olduser = strtolower($request->request->get('oldusername')); //Get old username
         $_SESSION['error'] = "";
         //check if there are parameters
         if($request->request->has('newusername') && 
@@ -124,26 +123,31 @@ class UsersController extends Controller
             $mailcheck = strtolower($request->request->get('mailcheck'));
             $role = $request->request->get('role'); //Role puede ser ROLE_USER y ROLE_ADMIN
             $active = false;
+            //Si trae parametro habilitado, active = true
             if($request->request->has('habilitado'))
             {
                 $active = true;
             }
-            //Validar
+            //Validar parametros
             if($this->ValidUpdate($olduser, $newuser, $mail, $mailcheck))
             {
+                //Encuentra objeto a modificar
+                $oldu = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_By_User($olduser);
                 //Hacer Update
-                $this->UpdateUser($olduser, $newuser, $mail, $role, $active);
+                $this->getDoctrine()->getManager()->getRepository(User::class)->Updateuser($oldu, $newuser, $mail, $role, $active);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                 array("message"=>"Actualización exitosa"));
             }
+            $_Session['error']="Error en la base de datos, usuario ya existente?";
         }
         else
         {
             $_SESSION['error']="Llenar todos los campos";
         }
-        //No hay campos
+        //No hay campos/Hubo error
         $oldus = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($olduser);
-        dump($olduser,$oldus);
+        //Retornar a la vista con parametros del usuario a modificar
+        dump($oldus->getRoles());
         return $this->render('vistas/updateuser.html.twig',
         array('username'=>$olduser,
         'name'=>$oldus->getUsername(),
@@ -152,38 +156,7 @@ class UsersController extends Controller
         'active'=>$oldus->getActive(),
         'error'=>$_SESSION['error']));
     }
-    //Validar Update
-    private function ValidUpdate($oldusername, $newuser, $mail, $mailcheck)
-    {
-        //Longitud usuario
-        if(strlen($newuser)<=6)
-        {
-            $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
-            return false;
-        }
-        //Existe Usuario
-        if($newuser!=$oldusername)
-        {
-            if($this->Exist($newuser))
-            {
-                $_SESSION['error'] = "Usuario ya existe";
-                return false;
-            }
-        }
-        //Match en mail
-        if($mail != $mailcheck)
-        {
-            $_SESSION['error'] = "Emails no concuerdan";
-            return false;
-        }
-        //Mail Correcto
-        if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
-        {
-            $_SESSION['error'] = "Email Incorrecto";
-            return false;
-        }
-        return true;
-    }
+    
     //-----------------------------------FUNCIONES DE APOYO------------------------------
     /**
      * Chequear que los parametros estén correctos
@@ -199,7 +172,7 @@ class UsersController extends Controller
             return false;
         }
         //Si ya existe usuario
-        if($this->Exist($username))
+        if($this->getDoctrine()->getManager()->getRepository(User::class)->Exist($username))
         {
             $_SESSION['error'] = "Usuario ya existe";
             return false;
@@ -258,32 +231,39 @@ class UsersController extends Controller
         $encoder = $this->get('security.encoder_factory')->getEncoder('AppBundle\Entity\User');
         return $encoder->encodePassword($plain,null);
     }
-    //------------------------------------Querys-----------------------------------------------------
-    //Check if User Exist
-    private function Exist($username)
+    /**
+     * Valida campos de update
+     */
+    private function ValidUpdate($oldusername, $newuser, $mail, $mailcheck)
     {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT u.username FROM AppBundle\Entity\User u 
-                                WHERE u.username = :username')
-        ->setParameter('username', $username);
-        if(empty($query->getResult())){ return false;}
+        //Longitud usuario no menor a 6
+        if(strlen($newuser)<=6)
+        {
+            $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            return false;
+        }
+        //Si hay cambio de nombre de usuario, revisar que no exista
+        if($newuser!=$oldusername)
+        {
+            if($this->getDoctrine()->getManager()->getRepository(User::class)->Exist($newuser))
+            {
+                $_SESSION['error'] = "Usuario ya existe";
+                return false;
+            }
+        }
+        //Match en mail
+        if($mail != $mailcheck)
+        {
+            $_SESSION['error'] = "Emails no concuerdan";
+            return false;
+        }
+        //Regex de Mail Correcto y no menor a 10 caracteres
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
+        {
+            $_SESSION['error'] = "Email Incorrecto";
+            return false;
+        }
         return true;
-    }
-    //Update
-    private function UpdateUser($olduser, $newuser, $mail, $rol, $active)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT u.id FROM AppBundle\Entity\User u WHERE u.username = :username')
-        ->setParameter('username', $olduser);
-        $result= $query->getResult()[0];
-
-        $user = $em->getRepository(User::class)->find($result);
-    
-        $user->setUsername($newuser);
-        $user->setEmail($mail);
-        $user->setRol($rol);
-        $user->setActive($active);
-        $em->flush();
     }
     
 }
