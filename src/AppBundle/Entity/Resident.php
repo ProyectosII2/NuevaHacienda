@@ -61,7 +61,9 @@ class Resident
 		$this->first_name = $first_name;
 		$this->last_name = $last_name;
 		$this->email = $email;
-		$this->phone = $phone;
+        $this->phone = $phone;
+        $this->created_at = new \DateTime('10-11-2017');
+        $this->updated_at = new \DateTime('10-11-2017');
     }
 	
     public function getResident_code()
