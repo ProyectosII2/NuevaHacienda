@@ -15,39 +15,40 @@
                             </button>
                         </a>
                            </div>
-                        <form action={{path( "addresident")}} method="post">
+                        <form action={{path("addresident")}} method="POST">
                         <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:15%;height:15%;">
                         <p><strong> <h4>REGISTRO VECINO</h4></strong></p>
                            
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="vecino" id="vecino">
-                                <label class="mdl-textfield__label" for="vecino">Nombre Vecino</label>
+                                <input class="mdl-textfield__input" type="text" name="firstname">
+                                <label class="mdl-textfield__label" for="firstnamee">Nombre</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" name="secondname">
+                                <label class="mdl-textfield__label" for="secondname">Apellido</label>
                             </div>
 
                              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="DPI">
+                                <input class="mdl-textfield__input" type="tel" name="DPI" placeholder="1234 12345 1234" 
+        pattern="\d{4} \d{5} \d{4}|\d{13}" min="13" maxlength="15">
                                 <label class="mdl-textfield__label" for="DPI">DPI</label>
                                 <span class="mdl-textfield__error">Ingrese número de DPI</span>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="mail" name="mail" id="usermail">
-                                <label class="mdl-textfield__label" for="usermail">Email</label>
+                                <input class="mdl-textfield__input" type="text" name="email">
+                                <label class="mdl-textfield__label" for="email">Email</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="mail" name="secondmail" id="secondmail">
-                                <label class="mdl-textfield__label" for="secondmail">Reingrese EMail</label>
-                            </div>
-
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="phone">
+                                <input class="mdl-textfield__input" type="tel" name="phone" placeholder="8888 8888" 
+        pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9">
                                 <label class="mdl-textfield__label" for="phone">Telefono</label>
                                 <span class="mdl-textfield__error">Ingrese número de telefono</span>
                             </div>
 
-                            <br></br>
                             <!--Button-->
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
                                 Reiniciar
@@ -55,8 +56,10 @@
                              &nbsp;&nbsp;&nbsp;&nbsp;
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
                                 Agregar
-                            </button>
-                            <p style="color:red;"></p>
+                            </button>   
+                            
+                            <br></br>                                             
+                            <label style="color: red;font-weight: bold;">{{error}}</label>
                         </form>
                     </div>
                 <!--Button
