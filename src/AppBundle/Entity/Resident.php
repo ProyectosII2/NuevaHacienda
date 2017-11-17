@@ -62,8 +62,8 @@ class Resident
 		$this->last_name = $last_name;
 		$this->email = $email;
         $this->phone = $phone;
-        $this->created_at = new \DateTime();
-        $this->updated_at = new \DateTime();
+        $this->created_at = new \DateTime('America/Guatemala');
+        $this->updated_at = new \DateTime('America/Guatemala');
         $this->created_at->format('Y\-m\-d\ h:i:s');
         $this->updated_at->format('Y\-m\-d\ h:i:s');
     }
