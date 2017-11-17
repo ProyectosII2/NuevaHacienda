@@ -3,17 +3,17 @@
 <div>
     <form action={{path("checkupdateresident")}} method="POST">
         <h2 sytle="color:blue;">UPDATE RESIDENT</h2><br/><br/>
-        <input type="hidden" name="oldDPI" value={{code}}/>
+        <input type="hidden" name="oldDPI" value={{code}}>
         DPI: <input type="tel" name="DPI" placeholder="1234 12345 1234" 
-        pattern="\d{4} \d{5} \d{4}|\d{13}" min="13" maxlength="15" value={{code}}/> <br/>
-        Nombre: <input type="text" name="firstname" value={{first}}/><br/>
-        Apellido: <input type="text" name="secondname" value={{second}}/><br/>
-        Email: <input type="text" name="email" value={{mail}}/><br/>
+        pattern="\d{4} \d{5} \d{4}|\d{13}" min="13" maxlength="15" value={{code}}> <br/>
+        Nombre: <input type="text" name="firstname" value={{first}}><br/>
+        Apellido: <input type="text" name="secondname" value={{second}}><br/>
+        Email: <input type="text" name="email" value={{mail}}><br/>
         Phone: <input type="tel" name="phone" placeholder="8888 8888" 
-        pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" value={{phone}}/>
+        pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" value={{phone}}>
         <br/>
         <button type="submit">Guardar</button><br/>
-        <a href="{{ url('deleteresident',{'code': code}) }}"
+        <a href="{{ url('deleteresident',{'code': code}) }}">
         <button type="submit">Eliminar</button></a>
         <br/>
         <label style="color: red;font-weight: bold;">{{error}}</label>

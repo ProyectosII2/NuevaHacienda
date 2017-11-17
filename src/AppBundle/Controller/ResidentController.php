@@ -68,19 +68,21 @@ class ResidentController extends Controller
     }
 
     /**
-     * @Route("/updateresident/{code}", name="updateresident")
+     * @Route("/updateresident/{code}", requirements={"code" = "\d+"}, name="updateresident")
      * @Security("has_role('ROLE_ADMIN')") 
      * Controlador para hacer update de resident segun su codigo
      */
     public function loadResidentUpdateForm(Request $request, $code)
     {
-        
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($code);
-        dump($dpicode->getFirst_Name());
         return $this->render('vistas_test\updatereesident.html.twig',
         array(
             'code'=>$dpicode->getResident_code(),
-            
+            'first'=>$dpicode->getFirst_Name(),
+            'second'=>$dpicode->getLast_name(),
+            'mail'=>$dpicode->getEmail(),
+            'phone'=>$dpicode->getPhone(),
+            'error'=>""
         ));
     }
     /**
@@ -90,12 +92,36 @@ class ResidentController extends Controller
      */
     public function CheckUpdateResident(Request $request)
     {
+        //Revisar que esten los parametros
+        $message = "";
+        $oldDPI = $request->request->get('oldDPI'); //residente
+        if($request->request->has("DPI") && $request->request->has("secondname") && 
+        $request->request->has("firstname") && $request->request->has("email") &&
+        $request->request->has("phone"))
+        {
+            //Asignar Variables
+            $dpi = $request->request->get("DPI");
+            $firstname = $request->request->get("secondname");
+            $lastname = $request->request->get("firstname");
+            $phone = $request->request->get("email");
+            $mail = $request->request->get("phone");
+            $updatetime = new \DateTime('America/Guatemala'); //tiempo de update
+            $this->updated_at->format('Y\-m\-d\ h:i:s');
 
-        return $this->render('vistas_test\exito.html.twig'
-        );
+        }
+        $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
+        return $this->render('vistas_test\updatereesident.html.twig',
+        array(
+            'code'=>$dpicode->getResident_code(),
+            'first'=>$dpicode->getFirst_Name(),
+            'second'=>$dpicode->getLast_name(),
+            'mail'=>$dpicode->getEmail(),
+            'phone'=>$dpicode->getPhone(),
+            'error'=>$message
+        ));
     }
     /**
-     * @Route("/deleteresident/{code}", name="deleteresident")
+     * @Route("/deleteresident/{code}",  requirements={"code" = "\d+"}, name="deleteresident")
      * @Security("has_role('ROLE_ADMIN')") 
      */
     public function deleteResident(Request $request)
@@ -130,6 +156,37 @@ class ResidentController extends Controller
         {
             $_SESSION['error'] = "Residente ya existe";
             return false;
+        }
+        return true;
+    }
+    private function UpdateCheck($first, $last, $mail, &$phone, &$DPI, $oldDPI)
+    {
+        //Longitud no puede ser menor de 3 para el nombre
+        if(strlen($first)<=3)
+        {
+            $_SESSION['error'] = "Primer nombre debe ser mayor a 3";
+            return false;
+        }//Longitud no puede ser menor de 3 para el segundo
+        if(strlen($last)<=3)
+        {
+            $_SESSION['error'] = "Apellido nombre debe ser mayor a 3";
+            return false;
+        }
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
+        {
+            $_SESSION['error'] = "Email Incorrecto";
+            return false;
+        }
+        $DPI = str_replace(' ', '', $DPI);
+        $phone = str_replace(' ', '', $phone);
+        $phone = str_replace('-', '', $phone);
+        if($oldDPI!=$DPI)
+        {
+            if($this->getDoctrine()->getManager()->getRepository(Resident::class)->Exist($DPI))
+            {
+                $_SESSION['error'] = "Residente ya existe";
+                return false;
+            }
         }
         return true;
     }
