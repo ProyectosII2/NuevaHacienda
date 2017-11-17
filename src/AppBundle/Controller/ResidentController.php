@@ -51,7 +51,7 @@ class ResidentController extends Controller
             }
 
         }
-        return $this->render('vistas_test/addresident.html.twig', 
+        return $this->render('vistas/addvecino.html.twig', 
         array('error'=>$_SESSION['error']));
     }
 
