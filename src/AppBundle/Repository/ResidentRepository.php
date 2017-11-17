@@ -103,6 +103,15 @@ class ResidentRepository extends EntityRepository
         $em->flush();
         return true;
     }
+    /**
+     * Delete permanente de residente
+     */
+    public function DelResident($resid)
+    {
+        $em->remove($resid);
+        $em->flush();
+        return true;
+    }
 
 }
 ?>

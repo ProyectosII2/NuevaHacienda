@@ -131,9 +131,17 @@ class ResidentController extends Controller
     /**
      * @Route("/deleteresident/{code}",  requirements={"code" = "\d+"}, name="deleteresident")
      * @Security("has_role('ROLE_ADMIN')") 
+     * @return RedirectResponse
      */
-    public function deleteResident(Request $request)
+    public function deleteResident(Request $request, $code)
     {
+        //Obtiene el residente
+        $oldDPI = $request->request->get("oldDPI");
+        $aeliminar = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
+        $tempmessa = $aeliminar->getFirstName();
+        $this->getDoctrine()->getManager()->getRepository(Resident::class)->DelResident($aeliminar);
+        return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+        array("message"=>$tempmessa + " eliminado exitosamente"));
     }
     //-----------------------------------FUNCIONES PRIVADAS--------------------------------
     /**
