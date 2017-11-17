@@ -20,6 +20,9 @@ class DashboardController extends Controller
     */
     public function loaddash(Request $request, $message=null)
     {
+        //Alternativa para almacenar username y rol, chequear UserRepository
+        //$_SESSION['username'] = $this->get('security.token_storage')->getToken()->getUser()->getUsername();
+        //$_SESSION['rol'] = $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole();
         return $this->render(
             'vistas/dashboard.html.twig', 
             array (
@@ -28,7 +31,7 @@ class DashboardController extends Controller
                 'message' => $message,
                 'residences' => null,
                 'residents' => null,
-                'payments' => null, 
+                'payments' => null,
             )
         );
     }

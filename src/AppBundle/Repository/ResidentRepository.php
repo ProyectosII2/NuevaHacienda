@@ -43,9 +43,22 @@ class ResidentRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->persist($resident);
         $em->flush();
-
-
         return $resident;
+    }
+    /**
+     * Chequea si existe residente por Codigo
+     * Retorna True si existe
+     */
+    public function Exist($code)
+    {
+        $query= $this->createQueryBuilder('u')
+        ->where('u.resident_code=:param')
+        ->setParameter('param', $code)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+        if(empty($query)){ return false; }
+        return true;
     }
 }
 ?>

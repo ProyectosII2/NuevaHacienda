@@ -19,7 +19,7 @@ class Resident
     private $id_resident;
 
     /**
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="string", length=13, unique=true)
      */
     private $resident_code;
 
@@ -34,7 +34,7 @@ class Resident
     private $last_name;
     
 	/**
-     * @ORM\Column(type="string", length=20, unique=true)
+     * @ORM\Column(type="string", length=40, unique=true)
      */
     private $email;
 	
@@ -62,10 +62,11 @@ class Resident
 		$this->last_name = $last_name;
 		$this->email = $email;
         $this->phone = $phone;
-        $this->created_at = new \DateTime('10-11-2017');
-        $this->updated_at = new \DateTime('10-11-2017');
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+        $this->created_at->format('Y\-m\-d\ h:i:s');
+        $this->updated_at->format('Y\-m\-d\ h:i:s');
     }
-	
     public function getResident_code()
     {
         return $this->resident_code;

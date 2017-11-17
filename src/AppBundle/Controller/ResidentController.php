@@ -27,25 +27,32 @@ class ResidentController extends Controller
      */
     public function loadResidentAddForm(Request $request)
     {
+        $_SESSION['error'] = null;
+        //Revisa si hay POST
+        if($request->request->has('email') && $request->request->has('firstname') 
+        && $request->request->has('secondname') && $request->request->has('phone')
+        && $request->request->has('DPI'))
+        {
+            //pasar parametros a variables
+            $email = strtolower($request->request->get('email'));
+            $firstname = strtolower($request->request->get('firstname'));
+            $secondname = strtolower($request->request->get('secondname'));
+            $phone = $request->request->get('phone');
+            $code = $request->request->get('DPI');
+            //Validación de parametros
+            if($this->AddCheck($firstname,$secondname,$email,$phone,$code))
+            {
+                //Pasó validación
+                $this->getDoctrine()->getManager()->getRepository(Resident::class)->
+                createResident(strval($code), $firstname, $secondname, $email, $phone);
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+                array("message"=>"Residente Ingresado"));
 
-        $em = $this->getDoctrine()->getManager();
+            }
 
-        //$sandbox = $em->getRepository(Resident::class)->loadResidentDataByIdResident(1);
-        $sandbox = $em->getRepository(Resident::class)->createResident(
-            2,
-            'Prueba',
-            'Sandbox',
-            'correo',
-            5
-        );
-
-        echo "<pre>"; print_r($sandbox); echo "</pre>";
-
-        die();
-
-        return $this->render(
-            'vistas/addvecino.html.twig'
-        );
+        }
+        return $this->render('vistas_test/addresident.html.twig', 
+        array('error'=>$_SESSION['error']));
     }
 
     /**
@@ -72,5 +79,37 @@ class ResidentController extends Controller
         array('error'=>$_SESSION['error']
     ));
     
+    }
+    //-----------------------------------FUNCIONES PRIVADAS--------------------------------
+    /**
+     * Funcion que chequea parametros de residente
+     */
+    private function AddCheck($first, $last, $mail, &$phone, &$DPI)
+    {
+        //Longitud no puede ser menor de 4 para el nombre
+        if(strlen($first)<=4)
+        {
+            $_SESSION['error'] = "Primer nombre debe ser mayor a 4";
+            return false;
+        }//Longitud no puede ser menor de 4 para el segundo
+        if(strlen($last)<=4)
+        {
+            $_SESSION['error'] = "Apellido nombre debe ser mayor a 4";
+            return false;
+        }
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
+        {
+            $_SESSION['error'] = "Email Incorrecto";
+            return false;
+        }
+        $DPI = str_replace(' ', '', $DPI);
+        $phone = str_replace(' ', '', $phone);
+        $phone = str_replace('-', '', $phone);
+        if($this->getDoctrine()->getManager()->getRepository(Resident::class)->Exist($DPI))
+        {
+            $_SESSION['error'] = "Ya existe";
+            return false;
+        }
+        return true;
     }
 }

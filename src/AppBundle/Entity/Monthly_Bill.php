@@ -39,10 +39,10 @@ class Monthly_Bill
      */
     private $description;
 	 
-    public function __construct($total, $description)
+    public function __construct($ptotal, $pdescription)
     {
-        $this->total = $totale;
-		$this->description = $description;
+        $this->total = $ptotal;
+		$this->description = $pdescription;
     }
 	
     public function getId_residence()

@@ -15,12 +15,16 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      */
     public function loadUserByUsername($username)
     {
-        return $this->createQueryBuilder('u')
+
+        $query = $this->createQueryBuilder('u')
             ->where('(u.username = :username OR u.email = :email) AND u.isActive=TRUE')
             ->setParameter('username', $username)
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
+        //$_SESSION['username'] = $query->getUsername();
+        //$_SESSION['rol'] = $query->getRoles()[0];
+        return $query;
     }
     /**
      * Metodo para Insertar Usuario
