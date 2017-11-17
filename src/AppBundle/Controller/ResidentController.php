@@ -54,20 +54,6 @@ class ResidentController extends Controller
         return $this->render('vistas/addvecino.html.twig', 
         array('error'=>$_SESSION['error']));
     }
-
-    /**
-     * @Route("/updateresident/{code}", name="updateresident")
-     * @Security("has_role('ROLE_ADMIN')") 
-     * Controlador para hacer update de resident
-     */
-    public function loadResidentUpdateForm(Request $request)
-    {
-
-        return $this->render(
-            'vistas_test/updateresident.html.twig'
-        );
-    }
-
     /**
      * @Route("/allresidents",name="allresidents")
      * @Security("has_role('ROLE_ADMIN')") 
@@ -76,10 +62,34 @@ class ResidentController extends Controller
     public function loadAllResidentsForm(Request $request)
     {
         $residentes = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
-        dump($residentes);
         return $this->render('vistas/tablaVecinos.html.twig',
         array('error'=>$_SESSION['error'], 'residentes'=>$residentes
     ));
+    }
+
+    /**
+     * @Route("/updateresident/{code}", name="updateresident")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * Controlador para hacer update de resident
+     */
+    public function loadResidentUpdateForm(Request $request, $code)
+    {
+        
+        $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_User($username);
+        return $this->render('vistas_test\updatereesident.html.twig',
+        array()
+        );
+    }
+    /**
+     * @Route("/checkupdateresident}", name="checkupdateresident")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * Controlador para hacer update de resident
+     */
+    public function CheckUpdateResident(Request $request)
+    {
+
+        return $this->render('vistas_test\exito.html.twig'
+        );
     }
     /**
      * @Route("/deleteresident/{code}", name="deleteresident")
