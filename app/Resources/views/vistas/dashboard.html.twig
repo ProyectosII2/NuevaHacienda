@@ -1,17 +1,5 @@
 {% extends 'baseNav.html.twig' %}
 
-{% block AdminUser %}  
-    
-{% endblock %}
-
-{% block AdminOption %}
- {% if role == "ROLE_ADMIN" %}            
-                <a href={{path("allusers")}} class="mdl-navigation__link" href="allusers"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>&nbsp; &nbsp;Gestion Usuarios</a>
- {% endif %}          
-          
-{% endblock %}
-
-
 {% block body %}
   <div class="title">
         <i style="font-size:200px;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>

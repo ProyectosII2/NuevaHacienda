@@ -14,9 +14,12 @@
         <!-- -->        
         <style>
         .avatar {
-          width: 65px;
-          height: 65px;
+          width: 100;
+          height: 100px;
           border-radius: 25px;
+        }
+        .mdl-navigation__link:hover {
+          text-decoration: none;
         }
         </style>
                 {% block stylesheets %}{% endblock %}
@@ -29,30 +32,30 @@
               <div class="mdl-layout__header-row">
               <div class="mdl-layout-spacer"></div>
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href={{path("dashboard")}} href="dashboard">Home</a>
-                    <a class="mdl-navigation__link" href={{path("logout")}} href="/">Salir</a>
+                    <a class="mdl-navigation__link" style="text-decoration: underline" href={{path("dashboard")}} href="dashboard">Home</a>
+                    <a class="mdl-navigation__link" style="text-decoration: underline" href={{path("logout")}} href="/">Salir</a>
                 </nav>  
               </div>
             </header>
             <div class="mdl-layout__drawer">
               <span class="mdl-layout-title"><strong>Hacienda Real</strong></span>  
-              {% block AdminUser %}
-              {% endblock %}
               <nav class="mdl-navigation">
-              
                 <div class="avatarusuario" align="center"> 
                         {% if role == "ROLE_ADMIN" %}
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyeS11Jc0Lsjvjq-c0QUUViv9fehU--5jJ2jAdBrHQPVvVg8jIQ" class="avatar">
+                          <img src="http://citimedny.com/wp-content/uploads/2016/02/flat-faces-icons-circle-6-min.png" class="avatar">
                         {% endif %}
                         {% if role == "ROLE_USER" %}
-                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmPMIRDYuNJlAKIX73Or3evfjKCHhcAzBOUkM5wSCLE4Y8vb9h3Q" class="avatar">
+                          <img src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png" class="avatar">
                         {% endif %}
-                  <p><strong> {{username}} </strong></p>
-                  </div>
-                <a class="mdl-navigation__link" href={{path("dashboard")}}><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>&nbsp; Panel de Inicio</a>
+                  <p style="text-transform: uppercase"><strong> {{username}} </strong></p>
+                  </div> 
+                <a class="mdl-navigation__link" href={{path("dashboard")}}><i class="mdl-color-text--blue-400 material-icons" role="presentation">dashboard</i>&nbsp; Panel de Inicio</a>
+                  {% if role == "ROLE_ADMIN" %}            
+                <a href={{path("allusers")}} class="mdl-navigation__link" href="allusers"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">person</i>&nbsp; &nbsp;Gestion Usuarios</a>
+                  {% endif %}  
                 <a href={{path("allresidents")}} class="mdl-navigation__link" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>&nbsp; Gestion Residente</a>
-                <a href={{path("adduser")}} class="mdl-navigation__link" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>&nbsp; Gestion Residencia</a>
-                <a href={{path("logout")}} class="mdl-navigation__link" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">highlight_off</i>&nbsp; Salir</a>              
+                <a href={{path("adduser")}} class="mdl-navigation__link" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>&nbsp; Gestion Residencia</a>
+                <a href={{path("logout")}} class="mdl-navigation__link" ><i class="mdl-color-text--red-400 material-icons" role="presentation">highlight_off</i>&nbsp; Salir</a>              
               </nav>
             </div>
             <main class="mdl-layout__content">
