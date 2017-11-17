@@ -13,10 +13,10 @@
         pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" value={{phone}}>
         <br/>
         <button type="submit">Guardar</button><br/>
-        <a href="{{ url('deleteresident',{'code': code}) }}">
-        <button type="submit">Eliminar</button></a>
         <br/>
         <label style="color: red;font-weight: bold;">{{error}}</label>
     </form>
+    <a href="{{ url('deleteresident',{'code': code}) }}">
+    <input type="submit">Eliminar</button></a>
 </div>
 {% endblock %}
