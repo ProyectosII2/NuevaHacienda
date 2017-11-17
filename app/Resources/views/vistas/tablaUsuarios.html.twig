@@ -6,7 +6,21 @@
     <div class="row">      
         <div class="col-md-3"></div>
         <div class="col-md-6">  
-            <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+            <div class="mdl-card mdl-card--border mdl-shadow--16dp">                       
+            
+           
+            <div class="mdl-layout__header-row">
+             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i> 
+                </label>
+
+                <div class="mdl-textfield__expandable-holder mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="search" onkeyup="myFunction()" placeholder="Buscar por nombre">
+                <label class="mdl-textfield__label" for="search"></label>
+                </div>
+            </div>
+            <div class="mdl-layout-spacer"></div>
                 {% if approle == "ROLE_ADMIN" %}
                     <div align="right" background-color="#607D8B">          
                         <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser">
@@ -15,14 +29,15 @@
                             </button>
                         </a>
                     </div>    
-                {% endif %}     
-                <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
+                {% endif %}    
+             </div>  
+                <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
                             <th>USUARIO</th>
-                            <th>DPI</th>
                             <th>EMAIL</th>
-                            <th>TELEFONO</th>
+                            <th>ROL</th>
+                            <th>STATUS</th>
                             {% if approle == "ROLE_ADMIN" %}
                             <th>EDITAR</th>
                             {% endif %}
@@ -59,9 +74,6 @@
 </div>
 
 {% endblock %}
-
-
-
 
 {% block stylesheets %}
 <style>
@@ -102,4 +114,26 @@ body {
 	color:#212121;
 }
 </style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
 {% endblock %}
