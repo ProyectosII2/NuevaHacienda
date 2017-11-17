@@ -126,7 +126,7 @@ class ResidentController extends Controller
 
         }
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
-        return $this->render('vistas_test\updatereesident.html.twig',
+        return $this->render('vistas\updatevecino.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
@@ -146,10 +146,8 @@ class ResidentController extends Controller
     {
         //Obtiene el residente
         $this->getDoctrine()->getManager()->getRepository(Resident::class)->DelResident($code);
-        dump($code);
-        return $this->render('vistas_test\exito.html.twig');
-        //return $this->forward('AppBundle\Controller\DashboardController::loaddash',
-        //array( "message"=>"Residente eliminado exitosamente"));
+        return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+        array( "message"=>"Residente eliminado exitosamente"));
     }
     //-----------------------------------FUNCIONES PRIVADAS--------------------------------
     /**

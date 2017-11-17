@@ -51,13 +51,14 @@
 															
                             <br></br>
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
-							<a href="{{ url('deleteresident',{'code': code}) }}">
-                            <br></br>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Eliminar </button>
 							
                              <label style="color: red;font-weight: bold;">{{error}}</label>
  
                         </form>
+                        <a href="{{ url('deleteresident',{'code': code}) }}">
+                            <br></br>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Eliminar </button>
+							
                 </div> 
                 <!--Button
                 <div class="col-md-6">
