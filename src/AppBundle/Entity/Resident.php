@@ -100,6 +100,31 @@ class Resident
 	public function getUpdated_at()
 	{
 		return $this->updated_at;
-	}
+    }
+    public function setCode($dpi)
+    {
+        $this->resident_code = $dpi;
+    }
+    public function setFirstName($first)
+    {
+        $this->first_name = $first;
+    }
+    public function setLastName($last)
+    {
+        $this->last_name = $last;
+    }
+    public function setPhone($pphone)
+    {
+        $this->phone = $pphone;
+    }
+    public function setEmail($pemail)
+    {
+        $this->email = $pemail;
+    }
+    public function setUpdateTime()
+    {
+        $this->updated_at = new \DateTime('America/Guatemala');
+        $this->updated_at->format('Y\-m\-d\ h:i:s');
+    }
 }
 ?>

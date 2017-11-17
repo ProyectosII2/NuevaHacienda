@@ -86,7 +86,7 @@ class ResidentController extends Controller
         ));
     }
     /**
-     * @Route("/checkupdateresident}", name="checkupdateresident")
+     * @Route("/checkupdateresident", name="checkupdateresident")
      * @Security("has_role('ROLE_ADMIN')") 
      * Controlador para hacer update de resident
      */
@@ -100,13 +100,21 @@ class ResidentController extends Controller
         $request->request->has("phone"))
         {
             //Asignar Variables
-            $dpi = $request->request->get("DPI");
-            $firstname = $request->request->get("secondname");
-            $lastname = $request->request->get("firstname");
-            $phone = $request->request->get("email");
-            $mail = $request->request->get("phone");
-            $updatetime = new \DateTime('America/Guatemala'); //tiempo de update
-            $this->updated_at->format('Y\-m\-d\ h:i:s');
+            $dpi = strtolower($request->request->get("DPI"));
+            $firstname = strtolower($request->request->get("secondname"));
+            $lastname = strtolower($request->request->get("firstname"));
+            $phone = $request->request->get("phone");
+            $mail = strtolower($request->request->get("email"));
+            if($this->UpdateCheck($firstname, $lastname, $mail, $phone, $dpi, $oldDPI))
+            {
+                //Datos validos
+                //Obtener entidad anterior
+                $oldResident = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
+                $this->getDoctrine()->getManager()->getRepository(Resident::class)->Update($oldResident, $dpi, $mail, $firstname, $lastname);
+                //Forward a Dashboard
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+                array("message"=>"Actualización exitosa de residente"));
+            }
 
         }
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
@@ -117,7 +125,7 @@ class ResidentController extends Controller
             'second'=>$dpicode->getLast_name(),
             'mail'=>$dpicode->getEmail(),
             'phone'=>$dpicode->getPhone(),
-            'error'=>$message
+            'error'=>$_SESSION['error']
         ));
     }
     /**
@@ -159,6 +167,9 @@ class ResidentController extends Controller
         }
         return true;
     }
+    /**
+     * Funcion que chequea variables de residente para hacer update
+     */
     private function UpdateCheck($first, $last, $mail, &$phone, &$DPI, $oldDPI)
     {
         //Longitud no puede ser menor de 3 para el nombre

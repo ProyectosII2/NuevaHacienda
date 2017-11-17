@@ -89,5 +89,20 @@ class ResidentRepository extends EntityRepository
         ->getQuery()
         ->getOneOrNullResult();
     }
+    /**
+     * Query para hacer update
+     */
+    public function Update($oldResident, $DPI, $mail, $first, $last)
+    {
+        $oldResident->setFirstName($first);
+        $oldResident->setCode($DPI);
+        $oldResident->setLastName($last);
+        $oldResident->setEmail($mail);
+        $oldResident->setUpdateTime();
+        $em = $this->getEntityManager();
+        $em->flush();
+        return true;
+    }
+
 }
 ?>
