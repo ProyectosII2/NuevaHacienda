@@ -107,7 +107,7 @@ class ResidentController extends Controller
         $phone = str_replace('-', '', $phone);
         if($this->getDoctrine()->getManager()->getRepository(Resident::class)->Exist($DPI))
         {
-            $_SESSION['error'] = "Ya existe";
+            $_SESSION['error'] = "Residente ya existe";
             return false;
         }
         return true;

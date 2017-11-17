@@ -21,7 +21,7 @@ class ResidentRepository extends EntityRepository
                              ->select('r.resident_code, r.first_name, r.last_name')
                              ->from('AppBundle:resident', 'r')
                              ->where('r.id_resident = :id_resident')
-                             ->setParameter(':id_resident', $id_resident)
+                             ->setParameter('id_resident', $id_resident)
                              ->getQuery()
                              ->getOneOrNullResult();
 
@@ -51,14 +51,24 @@ class ResidentRepository extends EntityRepository
      */
     public function Exist($code)
     {
-        $query= $this->createQueryBuilder('u')
-        ->where('u.resident_code=:param')
-        ->setParameter('param', $code)
-        ->getQuery()
-        ->getOneOrNullResult();
 
-        if(empty($query)){ return false; }
+        $query = $this->createQueryBuilder('p')
+        ->from('AppBundle:resident','r')
+        ->where('r.resident_code = :code')
+        ->setParameter('code', $code)
+        ->getQuery();
+
+        if(empty($query->getResult())){ return false; }
         return true;
+    }
+    /**
+     * Select All de Residentes
+     */
+    public function GetAll()
+    {
+        return $this->createQueryBuilder('u')
+        ->getQuery()
+        ->getResult();
     }
 }
 ?>
