@@ -52,18 +52,23 @@ class ResidentController extends Controller
 
         }
         return $this->render('vistas/addvecino.html.twig', 
-        array('error'=>$_SESSION['error']));
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'error'=>$_SESSION['error']));
     }
     /**
      * @Route("/allresidents",name="allresidents")
-     * @Security("has_role('ROLE_ADMIN')") 
      * Carga todos los residentes
      */
     public function loadAllResidentsForm(Request $request)
     {
         $residentes = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
         return $this->render('vistas/tablaVecinos.html.twig',
-        array('error'=>$_SESSION['error'], 'residentes'=>$residentes
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'error'=>$_SESSION['error'], 'residentes'=>$residentes
     ));
     }
 
@@ -75,8 +80,10 @@ class ResidentController extends Controller
     public function loadResidentUpdateForm(Request $request, $code)
     {
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($code);
-        return $this->render('vistas_test\updatereesident.html.twig',
+        return $this->render('vistas\updatevecino.html.twig',
         array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'code'=>$dpicode->getResident_code(),
             'first'=>$dpicode->getFirst_Name(),
             'second'=>$dpicode->getLast_name(),
@@ -113,13 +120,18 @@ class ResidentController extends Controller
                 $this->getDoctrine()->getManager()->getRepository(Resident::class)->Update($oldResident, $dpi, $mail, $firstname, $lastname);
                 //Forward a Dashboard
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
-                array("message"=>"Actualización exitosa de residente"));
+                array(
+                    'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+                    'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+                    "message"=>"Actualización exitosa de residente"));
             }
 
         }
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
         return $this->render('vistas_test\updatereesident.html.twig',
         array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'code'=>$dpicode->getResident_code(),
             'first'=>$dpicode->getFirst_Name(),
             'second'=>$dpicode->getLast_name(),
