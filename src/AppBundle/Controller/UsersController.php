@@ -104,6 +104,7 @@ class UsersController extends Controller
      /**
      * @Route("/checkupdate", name="checkupdate")
      * @Security("has_role('ROLE_ADMIN')") 
+     * @return RedirectResponse
      * Check User new data and update
      */
     public function checkupdate(Request $request)
