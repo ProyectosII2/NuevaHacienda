@@ -23,8 +23,8 @@ class DashboardController extends Controller
         return $this->render(
             'vistas/dashboard.html.twig', 
             array (
-                'username' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-                'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+                'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+                'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
                 'message' => $message,
                 'residences' => null,
                 'residents' => null,

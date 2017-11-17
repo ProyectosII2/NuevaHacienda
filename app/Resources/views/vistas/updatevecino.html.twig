@@ -9,54 +9,54 @@
             <div class="row" id="contenedor">              
                 <div class="col-md-12">  
                 <div align="left">
-                        <a class="mdl-navigation__link" href={{path("allvecinos")}} href="/allvecinos" >
+                        <a class="mdl-navigation__link" href={{path("allresidents")}} href="/allresidents" >
                             <button class="mdl-button mdl-js-button mdl-button--primary">
                             <i class="material-icons">keyboard_arrow_left</i>
                             </button>
                         </a>
                     </div>            
-                        <form action={{path( "addresident")}} method="post">
+                        <form action={{path("checkupdateresident")}} method="POST">
                             <p><strong> <h4>ACTUALIZAR VECINO</h4></strong></p>
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="vecino" id="vecino" value="Pablo  Queme">
-                                <label class="mdl-textfield__label" for="vecino">Nombre Vecino</label>
+                                <input class="mdl-textfield__input" type="text" name="firstname" value={{first}}>
+                                <label class="mdl-textfield__label" for="firstname">Nombre Vecino</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="DPI" value="123456789">
+                                <input class="mdl-textfield__input" type="text" name="secondname" value={{second}}>
+                                <label class="mdl-textfield__label" for="secondname">Apellido Vecino</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input type="hidden" name="oldDPI" value={{code}}>
+                                <input class="mdl-textfield__input" type="tel" name="DPI" placeholder="1234 12345 1234" 
+        pattern="\d{4} \d{5} \d{4}|\d{13}" min="13" maxlength="15" value={{code}}>
                                 <label class="mdl-textfield__label" for="DPI">DPI</label>
                                 <span class="mdl-textfield__error">Ingrese número de DPI</span>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="mail" name="mail" id="usermail" value="abcd@gmail.com">
-                                <label class="mdl-textfield__label" for="usermail">Email</label>
+                                <input class="mdl-textfield__input" type="text" name="email" value={{mail}}>
+                                <label class="mdl-textfield__label" for="email">Email</label>
                             </div>
 
-                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="mail" name="secondmail" id="secondmail" value="abcd@gmail.com">
-                                <label class="mdl-textfield__label" for="secondmail">Reingrese EMail</label>
-                            </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="phone" value="88888888" >
+                                <input class="mdl-textfield__input" type="tel" name="phone" placeholder="8888 8888" 
+        pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" value={{phone}}>
                                 <label class="mdl-textfield__label" for="phone">Telefono</label>
                                 <span class="mdl-textfield__error">Ingrese número de telefono</span>
                             </div>
-                            
-										<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="habilitado">									
-										<input type="checkbox" value="habilitado" name="habilitado" id="habilitado" class="mdl-checkbox__input" checked>
-										<span class="mdl-checkbox__label">Habilitado</span>
-										</label>
-						    									 
 															
                             <br></br>
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
-							<br></br>
+							<a href="{{ url('deleteresident',{'code': code}) }}">
+                            <br></br>
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Eliminar </button>
-									
-                            <p style="color:red;"></p>
+							
+                             <label style="color: red;font-weight: bold;">{{error}}</label>
+ 
                         </form>
                 </div> 
                 <!--Button

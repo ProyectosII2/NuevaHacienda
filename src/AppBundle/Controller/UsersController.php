@@ -69,9 +69,9 @@ class UsersController extends Controller
         }
         //Retorna vista original con mensaje de error
         return $this->render('vistas/registro.html.twig',
-        array(
-            'username' =>  $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-            'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+        array(            
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'error'=>$_SESSION['error']));
     }
     /**
@@ -84,8 +84,8 @@ class UsersController extends Controller
         $usuarios = $this->getDoctrine()->getManager()->getRepository(User::class)->GetAll();
         return $this->render('vistas/tablaUsuarios.html.twig',
         array(
-            'username' =>  $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-            'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'error'=>$_SESSION['error'], 'usuarios'=>$usuarios
         ));
     
@@ -103,8 +103,8 @@ class UsersController extends Controller
         'name'=>$user->getUsername(),
         'mail'=>$user->getEmail(),
         'rol'=>$user->getRoles(),        
-        'username' =>  $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-        'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(), 
+        'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+        'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
         'active'=>$user->getActive(),
         'error'=>""));
      }
@@ -162,8 +162,8 @@ class UsersController extends Controller
         'name'=>$oldus->getUsername(),
         'mail'=>$oldus->getEmail(),
         'rol'=>$oldus->getRoles(), 
-        'username' =>  $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-        'role' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+        'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+        'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
         'active'=>$oldus->getActive(),
         'error'=>$_SESSION['error']));
     }
