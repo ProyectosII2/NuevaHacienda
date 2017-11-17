@@ -82,7 +82,7 @@ class ResidentController extends Controller
     ));
     }
     /**
-     * @Route("/deleteresident/{code}", name="updateresident")
+     * @Route("/deleteresident/{code}", name="deleteresident")
      * @Security("has_role('ROLE_ADMIN')") 
      */
     public function deleteResident(Request $request)
