@@ -22,12 +22,10 @@
 
 
 {% block body %}
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col mdl-cell--middle mdl-typography--text-center" style="height:100%;">
-        <i style="font-size:150px;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
-        <h2 style="color:#78909c;"> ¡Bienvenido! </h2>
+  <div class="title">
+        <i style="font-size:200px;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
+        <h1 style="color:#78909c;"> ¡Bienvenido! </h1>
   </div>
-</div>
 {% endblock %}
 
 
@@ -41,5 +39,11 @@
   border-radius: 25px;
 }
 
+.title {
+  height:100%;
+  text-align: center;
+      padding-left: 40%;
+    padding-top: 15%;
+}
 </style>
 {% endblock %}
