@@ -14,19 +14,18 @@
                  </button>
             </a>
         </div>    
-                <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
+               <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
                             <th>USUARIO</th>
-                            <th>CORREO</th>
-                            <th>ROL</th>
-                            <th>ACTIVO</th>
+                            <th>DPI</th>
+                            <th>EMAIL</th>
+                            <th>TELEFONO</th>
                             <th>EDITAR</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
-                            {% for i in usuarios|keys %}
+                        {% for i in usuarios|keys %}
                             <tr>
                                     <td> {{ usuarios[i]['username']}} </td>
                                     <td> {{ usuarios[i]['email']}} </td>
@@ -44,7 +43,7 @@
                                     </a>
                                     </td>                         
                             </tr>
-                            {% endfor %}                        
+                            {% endfor %}                       
                     </tbody>
                 </table>
             </div>   
@@ -63,12 +62,21 @@
 body {
     background: #F5F5F5;
 }
-.mdl-data-table{
+.mdl-data-table{     
+    table-layout: fixed;
 }
 
 .mdl-data-table th {
     background-color: rgb(0,150,136);
     color: #ffffff;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.mdl-data-table td {
+   overflow: hidden;
+    table-layout: fixed;
+   
 }
 
 .logo {
