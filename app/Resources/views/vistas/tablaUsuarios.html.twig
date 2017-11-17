@@ -6,15 +6,17 @@
     <div class="row">      
         <div class="col-md-3"></div>
         <div class="col-md-6">  
- <div class="mdl-card mdl-card--border mdl-shadow--16dp">
-        <div align="right" background-color="#607D8B">          
-            <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser">
-                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-                 <i class="material-icons">person_add</i>
-                 </button>
-            </a>
-        </div>    
-               <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
+            <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+                {% if role == "ROLE_ADMIN" %}
+                    <div align="right" background-color="#607D8B">          
+                        <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <i class="material-icons">person_add</i>
+                            </button>
+                        </a>
+                    </div>    
+                {% endif %}     
+                <table class="mdl-data-table mdl-js-data-table" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
                             <th>USUARIO</th>
@@ -35,19 +37,21 @@
                                     {% else %}
                                         <td> Deshabilitado </td>
                                     {% endif %}
+                                    {% if role == "ROLE_ADMIN" %}
                                     <td> 
                                     <a href="{{ url('updateuser',{'username': usuarios[i]['username']}) }}"
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                                             <i class="material-icons">edit</i>
                                         </button>
                                     </a>
-                                    </td>                         
+                                    </td> 
+                                    {% endif %}                        
                             </tr>
                             {% endfor %}                       
                     </tbody>
                 </table>
             </div>   
-            </div> 
+        </div> 
         <div class="col-md-3"></div>
     </div>
 </div>
