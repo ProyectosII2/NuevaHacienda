@@ -57,7 +57,7 @@ class ResidentController extends Controller
     /**
      * @Route("/allresidents",name="allresidents")
      * @Security("has_role('ROLE_ADMIN')") 
-     * 
+     * Carga todos los residentes
      */
     public function loadAllResidentsForm(Request $request)
     {
@@ -70,15 +70,18 @@ class ResidentController extends Controller
     /**
      * @Route("/updateresident/{code}", name="updateresident")
      * @Security("has_role('ROLE_ADMIN')") 
-     * Controlador para hacer update de resident
+     * Controlador para hacer update de resident segun su codigo
      */
     public function loadResidentUpdateForm(Request $request, $code)
     {
         
-        $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_User($username);
+        $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($code);
+        dump($dpicode->getFirst_Name());
         return $this->render('vistas_test\updatereesident.html.twig',
-        array()
-        );
+        array(
+            'code'=>$dpicode->getResident_code(),
+            
+        ));
     }
     /**
      * @Route("/checkupdateresident}", name="checkupdateresident")

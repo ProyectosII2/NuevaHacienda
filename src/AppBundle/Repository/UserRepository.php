@@ -22,8 +22,8 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
-        //$_SESSION['username'] = $query->getUsername();
-        //$_SESSION['rol'] = $query->getRoles()[0];
+        $_SESSION['username'] = $query->getUsername();
+        $_SESSION['rol'] = $query->getRoles()[0];
         return $query;
     }
     /**

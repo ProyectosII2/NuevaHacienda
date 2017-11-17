@@ -17,9 +17,8 @@ class ResidentRepository extends EntityRepository
      */
     public function loadResidentDataByIdResident($id_resident)
     {
-        $queryBuilder = $this->createQueryBuilder('a')
+        $queryBuilder = $this->createQueryBuilder('r')
                              ->select('r.resident_code, r.first_name, r.last_name')
-                             ->from('AppBundle:resident', 'r')
                              ->where('r.id_resident = :id_resident')
                              ->setParameter('id_resident', $id_resident)
                              ->getQuery()
@@ -72,6 +71,23 @@ class ResidentRepository extends EntityRepository
         ORDER BY u.last_name ASC, u.first_name ASC');
         $residents = $query->getResult();
         return $residents;
+        
+        /* Forma Alternativa:
+        return $this->createQueryBuilder('r')
+        ->getQuery()
+        ->getArrayResult();
+        */
+    }
+    /**
+     * Obtiene el Residente por su Codigo
+     */
+    public function Get_by_Code($code)
+    {
+        return $this->createQueryBuilder('r')
+        ->where('r.resident_code = :code')
+        ->setParameter(':code', $code)
+        ->getQuery()
+        ->getOneOrNullResult();
     }
 }
 ?>
