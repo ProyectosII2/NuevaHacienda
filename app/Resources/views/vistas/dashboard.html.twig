@@ -1,16 +1,7 @@
 {% extends 'baseNav.html.twig' %}
 
 {% block AdminUser %}  
-    <div class="avatarusuario" align="center"> 
-          {% if role == "ROLE_ADMIN" %}
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyeS11Jc0Lsjvjq-c0QUUViv9fehU--5jJ2jAdBrHQPVvVg8jIQ" class="avatar">
-          {% endif %}
-          {% if role == "ROLE_USER" %}
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmPMIRDYuNJlAKIX73Or3evfjKCHhcAzBOUkM5wSCLE4Y8vb9h3Q" class="avatar">
-          {% endif %}
-    <p><strong> {{username}} </strong></p>
-    <p>{{message}}</p>
-    </div>
+    
 {% endblock %}
 
 {% block AdminOption %}
@@ -33,12 +24,6 @@
 
 {% block stylesheets %}
 <style>
- .avatar {
-  width: 65px;
-  height: 65px;
-  border-radius: 25px;
-}
-
 .title {
   height:100%;
   text-align: center;
