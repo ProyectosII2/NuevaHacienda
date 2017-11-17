@@ -23,7 +23,7 @@ class ResidentController extends Controller
     /**
      * @Route("/addresident",name="addresident")
      * @Security("has_role('ROLE_ADMIN')") 
-     * 
+     * Ingreso de residentes
      */
     public function loadResidentAddForm(Request $request)
     {
@@ -62,21 +62,22 @@ class ResidentController extends Controller
      */
     public function updateResidentForm(Request $request)
     {
+
         return $this->render(
             'vistas/updatevecino.html.twig'
         );
     }
 
     /**
-     * @Route("/allvecinos",name="allvecinos")
+     * @Route("/allresidents",name="allresidents")
      * @Security("has_role('ROLE_ADMIN')") 
      * 
      */
-    public function formGetAll(Request $request)
+    public function loadAllResidentsForm(Request $request)
     {
-        $usuarios [] = "";
+        $residentes = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
         return $this->render('vistas/tablaVecinos.html.twig',
-        array('error'=>$_SESSION['error']
+        array('error'=>$_SESSION['error'], 'residentes'=>$residentes
     ));
     
     }
@@ -86,15 +87,15 @@ class ResidentController extends Controller
      */
     private function AddCheck($first, $last, $mail, &$phone, &$DPI)
     {
-        //Longitud no puede ser menor de 4 para el nombre
-        if(strlen($first)<=4)
+        //Longitud no puede ser menor de 3 para el nombre
+        if(strlen($first)<=3)
         {
-            $_SESSION['error'] = "Primer nombre debe ser mayor a 4";
+            $_SESSION['error'] = "Primer nombre debe ser mayor a 3";
             return false;
-        }//Longitud no puede ser menor de 4 para el segundo
-        if(strlen($last)<=4)
+        }//Longitud no puede ser menor de 3 para el segundo
+        if(strlen($last)<=3)
         {
-            $_SESSION['error'] = "Apellido nombre debe ser mayor a 4";
+            $_SESSION['error'] = "Apellido nombre debe ser mayor a 3";
             return false;
         }
         if(!filter_var($mail, FILTER_VALIDATE_EMAIL) || strlen($mail)<10) 
