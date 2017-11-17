@@ -32,11 +32,7 @@
                                     <td> {{ residentes[i]['email']}} </td>
                                     <td> {{ residentes[i]['phone']}} </td>
                                     <td> 
-<<<<<<< HEAD
-                                    <a href="{{ url('updateuser',{'username': residentes[i]['first_name']}) }}"
-=======
-                                    <a href="{{ url('updateresident',{'code': residentes[i]['resident_code']}) }}"
->>>>>>> master
+                                    <a href="{{ url('updateresident',{'code': residentes[i]['resident_code']}) }}">
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                                             <i class="material-icons">edit</i>
                                         </button>
