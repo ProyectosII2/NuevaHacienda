@@ -1,33 +1,10 @@
 {% extends 'baseNav.html.twig' %}
 
-{% block AdminUser %}  
-    <div class="avatarusuario" align="center"> 
-          {% if role == "ROLE_ADMIN" %}
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXyeS11Jc0Lsjvjq-c0QUUViv9fehU--5jJ2jAdBrHQPVvVg8jIQ" class="avatar">
-          {% endif %}
-          {% if role == "ROLE_USER" %}
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmPMIRDYuNJlAKIX73Or3evfjKCHhcAzBOUkM5wSCLE4Y8vb9h3Q" class="avatar">
-          {% endif %}
-    <p><strong> {{username}} </strong></p>
-    <p>{{message}}</p>
-    </div>
-{% endblock %}
-
-{% block AdminOption %}
- {% if role == "ROLE_ADMIN" %}            
-                <a href={{path("allusers")}} class="mdl-navigation__link" href="allusers"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>&nbsp; &nbsp;Gestion Usuarios</a>
- {% endif %}          
-          
-{% endblock %}
-
-
 {% block body %}
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col mdl-cell--middle mdl-typography--text-center" style="height:100%;">
-        <i style="font-size:150px;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
-        <h2 style="color:#78909c;"> ¡Bienvenido! </h2>
+  <div class="title">
+        <i style="font-size:200px;" class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>
+        <h1 style="color:#78909c;"> ¡Bienvenido! </h1>
   </div>
-</div>
 {% endblock %}
 
 
@@ -35,11 +12,11 @@
 
 {% block stylesheets %}
 <style>
- .avatar {
-  width: 65px;
-  height: 65px;
-  border-radius: 25px;
+.title {
+  height:100%;
+  text-align: center;
+      padding-left: 40%;
+    padding-top: 15%;
 }
-
 </style>
 {% endblock %}
