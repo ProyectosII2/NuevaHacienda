@@ -35,8 +35,8 @@ class ResidentController extends Controller
         {
             //pasar parametros a variables
             $email = strtolower($request->request->get('email'));
-            $firstname = strtolower($request->request->get('firstname'));
-            $secondname = strtolower($request->request->get('secondname'));
+            $firstname = strtoupper($request->request->get('firstname'));
+            $secondname = strtoupper($request->request->get('secondname'));
             $phone = $request->request->get('phone');
             $code = $request->request->get('DPI');
             //Validación de parametros
@@ -108,8 +108,8 @@ class ResidentController extends Controller
         {
             //Asignar Variables
             $dpi = strtolower($request->request->get("DPI"));
-            $firstname = strtolower($request->request->get("secondname"));
-            $lastname = strtolower($request->request->get("firstname"));
+            $firstname = strtoupper($request->request->get("firstname"));
+            $lastname = strtoupper($request->request->get("secondname"));
             $phone = $request->request->get("phone");
             $mail = strtolower($request->request->get("email"));
             if($this->UpdateCheck($firstname, $lastname, $mail, $phone, $dpi, $oldDPI))
