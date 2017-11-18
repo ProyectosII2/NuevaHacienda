@@ -65,5 +65,21 @@ class Residence
     {
         return $this->sector;
     }
+
+    public function setResidence_code($residence_code){
+        $this->residence_code = $residence_code;
+    }
+
+    public function setTelephone($telephone){
+        $this->telephone = $telephone;
+    }
+
+    public function setAddress($address){
+        $this->address = $address;
+    }
+
+    public function setSector($sector){
+        $this->sector = $sector;
+    }
 }
 ?>
