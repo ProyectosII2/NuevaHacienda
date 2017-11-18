@@ -1,6 +1,6 @@
 <?php
 
-//src/AppBundle/Controller/PagosController.php
+//src/AppBundle/Controller/TarjetasController.php
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,14 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class PagosController extends Controller
+class TarjetasController extends Controller
 {
     /**
-     * @Route("/payment", name="payment")
-     * @Security("has_role('ROLE_USER')") 
+     * @Route("/activecards", name="activecards")
+     * @Security("has_role('ROLE_ADMIN')") 
      */
     public function loadLanding(Request $request, AuthenticationUtils $utils)
     {
-        return $this->render('vistas/pagos.html.twig');
+        return $this->render('vistas/tarjetasactivas.html.twig');
     }
 }
