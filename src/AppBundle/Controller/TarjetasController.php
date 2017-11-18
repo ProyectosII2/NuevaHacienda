@@ -18,7 +18,7 @@ class TarjetasController extends Controller
      * @Route("/activecards", name="activecards")
      * @Security("has_role('ROLE_ADMIN')") 
      */
-    public function loadLanding(Request $request, AuthenticationUtils $utils)
+    public function loadActiveCardsForm(Request $request, AuthenticationUtils $utils)
     {
         return $this->render('vistas/tarjetasactivas.html.twig');
     }

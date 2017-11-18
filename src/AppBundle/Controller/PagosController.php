@@ -18,7 +18,7 @@ class PagosController extends Controller
      * @Route("/payment", name="payment")
      * @Security("has_role('ROLE_USER')") 
      */
-    public function loadLanding(Request $request, AuthenticationUtils $utils)
+    public function loadPaymentForm(Request $request, AuthenticationUtils $utils)
     {
         return $this->render('vistas/pagos.html.twig');
     }
