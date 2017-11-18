@@ -20,6 +20,9 @@ class TarjetasController extends Controller
      */
     public function loadActiveCardsForm(Request $request, AuthenticationUtils $utils)
     {
-        return $this->render('vistas/tarjetasactivas.html.twig');
+        return $this->render('vistas/tarjetasactivas.html.twig',
+        array('appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+        'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+        'error'=>$_SESSION['error']));
     }
 }
