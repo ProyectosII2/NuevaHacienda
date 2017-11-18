@@ -9,6 +9,11 @@ php bin/console doctrine:database:create
 5. autogenerar tabla usuarios (app_users)
 php bin/console doctrine:schema:update --force --verbose
 
+Comando para borrar bdd y volverla a hacer
+
+cls && echo Creando bdd && php bin/console doctrine:database:create && echo Creando Schema && php bin/console doctrine:schema:update --force --verbose
+
+
 
 /* inserts despues de mapear proyecto en symfony con php
 bcrypt hash*/
