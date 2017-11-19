@@ -24,25 +24,21 @@ class Monthly_Bill
      */
 	private $id_residence;
 	
+	/**
+     * @ORM\OneToOne(targetEntity="monthly_pay", inversedBy="monthly_bill_pay")
+     * @ORM\JoinColumn(name="id_monthly_pay", referencedColumnName="id_monthly_pay")
+     */
+	private $id_monthly_pay;
+	
 	 /**
      * @ORM\Column(type="datetime", name="date")
      */
 	 private $date;
 	 
-	 /**
-     * @ORM\Column(type="decimal", name="total")
-     */
-	 private $total;
-	 
-	 /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $description;
-	 
-    public function __construct($ptotal, $pdescription)
+    public function __construct()
     {
-        $this->total = $ptotal;
-		$this->description = $pdescription;
+        $this->id_residence = null;
+		$this->id_monthly_pay = null;
     }
 	
     public function getId_residence()
@@ -50,19 +46,14 @@ class Monthly_Bill
         return $this->id_residence;
     }
 
+	public function getId_monthly_pay()
+    {
+        return $this->id_monthly_pay;
+    }
+	
     public function getDate()
     {
         return $this->date;
-    }
-
-    public function getTotal()
-    {
-        return $this->total;
-    }
-	
-    public function getDescription()
-    {
-        return $this->description;
     }
 }
 ?>

@@ -13,32 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class ResidenceRepository
 {
     /**
-     * Método que permite obtener cada residencia utilizando como
-     * parametro el id de la residencia
+     * Método que permite crear una nueva residencia enviando los parametros necesarios de cada residencia
      */
-    public function loadResidenceDataByIdResidence($id_residence)
-    {
-        $queryBuilder = $this->createQueryBuilder('r')
-                             ->select('r.code_residence, r.resident_code, r.address, r.telephone, r.sector')
-                             ->where('r.id_residence = :id_residence')
-                             ->setParameter('id_residence', $id_residence)
-                             ->getQuery()
-                             ->getOneOrNullResult();
-
-        return $queryBuilder;
-    }
-
-    /**
-     * Método que permite crear una nueva residencia enviando los parametros
-     * necesarios de cada residencia
-     */
-    public function createResidence($residence_code, $telephone, $address, $sector){
+    public function createResidence($residence_code, $telephone, $address, $sector, $residentid){
 
         $residence = new Residence($residence_code,
                                    $resident_code,
                                    $telephone,
                                    $address,
-                                   $sector
+                                   $sector,
+                                   $residetid
                                  );
         
         $em = $this->getEntityManager();
@@ -52,11 +36,11 @@ class ResidenceRepository
      */
     public function Exist($code)
     {
-        $query = $this->createQueryBuilder('p')
-                      ->from('AppBundle:residence','r')
-                      ->where('r.residence_code = :code')
-                      ->setParameter('code', $code)
-                      ->getQuery();
+        $query = $this->createQueryBuilder('r')
+        ->where('r.residence_code = :code')
+        ->setParameter(':code', $code)
+        ->getQuery()
+        ->getOneOrNullResult();
 
         if(empty($query->getResult())){ return false; }
         return true;
@@ -70,9 +54,9 @@ class ResidenceRepository
     {
         $em = $this->getEntityManager();
 
-        $query = $em->createQuery('SELECT u.residence_code, u.resident_code, u.telephone, u.address, u.sector
+        $query = $em->createQuery('SELECT u.resident_code, u.telephone, u.address, u.sector, u.id_resident
                                    FROM AppBundle\Entity\Residence u 
-                                   ORDER BY u.residence_code ASC, u.resident_code ASC'
+                                   ORDER BY u.sector ASC, u.resident_code ASC'
                                  );
 
         $residents = $query->getResult();
@@ -85,11 +69,11 @@ class ResidenceRepository
      */
     public function Get_by_Code($code)
     {
-        return $this->createQueryBuilder('r')
-                    ->where('r.residence_code = :code')
-                    ->setParameter(':code', $code)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+        return $this->createQueryBuilder('p')
+        ->where('p.residence_code = :code')
+        ->setParameter('code', $code)
+        ->getQuery()
+        ->getOneOrNullResult();
     }
 
     /**
