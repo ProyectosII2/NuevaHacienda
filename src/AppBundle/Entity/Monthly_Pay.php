@@ -24,7 +24,7 @@ class Monthly_Pay
     private $payment_type;
 	
 	 /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $payment_bank;
 	 
