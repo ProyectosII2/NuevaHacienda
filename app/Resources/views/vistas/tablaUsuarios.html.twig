@@ -14,14 +14,14 @@
                 </label>
 
                 <div class="mdl-textfield__expandable-holder mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="search" onkeyup="myFunction()" placeholder="Buscar por DPI">
+                <input class="mdl-textfield__input" type="text" id="search" onkeyup="myFunction()" placeholder="Buscar por Usuario">
                 <label class="mdl-textfield__label" for="search"></label>
                 </div>  
                 </div>
 
                 
                  {% if approle == "ROLE_ADMIN" %}         
-                        <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser" style="float: right; padding-top:3%;">
+                        <a class="mdl-navigation__link" href={{path("adduser")}} href="/adduser" style="float: right; padding-top:2%;">
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
                             <i class="material-icons">person_add</i>
                             </button>
