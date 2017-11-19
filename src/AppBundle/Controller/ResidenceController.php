@@ -21,12 +21,25 @@ use Doctrine\ORM\EntityManager;
 class ResidenceController extends Controller
 {
     /**
-     * @Route("/showsector",name="showsector")
+     * @Route("/showall",name="showall")
      * Ver sectores
      */
-    public function loadSectorResidencesForm(Request $request)
+    public function loadResidencesForm(Request $request)
     {
-        return $this->render('vistas/sectores.html.twig',
+        return $this->render('vistas/tablaResidencias.html.twig',
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()
+    ));
+    }
+
+    /**
+     * @Route("/viewresidence",name="viewresidence")
+     * Ver sectores
+     */
+    public function viewResidencesForm(Request $request)
+    {
+        return $this->render('vistas/verResidencia.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()

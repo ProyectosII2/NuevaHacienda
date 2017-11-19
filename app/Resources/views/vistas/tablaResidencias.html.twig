@@ -1,0 +1,98 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<!doctype html>
+<div class = "container-fluid">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+          <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+                <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i> 
+                </label>
+
+                <div class="mdl-textfield__expandable-holder mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="search" onkeyup="myFunction()" placeholder="Buscar por Direccion">
+                <label class="mdl-textfield__label" for="search"></label>
+                </div>  
+                </div>
+            </div>
+                <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
+                    <thead>
+                        <tr>
+                            <th>DIRECCION</th>
+                            <th>TELEFONO</th>
+                            <th>SECTOR</th>
+                            <th>VER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                    <td> 11 avenida </td>
+                                    <td> 2222-8888 </td>
+                                    <td> A</td>                                   
+                                    <td> 
+                                    <a href="/viewresidence">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">home</i>
+                                        </button>
+                                    </a>
+                                    </td>                       
+                            </tr>                    
+                    </tbody>
+                </table>
+            
+          </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+
+.mdl-card{       
+    width: 100%;
+    height:auto;  
+    top:15%;  
+}
+
+.mdl-data-table{     
+    table-layout: fixed;
+}
+
+.mdl-data-table th {
+    background-color: rgb(0,150,136);
+    color: #ffffff;
+    overflow: hidden;
+    table-layout: fixed;
+}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+{% endblock %}

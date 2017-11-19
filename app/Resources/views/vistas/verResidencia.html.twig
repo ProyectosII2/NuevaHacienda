@@ -7,8 +7,45 @@
     <div class="col-md-10"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">              
-                <div class="col-md-12">  
-                               
+                <div class="col-md-4">
+                        <div align="left">
+                        <a class="mdl-navigation__link" href={{path("showall")}} href="/showall" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                        </div>  
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:100%;">
+                </div>   
+                <div class="col-md-8">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required>
+                                <label class="mdl-textfield__label" for="user">Residencia</label>
+                     </div>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="tel" name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required>
+                                <label class="mdl-textfield__label" for="user">Telefono</label>
+                     </div>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" tabindex="3" maxlength="50" pattern=".{3,}" required name="addr" required>
+                                <label class="mdl-textfield__label" for="user">Direccion</label>
+                     </div>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" tabindex="4" maxlength="30" pattern=".{1,}" required name="sector" required>
+                                <label class="mdl-textfield__label" for="user">Sector</label>
+                     </div>
+
+                    <select class="mdl-textfield__input" name="role" id="roluser">
+                    <br></br>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
+					<br></br>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="reset">Limpiar </button>
+						
+					<label style="color:red">{{error}}</label>
+                </div>           
             </div>
           </div>
     </div>
