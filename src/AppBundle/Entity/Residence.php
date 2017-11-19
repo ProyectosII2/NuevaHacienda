@@ -39,18 +39,18 @@ class Residence
     private $sector;
     
 	/**
-     * @ORM\ManyToOne(targetEntity="resident")
+     * @ORM\ManyToOne(targetEntity="Resident")
      * @ORM\JoinColumn(name="id_resident", referencedColumnName="id_resident", nullable=true)
      */
 	private $id_resident;
 
-    public function __construct($residence_code, $telephone, $address, $sector)
+    public function __construct($residence_code, $telephone, $address, $sector, $residentid)
     {
         $this->residence_code = $residence_code;
 		$this->telephone = $telephone;
 		$this->address = $address;
         $this->sector = $sector;
-        $this->id_resident = null;
+        $this->id_resident = $residentid;
     }
     public function getid_resident()
     {

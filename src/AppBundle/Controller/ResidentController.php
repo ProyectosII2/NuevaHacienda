@@ -59,6 +59,7 @@ class ResidentController extends Controller
     }
     /**
      * @Route("/allresidents",name="allresidents")
+     * @Security("has_role('ROLE_USER')") 
      * Carga todos los residentes
      */
     public function loadAllResidentsForm(Request $request)
