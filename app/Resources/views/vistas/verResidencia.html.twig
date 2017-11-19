@@ -44,12 +44,12 @@
 
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                    <a>
+                    <a style="float: right;" onkeyup="myFunction()">
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="edit">
                                             <i class="material-icons">edit</i>
                                     </button>
                     </a>
-                    <select class="mdl-textfield__input" name="residence" tabindex="5" disabled>
+                    <select class="mdl-textfield__input" name="residence" tabindex="5" disabled id="list">
                         {% for resident in residentes %}
                             <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
                         {% endfor %}
@@ -114,3 +114,24 @@ body {
 }
 </style>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("list");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
