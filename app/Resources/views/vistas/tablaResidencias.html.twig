@@ -17,6 +17,15 @@
                 <label class="mdl-textfield__label" for="search"></label>
                 </div>  
                 </div>
+
+                {% if approle == "ROLE_ADMIN" %}         
+                        <a class="mdl-navigation__link" href={{path("addresidence")}} href="/addresidence" style="float: right; padding-top:2%;">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <i class="material-icons">add</i>
+                            <i class="material-icons">home</i>
+                            </button>
+                        </a>  
+                {% endif %}
             </div>
                 <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
@@ -35,7 +44,7 @@
                                     <td> 
                                     <a href="/addresidence">
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
-                                            <i class="material-icons">home</i>
+                                            <i class="material-icons">edit</i>
                                         </button>
                                     </a>
                                     </td>                       

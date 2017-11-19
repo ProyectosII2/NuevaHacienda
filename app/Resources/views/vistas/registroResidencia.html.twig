@@ -8,6 +8,8 @@
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">              
                 <div class="col-md-4">
+        
+    <form action={{path('addresidence')}} method="POST">
                         <div align="left">
                         <a class="mdl-navigation__link" href={{path("showall")}} href="/showall" >
                             <button class="mdl-button mdl-js-button mdl-button--primary">
@@ -38,23 +40,26 @@
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" tabindex="4" maxlength="30" pattern=".{1,}" required name="sector" required>
-                                <label class="mdl-textfield__label" for="user">Sector</label>
-                     </div>
+                    <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
+                        
+                        <option value="1">Sector 1</option>
+                        <option value="2">Sector 2</option>
+                        <option value="3">Sector 3</option>
+                        <option value="4">Sector 4</option>
+                        
+                    </select>    
+                        <label class="mdl-textfield__label" for="residente">Sector</label>                                   
+                    </div>
 
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                    <a style="float: right;" onkeyup="myFunction()">
-                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="edit">
-                                            <i class="material-icons">edit</i>
-                                    </button>
-                    </a>
-                    <select class="mdl-textfield__input" name="residence" tabindex="5" disabled id="list">
+                   
+                    <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
                         {% for resident in residentes %}
                             <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
                         {% endfor %}
                     </select>    
-                        <label class="mdl-textfield__label" for="residence">Residente</label>
+                        <label class="mdl-textfield__label" for="residente">Residente</label>
                     </div> 
 
 
@@ -64,7 +69,8 @@
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="reset">Limpiar </button>
 						
 					<label style="color:red">{{error}}</label>
-                </div>           
+                </div>
+                </form>           
             </div>
           </div>
     </div>
@@ -135,3 +141,4 @@ function myFunction() {
   }
 }
 </script>
+{% endblock %}
