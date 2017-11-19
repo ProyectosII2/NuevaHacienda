@@ -51,7 +51,7 @@ class ResidentController extends Controller
             }
 
         }
-        return $this->render('vistas/addvecino.html.twig', 
+        return $this->render('vistas/registroVecino.html.twig', 
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
@@ -81,7 +81,7 @@ class ResidentController extends Controller
     public function loadResidentUpdateForm(Request $request, $code)
     {
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($code);
-        return $this->render('vistas\updatevecino.html.twig',
+        return $this->render('vistas\actualizarVecino.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
@@ -127,7 +127,7 @@ class ResidentController extends Controller
 
         }
         $dpicode = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
-        return $this->render('vistas\updatevecino.html.twig',
+        return $this->render('vistas\actualizarVecino.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),

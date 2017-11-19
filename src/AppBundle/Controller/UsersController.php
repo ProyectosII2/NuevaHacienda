@@ -59,7 +59,7 @@ class UsersController extends Controller
                 {
                     dump($ex);
                     //retorna la vista
-                    return $this->render('vistas/registro.html.twig',
+                    return $this->render('vistas/registroUsuario.html.twig',
                     array('error'=>$message));
                 }
                 //retorna Dashboard con menssage
@@ -68,7 +68,7 @@ class UsersController extends Controller
             }
         }
         //Retorna vista original con mensaje de error
-        return $this->render('vistas/registro.html.twig',
+        return $this->render('vistas/registroUsuario.html.twig',
         array(            
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
@@ -98,7 +98,7 @@ class UsersController extends Controller
     public function loadUpdateUserForm(Request $request, $username)
     {
         $user = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($username);
-        return $this->render('vistas/updateuser.html.twig', 
+        return $this->render('vistas/actualizarUsuario.html.twig', 
         array('username'=>$username,
         'name'=>$user->getUsername(),
         'mail'=>$user->getEmail(),
@@ -157,7 +157,7 @@ class UsersController extends Controller
         $oldus = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($olduser);
         //Retornar a la vista con parametros del usuario a modificar
         dump($oldus->getRoles());
-        return $this->render('vistas/updateuser.html.twig',
+        return $this->render('vistas/actualizarUsuario.html.twig',
         array('username'=>$olduser,
         'name'=>$oldus->getUsername(),
         'mail'=>$oldus->getEmail(),
