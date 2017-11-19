@@ -39,7 +39,7 @@ class Monthly_Pay
 	 private $total;
 	 
 	 /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $description;
 	 
