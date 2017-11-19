@@ -42,8 +42,14 @@
                                 <label class="mdl-textfield__label" for="user">Sector</label>
                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select class="mdl-textfield__input" name="residence" tabindex="5">
+                    
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
+                    <a>
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="edit">
+                                            <i class="material-icons">edit</i>
+                                    </button>
+                    </a>
+                    <select class="mdl-textfield__input" name="residence" tabindex="5" disabled>
                         {% for resident in residentes %}
                             <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
                         {% endfor %}
@@ -83,6 +89,10 @@ body {
 
 .mdl-textfield{
 	width: 100%;
+}
+
+#edit{
+    width:auto;
 }
 
 .mdl-button.mdl-button--colored {
