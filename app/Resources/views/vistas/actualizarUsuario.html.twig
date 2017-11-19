@@ -3,8 +3,8 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">    
-	<div class="col-md-3"></div>
-        <div class="col-md-6">
+	<div class="col-md-1"></div>
+        <div class="col-md-10">
 				<div class="mdl-card mdl-card--border mdl-shadow--16dp" id="contenido">
 					<div class="row">                
 						<div class="col-md-12">
@@ -26,8 +26,13 @@
 
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 										<input class="mdl-textfield__input" type="mail" name="mail" value={{mail}} id="usermail">
-                                		<label class="mdl-textfield__label" for="usermail">Email</label>
-										</div> 							
+                                		<label class="mdl-textfield__label" for="usermail">Correo</label>
+									</div> 	
+
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+										<input class="mdl-textfield__input" type="mail" name="mailcheck" value={{mail}} id="mailcheck">
+                                		<label class="mdl-textfield__label" for="mailcheck">Reingrese Correo</label>
+									</div>						
 																		
 
 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -71,7 +76,7 @@
 					</div>				
 				</div>
 		</div>
-	<div class="col-md-3"></div>
+	<div class="col-md-1"></div>
 	</div>
 </div>	
 {% endblock %}
@@ -83,11 +88,13 @@ body {
 
 .mdl-card{  
     text-align: center;   
-	padding:5%;   
+	padding-left:5%;  
+	padding-right:5%;   
     width: 100%;
-    top:5%;  
+    padding-top:3%;  
     height:auto;
 }
+
 
 .mdl-button.mdl-button--colored {
 	width: 100%;

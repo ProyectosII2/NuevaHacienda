@@ -1,0 +1,116 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<!doctype html>
+<div class = "container-fluid">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+          <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+            <div class="row" id="contenedor">                
+                <div class="col-md-12">
+                    <div align="left">
+                        <a class="mdl-navigation__link" href={{path("allusers")}} href="/allusers" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                    </div>                        
+                        <form action={{path( "adduser")}} method="post">                        
+                           <img src="https://maxcdn.icons8.com/app/uploads/2016/10/male-user-icons.png" style="width:15%;">
+                            <p><strong> <h4>REGISTRO USUARIO</h4></strong></p>	
+                            <!--Div para User y Pass-->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" name="usuario" id="user">
+                                <label class="mdl-textfield__label" for="user">Usuario</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="mail" name="mail" id="usermail">
+                                <label class="mdl-textfield__label" for="usermail">Email</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="mail" name="secondmail" id="secondmail">
+                                <label class="mdl-textfield__label" for="secondmail">Reingrese EMail</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="password" name="pass" id="password_user">
+                                <label class="mdl-textfield__label" for="password_user">Contraseña</label>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="password" name="secondpass" id="second_password_user">
+                                <label class="mdl-textfield__label" for="second_password_user">Reingresar Contraseña</label>
+                            </div>                                
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" name="rol" id="roluser">
+                                    <option value="ROLE_USER">Usuario</option>
+                                    <option value="ROLE_ADMIN">Administrador</option>
+                                    </select>
+                                <label class="mdl-textfield__label" for="roluser">Rol</label>
+                            </div> 
+                            <br></br>
+                            <!--Button-->
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
+                                Reiniciar
+                            </button>
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+                                Agregar
+                            </button>
+                            <p style="color:red;">{{error}} </p>
+                        </form>
+                    
+                </div>
+                <!--Button
+                <div class="col-md-6">
+                     <img class="img" src="https://static.pexels.com/photos/7294/garden.jpg">              
+                 </div>
+                 -->
+            </div>
+          </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+
+.mdl-card{  
+    text-align: center;   
+	padding-left:5%;  
+	padding-right:5%;   
+    width: 100%;
+    padding-top:3%;  
+    height:auto;
+}
+
+.mdl-button.mdl-button--colored {
+	
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 100%;
+}
+
+.img{
+    width: 100%;
+    height:100%;
+    object-fit: scale-down;
+}
+
+
+</style>
+{% endblock %}

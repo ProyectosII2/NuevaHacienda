@@ -3,8 +3,8 @@
 <!doctype html>
 <div class = "container-fluid">
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6"> 
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
           <div class="mdl-card mdl-card--border mdl-shadow--16dp">
             <div class="row" id="contenedor">                
                 <div class="col-md-12">
@@ -16,7 +16,7 @@
                         </a>
                            </div>
                         <form action={{path("addresident")}} method="POST">
-                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:15%;height:15%;">
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:15%;">
                         <p><strong> <h4>REGISTRO VECINO</h4></strong></p>
                            
                             <!--Div para User y Pass-->
@@ -70,7 +70,7 @@
             </div>
           </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
 </div>
 </div>
 {% endblock %}
@@ -83,11 +83,13 @@ body {
 
 .mdl-card{  
     text-align: center;   
-	padding:5%;   
+	padding-left:5%;  
+	padding-right:5%;   
     width: 100%;
-    top:5%;  
+    padding-top:3%;  
     height:auto;
 }
+
 
 .mdl-button.mdl-button--colored {
 	
