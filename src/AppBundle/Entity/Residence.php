@@ -37,15 +37,29 @@ class Residence
      * @ORM\Column(type="string", length=30)
      */
     private $sector;
+    
+	/**
+     * @ORM\OneToOne(targetEntity="resident")
+     * @ORM\JoinColumn(name="resident_code", referencedColumnName="resident_code", nullable=true)
+     */
+	private $resident_code;
 
     public function __construct($residence_code, $telephone, $address, $sector)
     {
         $this->residence_code = $residence_code;
 		$this->telephone = $telephone;
 		$this->address = $address;
-		$this->sector = $sector;
+        $this->sector = $sector;
+        $this->resident_code = null;
     }
-	
+    public function getResident_Code()
+    {
+        return $this->resident_code;
+    }
+    public function setResident_Code($residentdpi)
+    {
+        $this->resident_code = $residentdpi;
+    }
     public function getResidence_code()
     {
         return $this->residence_code;
