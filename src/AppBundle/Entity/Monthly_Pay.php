@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="monthly_pay")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Monthly_PayRepository")
  */
-class Monthly_Bill
+class Monthly_Pay
 {
     /**
      * @ORM\Column(type="integer")
