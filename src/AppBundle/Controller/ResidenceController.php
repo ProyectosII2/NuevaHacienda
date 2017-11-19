@@ -66,23 +66,24 @@ class ResidenceController extends Controller
             $tele = $request->request->get('tel');
             $addre = strtolower($request->request->get('addr'));
             $sector = strtolower($request->request->get('sector'));
-            $residentid = null;
+
             //Valida si tiene residente
-            if($request->request->has('residente')) { $resident = $request->request->get('residente');} //ObtenerID
+            if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
             //Validación de parametros
             if($this->AddCheckResidence($residencecode,$tele,$addre,$sector,$residentid))
             {
                 //Pasó validación
-                $this->getDoctrine()->getManager()->getRepository(Residence::class)->
-                createResidence($residencecode, $tele, $addr, $sector, $residentid);
+                $this->getDoctrine()->getManager()->getRepository(Residence::class)->createResidence($residencecode, $tele, $addre, $sector, $residentid);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
-                array("message"=>"Residente Ingresado"));
+                                        array(
+                                            "message"=> "Residente Ingresado"
+                                        )
+                                    );
 
             }
 
         }
         $residentes = $this->getDoctrine()->getManager()->getRepository('AppBundle\Entity\Resident')->GetAll();
-        dump($residentes);
         return $this->render('vistas_test/addresidencia.html.twig', 
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -102,7 +103,7 @@ class ResidenceController extends Controller
             $_SESSION['error'] = "Dirección no puede ser menor de 3 caracteres";
             return false;
         }
-        if(strlen($sector)<=1)
+        if(strlen($sector)<1)
         {
             $_SESSION['error'] = "Sector no puede ser menor de 1 caracteres";
             return false;

@@ -51,7 +51,7 @@ class ResidentRepository extends EntityRepository
     public function GetAll()
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u.resident_code, u.first_name, u.last_name, u.email, u.phone
+        $query = $em->createQuery('SELECT u.id_resident, u.resident_code, u.first_name, u.last_name, u.email, u.phone
         FROM AppBundle\Entity\Resident u 
         ORDER BY u.last_name ASC, u.first_name ASC');
         $residents = $query->getResult();

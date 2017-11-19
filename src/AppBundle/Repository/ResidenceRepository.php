@@ -10,19 +10,24 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ResidenceRepository")
  */
-class ResidenceRepository
+class ResidenceRepository extends EntityRepository
 {
     /**
      * Método que permite crear una nueva residencia enviando los parametros necesarios de cada residencia
      */
     public function createResidence($residence_code, $telephone, $address, $sector, $residentid){
 
+        $resident = $this->getEntityManager()->getRepository("AppBundle:Resident")->findOneBy(
+            array(
+                'id_resident' => $residentid
+            )
+        );
+
         $residence = new Residence($residence_code,
-                                   $resident_code,
                                    $telephone,
                                    $address,
                                    $sector,
-                                   $residetid
+                                   $resident
                                  );
         
         $em = $this->getEntityManager();
@@ -37,12 +42,11 @@ class ResidenceRepository
     public function Exist($code)
     {
         $query = $this->createQueryBuilder('r')
-        ->where('r.residence_code = :code')
-        ->setParameter(':code', $code)
-        ->getQuery()
-        ->getOneOrNullResult();
+                      ->where('r.residence_code = :code')
+                      ->setParameter(':code', $code)
+                      ->getQuery();
 
-        if(empty($query->getResult())){ return false; }
+        if(isset($query) && empty($query->getResult())){ return false; }
         return true;
     }
 
