@@ -176,10 +176,10 @@ class UsersController extends Controller
      */
     private function UserChecker($username, $password, $checkpassword, $email, $checkmail, $rol)
     {
-        //Longitud usuario no menor a 6
-        if(strlen($username)<=6)
+        //Longitud usuario no menor a 4
+        if(strlen($username)<=4)
         {
-            $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            $_SESSION['error'] = "Usuario debe ser mayor a 4 caracteres";
             return false;
         }
         //Si ya existe usuario
@@ -247,10 +247,10 @@ class UsersController extends Controller
      */
     private function ValidUpdate($oldusername, $newuser, $mail, $mailcheck)
     {
-        //Longitud usuario no menor a 6
-        if(strlen($newuser)<=6)
+        //Longitud usuario no menor a 4
+        if(strlen($newuser)<=4)
         {
-            $_SESSION['error'] = "Usuario debe ser mayor a 6 caracteres";
+            $_SESSION['error'] = "Usuario debe ser mayor a 4 caracteres";
             return false;
         }
         //Si hay cambio de nombre de usuario, revisar que no exista
