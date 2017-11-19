@@ -96,7 +96,7 @@ class ResidenceController extends Controller
         }
         $residentes = $this->getDoctrine()->getManager()->getRepository('AppBundle\Entity\Resident')->GetAll();
         dump($residentes);
-        return $this->render('vistas_test/addresidencia.html.twig', 
+        return $this->render('vistas/verResidencia.html.twig', 
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),

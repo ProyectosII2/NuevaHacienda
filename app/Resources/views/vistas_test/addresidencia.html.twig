@@ -13,8 +13,11 @@
         <br/>
         Sector:<input type="text" tabindex="4" maxlength="30" pattern=".{1,}" required name="sector" required>
         <br/>
-
-        Residente:<select name="residente" tabindex="5">
+        Residente:
+        <select name="residente" tabindex="5">
+             {% for resident in residentes %}
+                <option value="{{ resident.id_resident | e }}">{{ resident.resident_code | e }}</option>
+             {% endfor %}
         </select>
         <br/>
         <label style="color:red; font-weight:bold;">{{error}}</label>

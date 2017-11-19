@@ -15,6 +15,10 @@
                             </button>
                         </a>
                         </div>  
+                        
+                    <br></br>
+                    
+                    <br></br>
                         <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:100%;">
                 </div>   
                 <div class="col-md-8">
@@ -38,7 +42,16 @@
                                 <label class="mdl-textfield__label" for="user">Sector</label>
                      </div>
 
-                    <select class="mdl-textfield__input" name="role" id="roluser">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <select class="mdl-textfield__input" name="residence" tabindex="5">
+                        {% for resident in residentes %}
+                            <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
+                        {% endfor %}
+                    </select>    
+                        <label class="mdl-textfield__label" for="residence">Residente</label>
+                    </div> 
+
+
                     <br></br>
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
 					<br></br>
@@ -68,5 +81,26 @@ body {
     height:auto;
 }
 
+.mdl-textfield{
+	width: 100%;
+}
+
+.mdl-button.mdl-button--colored {
+	width: 100%;
+}
+
+.mdl-button.mdl-button--accent {
+	width: 100%;
+}
+
+.mdl-button.mdl-button--accent:hover{
+	background-color: #F8BBD0;
+	color:#212121;
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
 </style>
 {% endblock %}
