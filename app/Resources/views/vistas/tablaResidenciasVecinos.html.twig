@@ -1,0 +1,110 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<!doctype html>
+<div class = "container-fluid">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+          <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+                <div class="row" id="contenedor">              
+                <div class="col-md-4">
+                        <div align="left">
+                        <a class="mdl-navigation__link" href={{path("showall")}} href="/showall" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                        </div>  
+                        
+                    <br></br>
+                    
+                    <br></br>
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:100%;">
+                </div>   
+                <div class="col-md-8">                    
+                    <p><strong> <h4>PABLO ANDRES CANCINOS</h4></strong></p>
+                    <br></br>
+
+                    <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="90%" width="90%">
+                    <thead>
+                        <tr>
+                            <th>DIRECCION</th>
+                            <th>SECTOR</th>
+                            <th>VER</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                    <td> 11 avenida </td>
+                                    <td> A</td>                                   
+                                    <td> 
+                                    <a href="/addresidence">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">home</i>
+                                        </button>
+                                    </a>
+                                    </td>                       
+                            </tr>                    
+                    </tbody>
+                </table>
+                </div>  
+          </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+
+.mdl-card{       
+    width: 100%;
+    height:auto;  
+    top:15%;  
+}
+
+.mdl-data-table{     
+    table-layout: fixed;
+    height:auto;
+}
+
+.mdl-data-table th {
+    background-color: rgb(0,150,136);
+    color: #ffffff;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.mdl-data-table td {
+   overflow: hidden;
+    table-layout: fixed;
+   
+}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+{% endblock %}

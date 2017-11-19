@@ -39,7 +39,7 @@ class ResidenceController extends Controller
      */
     public function viewResidencesForm(Request $request)
     {
-        return $this->render('vistas/verResidencia.html.twig',
+        return $this->render('vistas/tablaResidenciasVecinos.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()

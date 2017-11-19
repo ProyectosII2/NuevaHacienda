@@ -22,7 +22,7 @@
 
                 
                  {% if approle == "ROLE_ADMIN" %}         
-                        <a class="mdl-navigation__link" href={{path("addresident")}} href="/addresident" style="float: right; padding-top:3%;">
+                        <a class="mdl-navigation__link" href={{path("addresident")}} href="/addresident" style="float: right; padding-top:2%;">
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
                             <i class="material-icons">person_add</i>
                             </button>
@@ -35,6 +35,7 @@
                 <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
                     <thead>
                         <tr>
+                            <th>RESIDENCIAS</th>
                             <th>USUARIO</th>
                             <th>DPI</th>
                             <th>EMAIL</th>
@@ -47,6 +48,14 @@
                     <tbody>
                          {% for i in residentes|keys %}
                             <tr>
+                                    <td> 
+                                    <a href="/viewresidence">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">home</i>
+                                        </button>
+                                    </a>
+                                    </td>
+
                                     <td> {{ residentes[i]['first_name']}}  {{ residentes[i]['last_name']}} </td>
                                     <td> {{ residentes[i]['resident_code']}} </td>
                                     <td> {{ residentes[i]['email']}} </td>
