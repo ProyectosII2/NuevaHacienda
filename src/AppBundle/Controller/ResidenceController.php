@@ -101,6 +101,7 @@ class ResidenceController extends Controller
      */
     public function loadResidenceUpdateForm(Request $request, $code)
     {
+        $_SESSION['error'] = "";
         $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($code);
         //Obtener resident de residencia
         $resident = 0;
@@ -121,20 +122,44 @@ class ResidenceController extends Controller
             'sector' => $residencecode->getSector(),
             'residentes' => $residents,
             'duenioid' => $resident,
-            'error'=>""
+            'error'=>$_SESSION['error']
         ));
     }
-     /**
+    /**
      * @Route("/checkupdateresidence",name="checkupdateresidence")
      * @Security("has_role('ROLE_ADMIN')") 
      * Revisar parametros de update
      */
-    public function UpdateCheckResidence(Request $request)
+    public function loadUpdateCheckResidence(Request $request)
     {
-        return $this->render('vistas_test\exito.html.twig',
-        array(
-            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()));
+        $message = "";
+        $codigoori = $request->$request->get("original");
+        if($request->request->has('idres') && $request->request->has('tel') 
+        && $request->request->has('addr') && $request->request->has('sector'))
+        {
+            //pasar parametros a variables
+            $residencecode = $request->request->get('idres');
+            $tele = $request->request->get('tel');
+            $addre = strtolower($request->request->get('addr'));
+            $sector = strtolower($request->request->get('sector'));
+            $residentid = 0;
+            if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
+            if(UpdateCheckResidence($residencecode, $tele))
+            {
+                //Datos validos
+                //Obtener residencia vieja
+                $oldres = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($residencecode);
+                $this->getDoctrine()->getManager()->getRepository(Residence::class)->Update($oldRes, $residencecode, $tele, $addre, $sector, $residentid);
+                //Forward a Dashboard
+                return $this->forward('AppBundle\Controller\DashboardController::loaddash',
+                array(
+                    "message"=>"Actualización exitosa de residencia"));
+
+            }
+
+        }
+
+
     }
 
 
@@ -158,6 +183,24 @@ class ResidenceController extends Controller
         if($this->getDoctrine()->getManager()->getRepository(Residence::class)->Exist($residencecode))
         {
             $_SESSION['error'] = "Residencia ya existe";
+            return false;
+        }
+        return true;
+    }
+    private function UpdateCheckResidence($residencecode, &$tele)
+    {
+        //Longitud no puede ser menor de 3 para el segundo
+        $tele = str_replace(' ', '', $tele);
+        $tele = str_replace('-', '', $tele);
+        if($this->getDoctrine()->getManager()->getRepository(Residence::class)->Exist($residencecode))
+        {
+            $_SESSION['error'] = "Residencia ya existe";
+            return false;
+        }
+        //Chequear si no existe algun unique en la bdd, telephone
+        if($this->getDoctrine()->getManager()->getRepository(Residence::class)->CheckIfPhoneExist($tele))
+        {
+            $_SESSION['error'] = "Telefono ya existe";
             return false;
         }
         return true;
