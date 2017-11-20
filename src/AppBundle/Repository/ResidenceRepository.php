@@ -105,11 +105,10 @@ class ResidenceRepository extends EntityRepository
     /**
      * Query para hacer update
      */
-    public function Update($oldreside, $code, $telephone, $address, $sector, $id_resident)
+    public function Update($oldreside, $code, $telephone, $sector, $id_resident)
     {
         $oldreside->setResidence_code($code);
         $oldreside->setTelephone($telephone);
-        $oldreside->setAddress($address);
         $oldreside->setSector($sector);
         $oldreside->setid_resident($id_resident);
         $em = $this->getEntityManager();

@@ -42,7 +42,7 @@
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
+                    <select class="mdl-textfield__input" name="sector" tabindex="5" id="list">
                         
                         <option value="1">Sector 1</option>
                         <option value="2">Sector 2</option>
@@ -57,6 +57,7 @@
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
                    
                     <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
+                        <option selected="selected"></option>
                         {% for resident in residentes %}
                             <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
                         {% endfor %}

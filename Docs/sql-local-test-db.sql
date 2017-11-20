@@ -21,6 +21,8 @@ INSERT INTO public."app_users" ("id","username", "password","role","email","is_a
 VALUES (nextval('user_gen'),'julio', '$2a$12$SgKol5wgx0lKldG8Ek2rKO4ZhydDlMIgrnnaQGT3FXkx4/qm.hd.G', 'ROLE_ADMIN','some@mail.com',true);
 INSERT INTO public."resident" ("id_resident", "resident_code", "first_name", "last_name", "email", "phone", "created_at", "updated_at")
 VALUES (nextval('resident_gen'),'123456780123', 'ELEMENTO DE', 'PRUEBA', 'algun@mail.com', '55667788', '2006-6-6 00:00:00', '2006-6-6 00:00:00');
+INSERT INTO public."residence" ("id_residence", "id_resident", "residence_code", "telephone","address","sector")
+VALUES (nextval('residence_gen'), null, '100','88889999','dirección de vivienda','1');
 select * from app_users;
 
 	

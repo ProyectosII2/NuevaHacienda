@@ -35,7 +35,7 @@
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" tabindex="3" maxlength="50" pattern=".{3,}" required name="addr" required value={{direccion}} readonly>
+                                <input class="mdl-textfield__input" tabindex="3" maxlength="50" pattern=".{3,}" required name="addr" required value={{direccion|convert_encoding('UTF-8', 'ISO-8859-1')}} readonly>
                                 <label class="mdl-textfield__label" for="user">Direccion</label>
                      </div>
 
@@ -55,13 +55,14 @@
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
                    
                     <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
+                        <option></option>
                          {% for item in residentes %}
-                {% if item.id_resident == duenioid %}
-                    <option value="{{ item.id_resident}}" selected="selected">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
-                {% else %}
-                    <option value="{{ item.id_resident}}">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
-                {% endif %}
-             {% endfor %}
+                            {% if item.id_resident == duenioid %}
+                                <option value="{{ item.id_resident}}" selected="selected">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
+                            {% else %}
+                                <option value="{{ item.id_resident}}">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
+                            {% endif %}
+                        {% endfor %}
                     </select>    
                     <label class="mdl-textfield__label" for="residente">Residente</label>
                     </div> 

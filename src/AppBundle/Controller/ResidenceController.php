@@ -42,6 +42,7 @@ class ResidenceController extends Controller
     public function loadAllResidencesForm(Request $request)
     {
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
+        dump($residences);
         return $this->render('vistas/tablaResidencias.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -58,29 +59,32 @@ class ResidenceController extends Controller
      */
     public function loadResidenceAddForm(Request $request)
     {
+        
         $_SESSION['error'] = null;
         //Revisa si hay POST
         if($request->request->has('idres') && $request->request->has('tel') 
-        && $request->request->has('addr') && $request->request->has('sector'))
+        && $request->request->has('addr') && $request->request->has('sector') && $request->request->has('residente'))
         {
             //pasar parametros a variables
             $residencecode = $request->request->get('idres');
             $tele = $request->request->get('tel');
             $addre = strtolower($request->request->get('addr'));
             $sector = strtolower($request->request->get('sector'));
-            $residentid = 0;
+            $residentid = $request->request->get('residente');
             //Valida si tiene residente
-            if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
-            //Validación de parametros
-            if($this->AddCheckResidence($residencecode,$tele,$addre,$sector,$residentid))
+            if($residentid=="")
+            {
+                $residentid=null;
+            }
+            if($this->AddCheckResidence($residencecode,$tele,$addre,$sector))
             {
                 //Pasó validación
                 $this->getDoctrine()->getManager()->getRepository(Residence::class)->createResidence($residencecode, $tele, $addre, $sector, $residentid);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
-                                        array(
-                                            "message"=> "Residencia Ingresada"
-                                        )
-                                    );
+                array(
+                    "message"=> "Residencia Ingresada"
+                     )
+                );
 
             }
 
@@ -105,11 +109,15 @@ class ResidenceController extends Controller
         $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($code);
         //Obtener resident de residencia
         $resident = 0;
-        if($residencecode->getid_resident()->getId()!=0)
+        if($residencecode->getid_resident()!=null)
         {
-            $temp = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residencecode->getid_resident()->getId());
-            if($temp!=null){ $resident = $temp->getId();}
+            if($residencecode->getid_resident()->getId()!=0)
+            {
+                $temp = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residencecode->getid_resident()->getId());
+                if($temp!=null){ $resident = $temp->getId();}
+            }
         }
+        dump($resident);
         $residents = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
         return $this->render('vistas\actualizarResidencia.html.twig',
         array(
@@ -133,25 +141,27 @@ class ResidenceController extends Controller
     {
         $message = "";
         $code = $request->request->get("original");
+        dump($request->request);
         if($request->request->has('idres') && $request->request->has('tel') 
-        && $request->request->has('addr') && $request->request->has('sector'))
+        && $request->request->has('sector'))
         {
             //pasar parametros a variables
             $residencecode = $request->request->get('idres');
             $tele = $request->request->get('tel');
-            $addre = strtolower($request->request->get('addr'));
             $sector = strtolower($request->request->get('sector'));
-            $residentid = 0;
+            $residentid = null;
             if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
-            
+         
             if($this->UpdateCheckResidence($tele, $code))
             {
                 //Datos validos
                 //Obtener residencia vieja
                 $oldres = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($residencecode);
-                $actualresident = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residentid);
-                dump($oldres);
-                $this->getDoctrine()->getManager()->getRepository(Residence::class)->Update($oldres, $residencecode, $tele, $addre, $sector, $actualresident);
+                if($residentid != null)
+                {
+                    $residentid = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residentid);
+                }
+                $this->getDoctrine()->getManager()->getRepository(Residence::class)->Update($oldres, $residencecode, $tele, $sector, $residentid);
                 //Forward a Dashboard
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                 array(
@@ -189,7 +199,7 @@ class ResidenceController extends Controller
 
     
     //-----------------------------------FUNCIONES PRIVADAS--------------------------------
-    private function AddCheckResidence($residencecode, &$tele, $addr, $sector, $residentid)
+    private function AddCheckResidence($residencecode, &$tele, $addr, $sector)
     {
         //Longitud no puede ser menor de 3 para el segundo
         if(strlen($addr)<=3)
