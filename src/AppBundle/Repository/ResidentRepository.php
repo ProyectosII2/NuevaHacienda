@@ -75,6 +75,17 @@ class ResidentRepository extends EntityRepository
         ->getOneOrNullResult();
     }
     /**
+     * Obtiene el Residente por su id
+     */
+    public function Get_by_ID($id)
+    {
+        return $this->createQueryBuilder('r')
+        ->where('r.id_resident = :id')
+        ->setParameter(':id', $id)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
+    /**
      * Query para hacer update
      */
     public function Update($oldResident, $DPI, $mail, $first, $last)

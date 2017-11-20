@@ -21,20 +21,8 @@ use Doctrine\ORM\EntityManager;
 class ResidenceController extends Controller
 {
     /**
-     * @Route("/showall",name="showall")
-     * Ver sectores
-     */
-    public function loadResidencesForm(Request $request)
-    {
-        return $this->render('vistas/tablaResidencias.html.twig',
-        array(
-            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()
-    ));
-    }
-
-    /**
      * @Route("/viewresidence",name="viewresidence")
+     * @Security("has_role('ROLE_USER')") 
      * Ver sectores
      */
     public function viewResidencesForm(Request $request)
@@ -54,11 +42,13 @@ class ResidenceController extends Controller
     public function loadAllResidencesForm(Request $request)
     {
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
-        return $this->render('vistas_test/exito.html.twig',
+        dump($residences);
+        return $this->render('vistas/tablaResidencias.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            'error'=>$_SESSION['error'], 'residences'=>$residences
+            'error'=>$_SESSION['error'], 
+            'residences'=>$residences
     ));
     }
 
@@ -79,7 +69,7 @@ class ResidenceController extends Controller
             $tele = $request->request->get('tel');
             $addre = strtolower($request->request->get('addr'));
             $sector = strtolower($request->request->get('sector'));
-
+            $residentid = null;
             //Valida si tiene residente
             if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
             //Validación de parametros
@@ -89,7 +79,7 @@ class ResidenceController extends Controller
                 $this->getDoctrine()->getManager()->getRepository(Residence::class)->createResidence($residencecode, $tele, $addre, $sector, $residentid);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                                         array(
-                                            "message"=> "Residente Ingresado"
+                                            "message"=> "Residencia Ingresada"
                                         )
                                     );
 
@@ -104,6 +94,29 @@ class ResidenceController extends Controller
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'residentes' => $residentes,
             'error'=>$_SESSION['error']));
+    }
+    /**
+     * @Route("/updateresidence/{code}", requirements={"code" = "\d+"}, name="updateresidence")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * Ingreso de residencias
+     */
+    public function loadResidenceUpdateForm(Request $request, $code)
+    {
+        $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($code);
+        //Obtener resident de residencia
+        $resident = 0;
+        if($residencecode->residentid!=0)
+        {
+            $temp = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residencecode->residentid);
+            if($temp!=null){ $resident = $temp->id_resident;}
+        }
+        return $this->render('vistas_test\updateresidence.html.twig',
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            "code" => "",
+            'error'=>""
+        ));
     }
 
 

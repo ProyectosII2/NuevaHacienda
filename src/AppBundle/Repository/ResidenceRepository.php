@@ -2,6 +2,7 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity;
 use AppBundle\Entity\Residence;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,16 +57,20 @@ class ResidenceRepository extends EntityRepository
      */
     public function GetAll()
     {
+        /*
         $em = $this->getEntityManager();
 
-        $query = $em->createQuery('SELECT u.resident_code, u.telephone, u.address, u.sector, u.id_resident
-                                   FROM AppBundle\Entity\Residence u 
-                                   ORDER BY u.sector ASC, u.resident_code ASC'
-                                 );
+        $query = $em->createQuery('SELECT u.residence_code, u.telephone, u.address, u.sector, u.id_resident
+        FROM AppBundle\Entity\Residence u 
+        ORDER BY u.sector ASC, u.residence_code ASC' );
 
-        $residents = $query->getResult();
+        $residence = $query->getResult();
 
-        return $residents;
+        return $residence;*/
+        
+        return $this->createQueryBuilder('r')
+        ->getQuery()
+        ->getArrayResult();
     }
 
     /**
