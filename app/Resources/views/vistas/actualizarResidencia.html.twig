@@ -14,45 +14,54 @@
                             <i class="material-icons">keyboard_arrow_left</i>
                             </button>
                         </a>
-                        </div>  
-                    <form action={{path('addresidence')}} method="POST">    
+                        </div>     
                     <br></br>
                     
                     <br></br>
-                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:100%;">
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:75%;">
                 </div>   
                 <div class="col-md-8">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required>
+                <form action={{path('checkupdateresidence')}} method="POST">
+                            <p><strong> <h4>ACTUALIZAR RESIDENCIA</h4></strong></p>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">                    
+                                <input type="hidden" name="original" value={{code}}>
+                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required value={{code}}>
                                 <label class="mdl-textfield__label" for="user">Residencia</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="tel" name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required>
+                                <input class="mdl-textfield__input"  name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required value={{telefono}}>
                                 <label class="mdl-textfield__label" for="user">Telefono</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" tabindex="3" maxlength="50" pattern=".{3,}" required name="addr" required>
+                                <input class="mdl-textfield__input" tabindex="3" maxlength="50" pattern=".{3,}" required name="addr" required value={{direccion}}>
                                 <label class="mdl-textfield__label" for="user">Direccion</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" tabindex="4" maxlength="30" pattern=".{1,}" required name="sector" required>
-                                <label class="mdl-textfield__label" for="user">Sector</label>
-                     </div>
+                    <select class="mdl-textfield__input" name="residente" tabindex="5" id="list" required name="sector" required value={{sector}}>
+                        
+                        <option value="1">Sector 1</option>
+                        <option value="2">Sector 2</option>
+                        <option value="3">Sector 3</option>
+                        <option value="4">Sector 4</option>
+                        
+                    </select>    
+                        <label class="mdl-textfield__label" for="residente">Sector</label>                                   
+                    </div>
 
                     
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >
-                    <a style="float: right;" onkeyup="myFunction()">
-                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" id="edit">
-                                            <i class="material-icons">edit</i>
-                                    </button>
-                    </a>
+                   
                     <select class="mdl-textfield__input" name="residente" tabindex="5" id="list">
-                        {% for resident in residentes %}
-                            <option value="{{ resident.id_resident | e }}" > {{ resident.resident_code | e }} - {{ resident.first_name | e }} {{ resident.last_name | e }} </option>
-                        {% endfor %}
+                         {% for item in residentes %}
+                {% if item.id_resident == duenioid %}
+                    <option value="{{ item.id_resident}}" selected="selected">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
+                {% else %}
+                    <option value="{{ item.id_resident}}">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
+                {% endif %}
+             {% endfor %}
                     </select>    
                         <label class="mdl-textfield__label" for="residente">Residente</label>
                     </div> 
