@@ -40,7 +40,7 @@
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select class="mdl-textfield__input" name="residente" tabindex="5" id="list" required name="sector" required value={{sector}} >
+                    <select class="mdl-textfield__input" tabindex="5" id="list" required name="sector" required value={{sector}} >
                         
                         <option value="1">Sector 1</option>
                         <option value="2">Sector 2</option>
@@ -63,16 +63,13 @@
                 {% endif %}
              {% endfor %}
                     </select>    
-                        <label class="mdl-textfield__label" for="residente">Residente</label>
+                    <label class="mdl-textfield__label" for="residente">Residente</label>
                     </div> 
-
-
                     <br></br>
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">Guardar </button>
-					<br></br>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="reset">Limpiar </button>
-						
+					<br/>
 					<label style="color:red">{{error}}</label>
+                    <br/>
                 </div>
                 </form>           
             </div>

@@ -87,12 +87,13 @@ class ResidenceRepository extends EntityRepository
     /**
      * Obtiene el núm de telefono y chequea si existe
      */
-    public function CheckIfPhoneExist($phone)
+    public function CheckIfPhoneExist($phone, $code)
     {
         $query = $this->createQueryBuilder('r')
         ->select('r.telephone')
-        ->where('r.telephone = :phone')
+        ->where('r.telephone = :phone AND r.residence_code != :code')
         ->setParameter('phone', $phone)
+        ->setParameter('code', $code)
         ->getQuery();
 
         if(empty($query->getResult())) { return false;}
