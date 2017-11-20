@@ -42,7 +42,6 @@ class ResidenceController extends Controller
     public function loadAllResidencesForm(Request $request)
     {
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
-        dump($residences);
         return $this->render('vistas/tablaResidencias.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -87,7 +86,7 @@ class ResidenceController extends Controller
 
         }
         $residentes = $this->getDoctrine()->getManager()->getRepository('AppBundle\Entity\Resident')->GetAll();
-        dump($residentes);
+        
         return $this->render('vistas/registroResidencia.html.twig', 
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -105,18 +104,37 @@ class ResidenceController extends Controller
         $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($code);
         //Obtener resident de residencia
         $resident = 0;
-        if($residencecode->residentid!=0)
+        dump($residencecode->getid_resident()->getId());
+        if($residencecode->getid_resident()->getId()!=0)
         {
-            $temp = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residencecode->residentid);
-            if($temp!=null){ $resident = $temp->id_resident;}
+            $temp = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_ID($residencecode->getid_resident()->getId());
+            if($temp!=null){ $resident = $temp->getId();}
         }
+        $residents = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
         return $this->render('vistas_test\updateresidence.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            "code" => "",
+            'code' => $residencecode->getResidence_code(),
+            'telefono' => $residencecode->getTelephone(),
+            'direccion' => $residencecode->getAddress(),
+            'sector' => $residencecode->getSector(),
+            'residentes' => $residents,
+            'duenioid' => $resident,
             'error'=>""
         ));
+    }
+     /**
+     * @Route("/checkupdateresidence",name="checkupdateresidence")
+     * @Security("has_role('ROLE_ADMIN')") 
+     * Revisar parametros de update
+     */
+    public function UpdateCheckResidence(Request $request)
+    {
+        return $this->render('vistas_test\exito.html.twig',
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()));
     }
 
 

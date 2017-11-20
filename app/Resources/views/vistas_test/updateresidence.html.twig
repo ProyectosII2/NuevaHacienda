@@ -17,9 +17,9 @@
         <select name="residente" tabindex="5" >
              {% for item in residentes %}
                 {% if item.id_resident == duenioid %}
-                    <option value="{{ item.id_resident}}" selected="selected">{{ resident.resident_code}} - {{ resident.first_name}} {{ resident.last_name}}</option>
+                    <option value="{{ item.id_resident}}" selected="selected">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
                 {% else %}
-                    <option value="{{ item.id_resident}}">{{ resident.resident_code}} - {{ resident.first_name}} {{ resident.last_name}}</option>
+                    <option value="{{ item.id_resident}}">{{ item.resident_code}} - {{ item.first_name}} {{ item.last_name}}</option>
                 {% endif %}
              {% endfor %}
         </select>

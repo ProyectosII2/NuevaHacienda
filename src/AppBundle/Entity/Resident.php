@@ -67,6 +67,10 @@ class Resident
         $this->created_at->format('Y\-m\-d\ h:i:s');
         $this->updated_at->format('Y\-m\-d\ h:i:s');
     }
+    public function getId()
+    {
+        return $this->id_resident;
+    }
     public function getResident_code()
     {
         return $this->resident_code;
