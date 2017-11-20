@@ -69,6 +69,8 @@ class ResidenceRepository extends EntityRepository
         return $residence;*/
         
         return $this->createQueryBuilder('r')
+        ->orderBy('r.sector', 'ASC')
+        ->orderBy('r.residence_code', 'ASC')
         ->getQuery()
         ->getArrayResult();
     }
