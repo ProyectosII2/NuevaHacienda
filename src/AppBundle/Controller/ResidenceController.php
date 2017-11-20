@@ -111,7 +111,7 @@ class ResidenceController extends Controller
             if($temp!=null){ $resident = $temp->getId();}
         }
         $residents = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
-        return $this->render('vistas_test\updateresidence.html.twig',
+        return $this->render('vistas\actualizarResidencia.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),

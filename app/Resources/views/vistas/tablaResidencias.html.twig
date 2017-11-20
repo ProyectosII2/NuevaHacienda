@@ -33,6 +33,7 @@
                             <th>DIRECCION</th>
                             <th>TELEFONO</th>
                             <th>SECTOR</th>
+                            <th>RESIDENTE</th>
                             <th>EDITAR</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                     <td> {{ residences[i]['address']}} </td>
                                     <td> {{ residences[i]['telephone']}} </td>
                                     <td> {{ residences[i]['sector']}} </td>
+                                    <td> {{ residences[i]['residence_code']}} </td>
                                     {% if approle == "ROLE_ADMIN" %}
                                     <td> 
                                     <a href="{{ url('updateresidence',{'code': residences[i]['residence_code']}) }}">

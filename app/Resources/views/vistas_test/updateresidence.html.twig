@@ -4,6 +4,7 @@
     <form action={{path('checkupdateresidence')}} method="POST">
         <h1 syte="color:blue;">AGREGAR RESIDENCIA</h1>
         <br/>
+        <input type="hidden" name="original" value={{code}}>
         Residence: <input type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required value={{code}}>
         <br/>
         Telefono: <input type="tel" name="tel" placeholder="8888 8888" 
