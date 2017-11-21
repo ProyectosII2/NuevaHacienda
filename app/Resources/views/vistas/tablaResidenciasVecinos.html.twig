@@ -9,7 +9,7 @@
                 <div class="row" id="contenedor">              
                 <div class="col-md-4" style = "text-align: center;  ">
                         <div align="left">
-                        <a class="mdl-navigation__link" href={{path("allresidences")}} >
+                        <a class="mdl-navigation__link" href={{path("allresidents")}} >
                             <button class="mdl-button mdl-js-button mdl-button--primary">
                             <i class="material-icons">keyboard_arrow_left</i>
                             </button>
@@ -17,27 +17,47 @@
                         </div>  
                                             
                     <br></br>
-                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:50%;">
-                        
+                        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/house-icon.png" style="width:50%;">                        
                         <img src="https://maxcdn.icons8.com/app/uploads/2016/10/male-user-icons.png" style="width:50%;">
+
+                    <br></br>
                 </div>   
                 <div class="col-md-8" style = "text-align: center;  "> 
                                    
-                    <p><strong> <h4>PABLO ANDRES CANCINOS</h4></strong></p>
+                    <p><strong> <h4>{{residente.first_name}} {{residente.last_name}} </h4></strong></p>
                     <br></br>
 
                     <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="90%" width="90%">
                     <thead>
                         <tr>
                             <th>DIRECCION</th>
+                            <th>TELEFONO</th>
                             <th>SECTOR</th>
+                            <th>CODIGO RESIDENCIA</th>
+                             {% if approle == "ROLE_ADMIN" %}
+                            <th>EDITAR</th>
+                            {% endif %}  
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>                            
+                          {% for i in residencias|keys %}
                             <tr>
-                                    <td> 11 avenida </td>
-                                    <td> A</td>           
-                            </tr>                    
+                                    <td> {{ residencias[i]['address'] | convert_encoding('UTF-8', 'ISO-8859-1')}} </td>
+                                    <td> {{ residencias[i]['telephone']}} </td>
+                                    <td> {{ residencias[i]['sector']}} </td>
+                                    <td> {{ residencias[i]['residence_code']}} </td>
+                                    {% if approle == "ROLE_ADMIN" %}
+                                    <td> 
+                                    <a href="{{ url('updateresidence',{'code': residencias[i]['residence_code']}) }}">
+                                    <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </a>
+                                    </td> 
+                                    {% endif %}                        
+                            </tr>
+                            {% endfor %}   
+                   
                     </tbody>
                 </table>
                 </div>  
