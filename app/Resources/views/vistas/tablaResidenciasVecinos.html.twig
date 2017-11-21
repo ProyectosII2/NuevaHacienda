@@ -42,7 +42,7 @@
                     <tbody>                            
                           {% for i in residencias|keys %}
                             <tr>
-                                    <td> {{ residencias[i]['address'] | convert_encoding('UTF-8', 'ISO-8859-1')}} </td>
+                                    <td> {{ residencias[i]['address']}} </td>
                                     <td> {{ residencias[i]['telephone']}} </td>
                                     <td> {{ residencias[i]['sector']}} </td>
                                     <td> {{ residencias[i]['residence_code']}} </td>

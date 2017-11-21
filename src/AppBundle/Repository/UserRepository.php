@@ -43,12 +43,10 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
      */
     public function GetAll()
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery('SELECT u.username, u.email, u.role, u.isActive 
-        FROM AppBundle\Entity\User u 
-        ORDER BY u.isActive Desc, u.role Asc, u.username Asc');
-        $users = $query->getResult();
-        return $users;
+        return $this->createQueryBuilder('u')
+        ->orderBy('u.username', 'ASC')
+        ->getQuery()
+        ->getArrayResult();
     
     }
     /**
@@ -58,7 +56,18 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     {
         return $this->createQueryBuilder('u')
         ->where('u.username=:username')
-        ->setParameter('username', $username)
+        ->setParameter('username',  $username)
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
+    /**
+     * Obtiene Usuario por Username
+     */
+    public function Get_by_ID($id)
+    {
+        return $this->createQueryBuilder('u')
+        ->where('u.id=:id')
+        ->setParameter('id', $id)
         ->getQuery()
         ->getOneOrNullResult();
     }
