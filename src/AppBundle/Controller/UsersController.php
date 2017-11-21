@@ -90,15 +90,15 @@ class UsersController extends Controller
     
     }
     /**
-     * @Route("/updateuser/{username}", name="updateuser")
+     * @Route("/updateuser/{id}", name="updateuser")
      * @Security("has_role('ROLE_ADMIN')")
      * Obtiene usuario del parametro y renderiza la vista para editar
      */
-    public function loadUpdateUserForm(Request $request, $username)
+    public function loadUpdateUserForm(Request $request, $id)
     {
-        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($username);
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_ID($id);
         return $this->render('vistas/actualizarUsuario.html.twig', 
-        array('username'=>$username,
+        array('username'=>$user->getUsername(),
         'name'=>$user->getUsername(),
         'mail'=>$user->getEmail(),
         'rol'=>$user->getRoles(),        
@@ -116,8 +116,8 @@ class UsersController extends Controller
      */
     public function checkupdate(Request $request)
     { 
+        $olduser = mb_strtolower($request->request->get('oldusername'), "UTF-8");; //Get old username
         
-        $olduser = strtolower($request->request->get('oldusername')); //Get old username
         $_SESSION['error'] = "";
         //check if there are parameters
         if($request->request->has('newusername') && 
@@ -126,7 +126,7 @@ class UsersController extends Controller
         $request->request->has('role'))
         {
             //coloca campos a minuscula
-            $newuser = strtolower($request->request->get('newusername'));
+            $newuser = mb_strtolower($request->request->get('newusername'), "UTF-8");
             $mail = strtolower($request->request->get('mail'));
             $mailcheck = strtolower($request->request->get('mailcheck'));
             $role = $request->request->get('role'); //Role puede ser ROLE_USER y ROLE_ADMIN
@@ -142,7 +142,7 @@ class UsersController extends Controller
                 //Encuentra objeto a modificar
                 $oldu = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_By_User($olduser);
                 //Hacer Update
-                $this->getDoctrine()->getManager()->getRepository(User::class)->Updateuser($oldu, $newuser, $mail, $role, $active);
+                $this->getDoctrine()->getManager()->getRepository(User::class)->Updateuser($oldu,  mb_convert_encoding($newuser,"ISO-8859-1"), $mail, $role, $active);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                 array("message"=>"Actualización exitosa"));
             }

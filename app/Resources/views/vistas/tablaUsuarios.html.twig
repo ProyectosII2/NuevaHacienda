@@ -53,7 +53,7 @@
                                     {% endif %}
                                     {% if approle == "ROLE_ADMIN" %}
                                     <td> 
-                                    <a href="{{ url('updateuser',{'username': usuarios[i]['username']}) }}">
+                                    <a href="{{ url('updateuser',{'id': usuarios[i]['id']}) }}">
                                     <button type="submit" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
                                             <i class="material-icons">edit</i>
                                         </button>
