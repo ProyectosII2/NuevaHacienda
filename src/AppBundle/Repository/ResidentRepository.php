@@ -105,7 +105,7 @@ class ResidentRepository extends EntityRepository
     public function DelResident($resid)
     {
        $em=$this->getEntityManager();
-       $em->remove($this->Get_by_Code($resid));
+       $em->remove($this->Get_by_ID($resid));
        $em->flush();
     }
 

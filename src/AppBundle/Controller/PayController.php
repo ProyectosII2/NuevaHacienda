@@ -26,6 +26,11 @@ class PayController extends Controller
      */
     public function loadPaymentForm(Request $request)
     {
-
+        return $this->render('vistas_test\addpay.html.twig',
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'error'=>""
+        ));
     }
 }

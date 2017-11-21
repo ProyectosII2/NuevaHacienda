@@ -1,0 +1,27 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<div>
+    <form method="POST">
+    <h1>Ingreso de Pago de Residencia</h1>
+    <h2>Monto</h2>
+    <select name="mes" required>
+        <option selected value="2017-10">Noviembre 2017</option>
+    </select>
+    <br/>
+    <select name="residencia" required>
+            <option></option>
+        <option selected>Residencia</option>
+    </select>
+        <br/>
+        Monto:<input type="text" value="1500" readonly>
+        <br/>
+    <h2>Ingresar Pago</h2>
+        Tipo de pago: <input type="text" name="type" maxlength="20" required><br/>	
+        Banco: <input type="text" name="bank" maxlength="20"><br/>
+        Voucher: <input type="text" name="voucher" maxlength="30" required><br/>
+        Total: <input type="number" pattern="^\\Q?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" maxlenght="14" name="total" required><br/>
+        <button type="submit">Ingresar Pago</button><br/>
+        <button type="reset">Limpiar</button>
+    </form>
+</div>
+{% endblock %}
