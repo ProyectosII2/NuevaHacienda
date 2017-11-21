@@ -43,7 +43,7 @@
                     <tbody>
                         {% for i in usuarios|keys %}
                             <tr>
-                                    <td> {{ usuarios[i]['username']}} </td>
+                                    <td> {{ usuarios[i]['username']  | convert_encoding('UTF-8', 'ISO-8859-1')}} </td>
                                     <td> {{ usuarios[i]['email']}} </td>
                                     <td> {{ usuarios[i]['role']}} </td>
                                     {% if usuarios[i]['isActive']== true %}
