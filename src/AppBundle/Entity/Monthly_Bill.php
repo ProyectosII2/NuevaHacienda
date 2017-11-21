@@ -33,13 +33,19 @@ class Monthly_Bill
 	 /**
      * @ORM\Column(type="datetime", name="date")
      */
-	 private $date;
+     private $date;
+     
+	 /**
+     * @ORM\Column(type="decimal", name="monto")
+     */
+	 private $monto;
 	 
-    public function __construct($id_residence, $date)
+    public function __construct($id_residence, $date, $monto)
     {
         $this->id_residence = $id_residence;
         $this->date = $date;
         $this->id_monthly_pay = null;
+        $this->monto = $monto;
     }
 	
     public function getId_residence()
@@ -55,6 +61,10 @@ class Monthly_Bill
     public function getDate()
     {
         return $this->date;
+    }
+    public function getMonto()
+    {
+        return $this->monto;
     }
 }
 ?>
