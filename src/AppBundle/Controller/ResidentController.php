@@ -150,6 +150,7 @@ class ResidentController extends Controller
         return $this->forward('AppBundle\Controller\DashboardController::loaddash',
         array( "message"=>"Residente eliminado exitosamente"));
     }
+    
     //-----------------------------------FUNCIONES PRIVADAS--------------------------------
     /**
      * Funcion que chequea parametros de residente

@@ -195,6 +195,26 @@ class ResidenceController extends Controller
 
 
     }
+    
+    /**
+     * @Route("/residencesby/{dpi}",  requirements={"dpi" = "\d+"}, name="residencesby")
+     * @Security("has_role('ROLE_USER')") 
+     */
+    public function loadresidencesbyresident(Request $request, $dpi)
+    {
+        //Obtiene el residente
+        $residente = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($dpi);
+        dump($residente->getid());
+        $residencias = $this->getDoctrine()->getManager()->getRepository(Residence::class)->ResidenciasDe($residente);
+        dump($residente, $residencias);
+        return $this->render('vistas_test\exito.html.twig',
+        array(
+            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
+            'residencias' => $residencias,
+            'residente' => $residente));
+    }
+
 
 
     

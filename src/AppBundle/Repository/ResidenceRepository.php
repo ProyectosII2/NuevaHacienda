@@ -131,5 +131,17 @@ class ResidenceRepository extends EntityRepository
         );
         $em->flush();
     }
+    /**
+     * Obtiene residencias por residente
+     */
+    public function ResidenciasDe($id_rsident)
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.id_resident = :id')
+        ->setParameter('id', $id_rsident)
+        ->orderBy('p.sector', 'ASC')
+        ->getQuery()
+        ->getArrayResult();
+    }
 }
 ?>
