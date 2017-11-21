@@ -33,8 +33,10 @@
                             <th>DIRECCION</th>
                             <th>TELEFONO</th>
                             <th>SECTOR</th>
-                            <th>RESIDENTE</th>
+                            <th>CODIGO RESIDENCIA</th>
+                             {% if approle == "ROLE_ADMIN" %}
                             <th>EDITAR</th>
+                            {% endif %}  
                         </tr>
                     </thead>
                     <tbody>                            
