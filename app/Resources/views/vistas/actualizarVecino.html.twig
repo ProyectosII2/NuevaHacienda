@@ -19,12 +19,12 @@
                             <p><strong> <h4>ACTUALIZAR VECINO</h4></strong></p>
                             <!--Div para User y Pass-->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="firstname" value={{first}}>
+                                <input class="mdl-textfield__input" type="text" name="firstname" value={{first|convert_encoding('UTF-8', 'ISO-8859-1')}}>
                                 <label class="mdl-textfield__label" for="firstname">Nombre Vecino</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="secondname" value={{second}}>
+                                <input class="mdl-textfield__input" type="text" name="secondname" value={{second|convert_encoding('UTF-8', 'ISO-8859-1')}}>
                                 <label class="mdl-textfield__label" for="secondname">Apellido Vecino</label>
                             </div>
 
@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="email" value={{mail}}>
+                                <input class="mdl-textfield__input" type="text" name="email" value={{mail|convert_encoding('UTF-8', 'ISO-8859-1')}}>
                                 <label class="mdl-textfield__label" for="email">Email</label>
                             </div>
 
