@@ -57,7 +57,6 @@ class UsersController extends Controller
                 } 
                 catch(\Exception $ex)
                 {
-                    dump($ex);
                     //retorna la vista
                     return $this->render('vistas/registroUsuario.html.twig',
                     array('error'=>$message));
@@ -156,7 +155,7 @@ class UsersController extends Controller
         //No hay campos/Hubo error
         $oldus = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_by_User($olduser);
         //Retornar a la vista con parametros del usuario a modificar
-        dump($oldus->getRoles());
+    
         return $this->render('vistas/actualizarUsuario.html.twig',
         array('username'=>$olduser,
         'name'=>$oldus->getUsername(),

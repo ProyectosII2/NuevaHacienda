@@ -21,20 +21,6 @@ use Doctrine\ORM\EntityManager;
 class ResidenceController extends Controller
 {
     /**
-     * @Route("/viewresidence",name="viewresidence")
-     * @Security("has_role('ROLE_USER')") 
-     * Ver sectores
-     */
-    public function viewResidencesForm(Request $request)
-    {
-        return $this->render('vistas/tablaResidenciasVecinos.html.twig',
-        array(
-            'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-            'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole()
-    ));
-    }
-
-    /**
      * @Route("/allresidences",name="allresidences")
      * @Security("has_role('ROLE_USER')") 
      * Carga todos las residencias
@@ -42,7 +28,7 @@ class ResidenceController extends Controller
     public function loadAllResidencesForm(Request $request)
     {
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
-        dump($residences);
+  
         return $this->render('vistas/tablaResidencias.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -117,7 +103,6 @@ class ResidenceController extends Controller
                 if($temp!=null){ $resident = $temp->getId();}
             }
         }
-        dump($resident);
         $residents = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
         return $this->render('vistas\actualizarResidencia.html.twig',
         array(
@@ -141,7 +126,6 @@ class ResidenceController extends Controller
     {
         $message = "";
         $code = $request->request->get("original");
-        dump($request->request);
         if($request->request->has('idres') && $request->request->has('tel') 
         && $request->request->has('sector'))
         {
@@ -179,7 +163,7 @@ class ResidenceController extends Controller
             if($temp!=null){ $resident = $temp->getId();}
         }
         $residents = $this->getDoctrine()->getManager()->getRepository(Resident::class)->GetAll();
-        //dump($_SESSION['error']);
+      
         return $this->render('vistas\actualizarResidencia.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -204,9 +188,9 @@ class ResidenceController extends Controller
     {
         //Obtiene el residente
         $residente = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($dpi);
-        dump($residente->getid());
+        
         $residencias = $this->getDoctrine()->getManager()->getRepository(Residence::class)->ResidenciasDe($residente);
-        dump($residente, $residencias);
+       
         return $this->render('vistas/tablaResidenciasVecinos.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
