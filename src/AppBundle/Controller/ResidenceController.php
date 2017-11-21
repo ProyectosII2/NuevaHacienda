@@ -207,7 +207,7 @@ class ResidenceController extends Controller
         dump($residente->getid());
         $residencias = $this->getDoctrine()->getManager()->getRepository(Residence::class)->ResidenciasDe($residente);
         dump($residente, $residencias);
-        return $this->render('vistas_test\exito.html.twig',
+        return $this->render('vistas/tablaResidenciasVecinos.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
