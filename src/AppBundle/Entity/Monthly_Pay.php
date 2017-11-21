@@ -43,11 +43,11 @@ class Monthly_Pay
      */
     private $description;
 	 
-    public function __construct($ppayment_type, $ppayment_bank, $ppayment_voucher, $ptotal, $pdescription)
+    public function __construct($payment_type, $payment_bank, $payment_voucher, $ptotal, $pdescription)
     {
-		$this->payment_type = $ppayment_type;
-		$this->payment_bank = $ppayment_bank;
-		$this->payment_voucher = $ppayment_voucher;
+		$this->payment_type = $payment_type;
+		$this->payment_bank = $payment_bank;
+		$this->payment_voucher = $payment_voucher;
         $this->total = $ptotal;
 		$this->description = $pdescription;
     }
@@ -75,6 +75,31 @@ class Monthly_Pay
     public function getDescription()
     {
         return $this->description;
+    }
+
+	public function setPayment_type($payment_type)
+    {
+        $this->payment_type = $payment_type;
+    }
+	
+	public function setPayment_bank($payment_bank)
+    {
+        $this->payment_bank = $payment_bank;
+    }
+	
+    public function setPayment_voucher($payment_voucher)
+    {
+        $this->payment_voucher = $payment_voucher;
+    }
+
+    public function setTotal($total)
+    {
+        $this->total = $total;
+    }
+	
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
 ?>
