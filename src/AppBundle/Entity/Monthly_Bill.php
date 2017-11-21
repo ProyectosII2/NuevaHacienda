@@ -35,10 +35,11 @@ class Monthly_Bill
      */
 	 private $date;
 	 
-    public function __construct()
+    public function __construct($id_residence, $date)
     {
-        $this->id_residence = null;
-		$this->id_monthly_pay = null;
+        $this->id_residence = $id_residence;
+        $this->date = $date;
+        $this->id_monthly_pay = null;
     }
 	
     public function getId_residence()
