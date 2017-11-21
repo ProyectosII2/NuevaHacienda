@@ -116,7 +116,7 @@ class UsersController extends Controller
      */
     public function checkupdate(Request $request)
     { 
-        $olduser = mb_strtolower($request->request->get('oldusername'), "UTF-8");; //Get old username
+        $olduser = strtolower($request->request->get('oldusername')); //Get old username
         
         $_SESSION['error'] = "";
         //check if there are parameters
@@ -126,7 +126,7 @@ class UsersController extends Controller
         $request->request->has('role'))
         {
             //coloca campos a minuscula
-            $newuser = mb_strtolower($request->request->get('newusername'), "UTF-8");
+            $newuser = strtolower($request->request->get('newusername'));
             $mail = strtolower($request->request->get('mail'));
             $mailcheck = strtolower($request->request->get('mailcheck'));
             $role = $request->request->get('role'); //Role puede ser ROLE_USER y ROLE_ADMIN
@@ -142,7 +142,7 @@ class UsersController extends Controller
                 //Encuentra objeto a modificar
                 $oldu = $this->getDoctrine()->getManager()->getRepository(User::class)->Get_By_User($olduser);
                 //Hacer Update
-                $this->getDoctrine()->getManager()->getRepository(User::class)->Updateuser($oldu,  mb_convert_encoding($newuser,"ISO-8859-1"), $mail, $role, $active);
+                $this->getDoctrine()->getManager()->getRepository(User::class)->Updateuser($oldu,$newuser, $mail, $role, $active);
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                 array("message"=>"Actualización exitosa"));
             }

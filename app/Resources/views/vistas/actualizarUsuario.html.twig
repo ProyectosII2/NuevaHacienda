@@ -16,11 +16,11 @@
                         </a>
                     </div>
 							<form form action={{path("checkupdate")}} method="post">
-							<input type="hidden" name="oldusername" value={{username | convert_encoding('UTF-8', 'ISO-8859-1')}}>
+							<input type="hidden" name="oldusername" value={{username}}>
 								<p><strong> <h4>ACTUALIZAR USUARIO</h4></strong></p>
 								<br></br>	
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            		    <input class="mdl-textfield__input" type="text" name="newusername" value={{name|convert_encoding('UTF-8', 'ISO-8859-1')}} id="user" readonly>
+                            		    <input class="mdl-textfield__input" type="text" name="newusername" value={{name}} id="user" readonly>
                                 		<label class="mdl-textfield__label" for="user">Usuario</label>
                             		</div>
 

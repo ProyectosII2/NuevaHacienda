@@ -56,7 +56,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     {
         return $this->createQueryBuilder('u')
         ->where('u.username=:username')
-        ->setParameter('username',  mb_convert_encoding($username,"ISO-8859-1"))
+        ->setParameter('username',  $username)
         ->getQuery()
         ->getOneOrNullResult();
     }
