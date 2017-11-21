@@ -25,12 +25,12 @@
                             <p><strong> <h4>ACTUALIZAR RESIDENCIA</h4></strong></p>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >                    
                                 <input type="hidden" name="original" value={{code}}>
-                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required value={{code}} readonly>
+                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required value={{code|convert_encoding('UTF-8', 'ISO-8859-1')}} readonly>
                                 <label class="mdl-textfield__label" for="user">Residencia</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input"  name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required value={{telefono}}>
+                                <input class="mdl-textfield__input"  name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required value={{telefono|convert_encoding('UTF-8', 'ISO-8859-1')}}>
                                 <label class="mdl-textfield__label" for="user">Telefono</label>
                      </div>
 
@@ -40,7 +40,7 @@
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <select class="mdl-textfield__input" tabindex="5" id="list" required name="sector" required value={{sector}} >
+                    <select class="mdl-textfield__input" tabindex="5" id="list" required name="sector" required value={{sector|convert_encoding('UTF-8', 'ISO-8859-1')}} >
                         
                         <option value="1">Sector 1</option>
                         <option value="2">Sector 2</option>
