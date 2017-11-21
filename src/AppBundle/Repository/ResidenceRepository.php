@@ -86,22 +86,24 @@ class ResidenceRepository extends EntityRepository
         ->getQuery()
         ->getOneOrNullResult();
     }
+
     /**
      * Obtiene el núm de telefono y chequea si existe
      */
     public function CheckIfPhoneExist($phone, $code)
     {
         $query = $this->createQueryBuilder('r')
-        ->select('r.telephone')
-        ->where('r.telephone = :phone AND r.residence_code != :code')
-        ->setParameter('phone', $phone)
-        ->setParameter('code', $code)
-        ->getQuery();
+                      ->select('r.telephone')
+                      ->where('r.telephone = :phone AND r.residence_code != :code')
+                      ->setParameter('phone', $phone)
+                      ->setParameter('code', $code)
+                      ->getQuery();
 
         if(empty($query->getResult())) { return false;}
         return true;
 
     }
+
     /**
      * Query para hacer update
      */
@@ -115,6 +117,7 @@ class ResidenceRepository extends EntityRepository
         $em->flush();
         return true;
     }
+    
     /**
      * Eliminación de la base de datos de residencias
      */
