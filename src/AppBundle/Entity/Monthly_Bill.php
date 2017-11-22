@@ -19,13 +19,13 @@ class Monthly_Bill
     private $id_monthly_bill;
 
 	/**
-     * @ORM\ManyToOne(targetEntity="residence", inversedBy="monthly_bills")
+     * @ORM\ManyToOne(targetEntity="Residence", inversedBy="monthly_bills")
      * @ORM\JoinColumn(name="id_residence", referencedColumnName="id_residence")
      */
 	private $id_residence;
 	
 	/**
-     * @ORM\OneToOne(targetEntity="monthly_pay", inversedBy="monthly_bill_pay")
+     * @ORM\OneToOne(targetEntity="Monthly_Pay", inversedBy="monthly_bill_pay")
      * @ORM\JoinColumn(name="id_monthly_pay", referencedColumnName="id_monthly_pay")
      */
 	private $id_monthly_pay;

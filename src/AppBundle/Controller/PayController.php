@@ -51,14 +51,14 @@ class PayController extends Controller
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
         $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll();
         $meses = $this->ArrayMeses();
-        dump($residences, $meses);
+        dump($residences, $bills, $meses);
         return $this->render('vistas_test\addpay.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
             'meses' => $meses,
             'residences' => $residences,
-            //'bills' => $bills,
+            'bills' => $bills,
             'error'=>""
         ));
     }
