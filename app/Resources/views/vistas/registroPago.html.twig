@@ -15,7 +15,7 @@
                             </button>
                         </a>
                            </div>
-                        <form action={{path("addpayment")}} method="POST" accept-charset="ISO-8859-1">
+                        <form action={{path("addpayment")}} method="POST">
                         <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f25ce68920a6edaba16abdd2109566bc-dollar.png" style="width:15%;">
                         <p><strong> <h4>INGRESO DE PAGO RESIDENCIA</h4></strong></p>
                         <div class="row" id="contenedor"> 
@@ -58,8 +58,8 @@
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <select class="mdl-textfield__input" name="tipopago" required>
                                             <option selected="selected"></option>                                     
-                                            <option value="1">Banco</option>
-                                            <option value="2">Voucher</option>                                            
+                                            <option value="Banco">Banco</option>
+                                            <option value="Voucher">Voucher</option>                                            
                                     </select>
                                     <label class="mdl-textfield__label" for="tipopago">Tipo de Pago</label>
                                 </div>
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" name="usuario" id="description" maxlength="8">
+                                <input class="mdl-textfield__input" type="text" name="desc" id="description" maxlength="8">
                                 <label class="mdl-textfield__label" for="description">Descripcion</label>
                             </div>
                            </div>

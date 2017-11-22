@@ -29,18 +29,16 @@ class PayController extends Controller
     public function loadPaymentForm(Request $request)
     {
         if($request->request->has('mes') && $request->request->has('monto') && $request->request->has('residencia')
-        && $request->request->has('total') && $request->request->has('type') && $request->request->has('voucher') && $request->request->has('desc'))
+        && $request->request->has('tipopago') && $request->request->has('total'))
         {
-            $bank = null;
             $desc = null;
             if($request->request->has('desc')) {$desc = $request->request->get('desc');}
-            if($request->request->has('bank')) {$bank = $request->request->get('bank');}
             $mes = $request->request->get('mes');
             $monto = $request->request->get('monto');
             $residencia = $request->request->get('residencia');
             $total = $request->request->get('total');
-            $type = $request->request->get('type');
-            $voucher = $request->request->get('voucher');
+            $type = $request->request->get('tipopago');
+            
             return $this->render('vistas_test\exito.html.twig',
             array(
                 'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
