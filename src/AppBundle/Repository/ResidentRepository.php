@@ -108,7 +108,7 @@ class ResidentRepository extends EntityRepository
        $query = $this->createQueryBuilder('r')
                      ->select('r.email')
                      ->where('r.email = :email AND r.resident_code != :dpi')
-                     ->setParameter('email', $mal)
+                     ->setParameter('email', $mail)
                      ->setParameter('dpi', $dpi)
                      ->getQuery();
 
