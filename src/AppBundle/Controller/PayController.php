@@ -49,7 +49,7 @@ class PayController extends Controller
             ));
         }
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
-        $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll();
+        $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_with_Residence();
         $meses = $this->ArrayMeses();
         dump($residences, $bills, $meses);
         return $this->render('vistas\registroPago.html.twig',

@@ -72,7 +72,7 @@ class Monthly_BillRepository extends EntityRepository
     /**
      * Método que permite obtener todas las cuentas 
      */
-    public function GetAll()
+    public function GetAll_with_Residence()
     {   
         return $this->createQueryBuilder('m')
         ->select('m','r')
