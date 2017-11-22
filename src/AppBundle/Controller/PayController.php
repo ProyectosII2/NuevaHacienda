@@ -29,7 +29,7 @@ class PayController extends Controller
     public function loadPaymentForm(Request $request)
     {
         if($request->request->has('mes') && $request->request->has('monto') && $request->request->has('residencia')
-        && $request->request->has('tipopago') && $request->request->has('total'))
+        && $request->request->has('type') && $request->request->has('total') && )
         {
             $desc = null;
             if($request->request->has('desc')) {$desc = $request->request->get('desc');}

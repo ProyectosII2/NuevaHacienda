@@ -56,12 +56,16 @@
                            <h2>Ingresar Pago</h2>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <select class="mdl-textfield__input" name="tipopago" required>
-                                            <option selected="selected"></option>                                     
-                                            <option value="Banco">Banco</option>
-                                            <option value="Voucher">Voucher</option>                                            
-                                    </select>
+                                    <input type="text" name="type" min="3" maxlength="20" required>
                                     <label class="mdl-textfield__label" for="tipopago">Tipo de Pago</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input type="text" name="bank" min="2" maxlength="20">
+                                    <label class="mdl-textfield__label" for="tipopago">Banco</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input type="text" name="voucher" min="3" maxlength="30" required>
+                                    <label class="mdl-textfield__label" for="tipopago">Voucher</label>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

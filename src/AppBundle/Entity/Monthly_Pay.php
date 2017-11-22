@@ -27,7 +27,7 @@ class Monthly_Pay
      * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $payment_bank;
-	 
+	
 	/**
      * @ORM\Column(type="string", length=30,unique=true)
      */
