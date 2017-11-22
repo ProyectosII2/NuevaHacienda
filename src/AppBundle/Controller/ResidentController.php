@@ -220,6 +220,11 @@ class ResidentController extends Controller
             $_SESSION['error'] = "Telefono ya existe";
             return false;
         }
+        if($this->getDoctrine()->getManager()->getRepository(Resident::class)->CheckIfMailExist($mail, $DPI))
+        {
+            $_SESSION['error'] = "Email ya existe";
+            return false;
+        }
         return true;
     }
 }

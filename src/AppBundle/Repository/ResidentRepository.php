@@ -101,6 +101,22 @@ class ResidentRepository extends EntityRepository
         return true;
     } 
     /**
+    * Obtiene el mail y chequea si existe
+    */
+   public function CheckIfMailExist($mail, $dpi)
+   {
+       $query = $this->createQueryBuilder('r')
+                     ->select('r.email')
+                     ->where('r.email = :email AND r.resident_code != :dpi')
+                     ->setParameter('email', $phone)
+                     ->setParameter('dpi', $dpi)
+                     ->getQuery();
+
+       if(empty($query->getResult())) { return false;}
+       return true;
+
+   }
+    /**
     * Obtiene el núm de telefono y chequea si existe
     */
    public function CheckIfPhoneExist($phone, $dpi)
