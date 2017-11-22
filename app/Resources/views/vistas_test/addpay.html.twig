@@ -5,7 +5,9 @@
     <h1>Ingreso de Pago de Residencia</h1>
     <h2>Monto</h2>
     <select name="mes" required>
-        <option selected value="2017-10">Noviembre 2017</option>
+        {% for i in meses|keys %}
+            <option value="2017-10">Noviembre 2017</option>
+        {% endfor %}   
     </select>
     <br/>
     <select name="residencia" required>
