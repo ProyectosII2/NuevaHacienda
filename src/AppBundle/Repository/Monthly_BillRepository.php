@@ -74,10 +74,11 @@ class Monthly_BillRepository extends EntityRepository
      */
     public function GetAll()
     {   
-        return $this->createQueryBuilder('r')
-                    ->orderBy('r.date', 'ASC')
-                    ->getQuery()
-                    ->getArrayResult();
+        return $this->createQueryBuilder('m')
+        ->select('m','r')
+        ->innerJoin('m.id_residence', 'r')
+        ->getQuery()
+        ->getArrayResult();
     }
 
     /**
