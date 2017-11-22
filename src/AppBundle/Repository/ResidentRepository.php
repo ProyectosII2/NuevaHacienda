@@ -88,12 +88,13 @@ class ResidentRepository extends EntityRepository
     /**
      * Query para hacer update
      */
-    public function Update($oldResident, $DPI, $mail, $first, $last)
+    public function Update($oldResident, $DPI, $mail, $first, $last, $phone)
     {
         $oldResident->setFirstName($first);
         $oldResident->setCode($DPI);
         $oldResident->setLastName($last);
         $oldResident->setEmail($mail);
+        $oldResident->setPhone($phone);
         $oldResident->setUpdateTime();
         $em = $this->getEntityManager();
         $em->flush();

@@ -118,7 +118,7 @@ class ResidentController extends Controller
                 //Datos validos
                 //Obtener entidad anterior
                 $oldResident = $this->getDoctrine()->getManager()->getRepository(Resident::class)->Get_by_Code($oldDPI);
-                $this->getDoctrine()->getManager()->getRepository(Resident::class)->Update($oldResident, $dpi, $mail, $firstname, $lastname);
+                $this->getDoctrine()->getManager()->getRepository(Resident::class)->Update($oldResident, $dpi, $mail, $firstname, $lastname, $phone);
                 //Forward a Dashboard
                 return $this->forward('AppBundle\Controller\DashboardController::loaddash',
                 array(
