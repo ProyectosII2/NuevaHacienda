@@ -1,0 +1,144 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<!doctype html>
+<div class = "container-fluid">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+          <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+            <div class="row" id="contenedor">                
+                <div class="col-md-12">
+                <div align="left">
+                        <a class="mdl-navigation__link" href={{path("addpayment")}} href="/addpayment" >
+                            <button class="mdl-button mdl-js-button mdl-button--primary">
+                            <i class="material-icons">keyboard_arrow_left</i>
+                            </button>
+                        </a>
+                           </div>
+                        <form action={{path("addpayment")}} method="POST" accept-charset="ISO-8859-1">
+                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f25ce68920a6edaba16abdd2109566bc-dollar.png" style="width:15%;">
+                        <p><strong> <h4>INGRESO DE PAGO RESIDENCIA</h4></strong></p>
+                        <div class="row" id="contenedor"> 
+                        
+                        <div class="col-md-6">
+                            <div class="Monto">
+                            <h2>Monto</h2>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" name="mes" required>
+                                    {% for i in meses|keys %}
+                                        <option value="{{meses[i]['num']}}:{{meses[i]['anio']}}">{{meses[i]['mes']}}-{{meses[i]['anio']}}</option>
+                                    {% endfor %} 
+                                    </select>
+                                     <label class="mdl-textfield__label" for="mes">Mes</label>
+                                </div>  
+
+                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" name="residencia" required>
+                                        <option selected="selected"></option>
+                                        {% for i in residences|keys %}
+                                            <option value="{{residences[i]['residence_code']}}">Codigo: {{residences[i]['residence_code']}} Sector: {{residences[i]['sector']}}</option>
+                                        {% endfor %}   
+                                    </select>
+                                    <label class="mdl-textfield__label" for="residencia">Residencia</label>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" name="monto" value="1500" required readonly style="color:#757575;">
+                                    <label class="mdl-textfield__label" for="monto">Monto</label>
+                                    <span class="mdl-textfield__error">Ingrese número para registrar</span>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="Ingresar">
+                           <h2>Ingresar Pago</h2>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <select class="mdl-textfield__input" name="tipopago" required>
+                                            <option selected="selected"></option>                                     
+                                            <option value="1">Banco</option>
+                                            <option value="2">Voucher</option>                                            
+                                    </select>
+                                    <label class="mdl-textfield__label" for="tipopago">Tipo de Pago</label>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" pattern="\d*(.\d{2})?" min="2" maxlenght="14" name="total" required>
+                                    <label class="mdl-textfield__label" for="total">Total</label>
+                                    <span class="mdl-textfield__error">Ingrese Total para registrar</span>
+                                </div>
+
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" name="usuario" id="description" maxlength="8">
+                                <label class="mdl-textfield__label" for="description">Descripcion</label>
+                            </div>
+                           </div>
+                        </div>
+
+                        </div>                               
+
+                            <!--Button-->
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
+                                Limpiar
+                            </button>
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+                                Ingresar Pago
+                            </button>   
+                            
+                            <br></br>                                             
+                            <label style="color: red;font-weight: bold;">{{error}}</label>
+                        </form>
+                    </div>
+                <!--Button
+                <div class="col-md-6">
+                     <img class="img" src="http://cubacute.com/wp-content/uploads/2016/10/abeja-10.jpg">              
+                 </div>
+                 -->
+            </div>
+          </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+
+.mdl-card{  
+    text-align: center;   
+	padding-left:5%;  
+	padding-right:5%;   
+    width: 100%;
+    padding-top:3%;  
+    height:auto;
+}
+
+
+.mdl-button.mdl-button--colored {
+	
+}
+
+.mdl-button.mdl-button--colored:hover{
+	background-color: #B2DFDB;
+	color:#212121;
+}
+
+.mdl-textfield{
+	width: 50%;
+}
+
+.img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+
+</style>
+{% endblock %}
