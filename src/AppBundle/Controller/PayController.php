@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\Monthly_Pay;
+use AppBundle\Entity\Monthly_Bill;
 use AppBundle\Entity\Residence;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityManager;
@@ -40,7 +41,6 @@ class PayController extends Controller
             $total = $request->request->get('total');
             $type = $request->request->get('type');
             $voucher = $request->request->get('voucher');
-            dump($request->request);
             return $this->render('vistas_test\exito.html.twig',
             array(
                 'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -49,15 +49,16 @@ class PayController extends Controller
             ));
         }
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
-        //Obtener mes actual
-        //Doce meses antes
-        //Construir Array
+        $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll();
+        $meses = $this->ArrayMeses();
+        dump($residences, $meses);
         return $this->render('vistas_test\addpay.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
             'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-            'meses' => $this->ArrayMeses(),
+            'meses' => $meses,
             'residences' => $residences,
+            //'bills' => $bills,
             'error'=>""
         ));
     }

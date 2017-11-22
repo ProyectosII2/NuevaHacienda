@@ -5,6 +5,8 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity;
 use AppBundle\Entity\Monthly_Bill;
+use AppBundle\Entity\Monthly_Pay;
+use AppBundle\Entity\Residence;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
