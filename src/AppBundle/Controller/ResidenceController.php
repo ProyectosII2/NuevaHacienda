@@ -135,7 +135,10 @@ class ResidenceController extends Controller
             $sector = strtolower($request->request->get('sector'));
             $residentid = null;
             if($request->request->has('residente')) { $residentid = $request->request->get('residente');} //ObtenerID
-         
+            if($residentid=="")
+            {
+                $residentid = null;
+            }
             if($this->UpdateCheckResidence($tele, $code))
             {
                 //Datos validos
