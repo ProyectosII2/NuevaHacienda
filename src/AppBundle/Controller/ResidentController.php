@@ -215,6 +215,11 @@ class ResidentController extends Controller
                 return false;
             }
         }
+        if($this->getDoctrine()->getManager()->getRepository(Resident::class)->CheckIfPhoneExist($phone, $DPI))
+        {
+            $_SESSION['error'] = "Telefono ya existe";
+            return false;
+        }
         return true;
     }
 }

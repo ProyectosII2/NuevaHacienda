@@ -99,7 +99,23 @@ class ResidentRepository extends EntityRepository
         $em = $this->getEntityManager();
         $em->flush();
         return true;
-    }
+    } 
+    /**
+    * Obtiene el núm de telefono y chequea si existe
+    */
+   public function CheckIfPhoneExist($phone, $dpi)
+   {
+       $query = $this->createQueryBuilder('r')
+                     ->select('r.phone')
+                     ->where('r.phone = :phone AND r.resident_code != :dpi')
+                     ->setParameter('phone', $phone)
+                     ->setParameter('dpi', $dpi)
+                     ->getQuery();
+
+       if(empty($query->getResult())) { return false;}
+       return true;
+
+   }
     /**
      * Delete permanente de residente
      */
