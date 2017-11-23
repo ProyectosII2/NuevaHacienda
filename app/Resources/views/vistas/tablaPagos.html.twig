@@ -1,0 +1,134 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<!doctype html>
+<div class = "container-fluid">
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10"> 
+          <div class="mdl-card mdl-card--border mdl-shadow--16dp">
+          <div>                                   
+                {% if approle == 'ROLE_ADMIN' %}
+                    <a class="mdl-navigation__link" href={{path("addpayment")}} style="float: right; padding-top:2%;">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                            <i class="material-icons">add</i>
+                            <i class="material-icons">credit_card</i>
+                            </button>
+                    </a>
+                {% endif %} 
+            </div>
+            
+                <div class="row" id="contenedor"> 
+                <div class="col-md-12" style = "text-align: center;  "> 
+                    <p><strong> <h5>Pagos pendientes </h5></strong></p>
+                    <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
+                    <thead>
+                        <tr>
+                            <th>FECHA</th>
+                            <th>MONTO</th>
+                            <th>COD RESIDENCIA</th>
+                            <th>SECTOR</th>
+                            <th>TELEFONO</th>
+                            <th>RESIDENTE</th>
+                            <th>EMAIL</th>
+                            <th>CELULAR</th>  
+                        </tr>
+                    </thead>
+                    <tbody>                            
+                        {% for i in pendient|keys %}
+                            <tr>
+                                <td>{{pendient[i]['date']|date("(M)m-Y", false)}}</td>
+                                <td>{{"Q."~pendient[i]['monto']}}</td>
+                                <td>{{pendient[i]['id_residence']['residence_code']}}</td>
+                                <td>{{pendient[i]['id_residence']['sector']}}</td>
+                                <td>{{pendient[i]['id_residence']['telephone']}}</td>
+                                <td>{{pendient[i]['id_residence']['id_resident']['last_name']~" "~pendient[i]['id_residence']['id_resident']['first_name']}}</td>
+                                <td>{{pendient[i]['id_residence']['id_resident']['email']}}</td>
+                                <td>{{pendient[i]['id_residence']['id_resident']['phone']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <br></br>
+                <p><strong> <h5>Pagos realizados </h5></strong></p>   
+
+                    <table class="mdl-data-table mdl-js-data-table" id="myTable" cellspacing="0" height="auto" max-width="100%" width="100%">
+                    <thead>
+                        <tr>
+                            <th>FECHA</th>
+                            <th>MONTO</th>
+                            <th>TOTAL</th>
+                            <th>TIPO</th>
+                            <th>VOUCHER</th>
+                            <th>COD RESIDENCIA</th>
+                            <th>SECTOR</th>
+                            <th>RESIDENTE</th>  
+                        </tr>
+                    </thead>
+                    <tbody>                            
+                        {% for i in payments|keys %}
+                        <tr>
+                            <td>{{payments[i]['date']|date("(M)m-Y", false)}}</td>
+                            <td>{{"Q."~payments[i]['monto']}}</td>
+                            <td>{{"Q."~payments[i]['id_monthly_pay']['total']}}</td>
+                            <td>{{payments[i]['id_monthly_pay']['payment_type']}}</td>
+                            <td>{{payments[i]['id_monthly_pay']['payment_bank']~"-"~payments[i]['id_monthly_pay']['payment_voucher']}}</td>
+                            <td>{{pendient[i]['id_residence']['residence_code']}}</td>
+                            <td>{{pendient[i]['id_residence']['sector']}}</td>
+                            <td>{{pendient[i]['id_residence']['id_resident']['last_name']~", "~pendient[i]['id_residence']['id_resident']['first_name']}}</td>
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+                </div>  
+          </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+body {
+    background: #F5F5F5;
+}
+
+.mdl-card{       
+    width: 100%;
+    top:15%;  
+    padding-bottom:3%;
+    height:auto;
+}
+
+#contenedor{
+    width: 100%;   
+    padding-left:3%;
+    padding-bottom:3%;
+    height:auto;
+}
+
+.mdl-data-table{  
+    width: 100%;    
+    table-layout: fixed;
+    height:auto;
+    height:400px;
+}
+
+.mdl-data-table th {
+    background-color: rgb(0,150,136);
+    color: #ffffff;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.mdl-data-table td {
+   overflow: hidden;
+    table-layout: fixed;
+   
+}
+</style>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

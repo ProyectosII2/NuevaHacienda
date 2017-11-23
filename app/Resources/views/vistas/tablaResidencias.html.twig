@@ -76,13 +76,15 @@ body {
 
 .mdl-card{       
     width: 100%;
-    height:auto;  
     top:15%;  
-    overflow: auto; 
+    height:auto;
+    overflow: auto;    
 }
 
 .mdl-data-table{     
     table-layout: fixed;
+    height:auto;
+    max-height:100%;
     height:400px;
 }
 
@@ -91,6 +93,12 @@ body {
     color: #ffffff;
     overflow: hidden;
     table-layout: fixed;
+}
+
+.mdl-data-table td {
+   overflow: hidden;
+    table-layout: fixed;
+   
 }
 </style>
 {% endblock %}
