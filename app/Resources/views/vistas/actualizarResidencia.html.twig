@@ -25,53 +25,53 @@
                             <p><strong> <h4>ACTUALIZAR RESIDENCIA</h4></strong></p>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" >                    
                                 <input type="hidden" name="original" value={{code}}>
-                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="idres" tabindex="1" required value={{code}} readonly style="color:#757575;">
+                                <input class="mdl-textfield__input" type="number" min="1" maxlength="2147483647" name="user" tabindex="1" required value={{code}} readonly style="color:#757575;">
                                 <label class="mdl-textfield__label" for="user">Residencia</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input"  name="tel" placeholder="8888 8888" pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9" tabindex="2" required value={{telefono}}>
-                                <label class="mdl-textfield__label" for="user">Telefono</label>
+                                <label class="mdl-textfield__label" for="tel">Telefono</label>
                      </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" tabindex="3" maxlength="50" required name="addr" required value={{direccion | e}} readonly style="color:#757575;">
-                                <label class="mdl-textfield__label" for="user">Direccion</label>
-                     </div>
+                                <input class="mdl-textfield__input"  maxlength="50" required name="addr" required value=  {{direccion | e}} readonly style="color:#757575;">
+                                <label class="mdl-textfield__label" for="addr">Direccion</label>
+                    </div>
 
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                     <select class="mdl-textfield__input" tabindex="5" id="list" required name="sector" required value={{sector}} >
                         
                         {% if  '1' == sector %}
-                        <option value="1" selected="selected">Sector 1</option>                        
+                        <option value="1" selected="sector">Sector 1</option>                        
                         <option value="2">Sector 2</option>
                         <option value="3">Sector 3</option>
                         <option value="4">Sector 4</option>
                         {% else %}
                         {% if  '2' == sector %}
                         <option value="1">Sector 1</option>
-                        <option value="2" selected="selected">Sector 2</option>
+                        <option value="2" selected="sector">Sector 2</option>
                         <option value="3">Sector 3</option>
                         <option value="4">Sector 4</option>
                         {% else %}
                         {% if  '3' == sector %}
                         <option value="1">Sector 1</option>
                         <option value="2">Sector 2</option>
-                        <option value="3" selected="selected">Sector 3</option>                        
+                        <option value="3" selected="sector">Sector 3</option>                        
                         <option value="4">Sector 4</option>
                         {% else %}
                         {% if  '4' == sector %}
                         <option value="1">Sector 1</option>
                         <option value="2">Sector 2</option>
                         <option value="3">Sector 3</option>
-                        <option value="4" selected="selected">Sector 4</option>
+                        <option value="4" selected="sector">Sector 4</option>
                         {% endif %}
                         {% endif %}
                         {% endif %}
                         {% endif %}
                         
                     </select>    
-                        <label class="mdl-textfield__label" for="residente">Sector</label>                                   
+                        <label class="mdl-textfield__label" for="sector">Sector</label>                                   
                     </div>
 
                     
@@ -112,9 +112,10 @@ body {
 
 .mdl-card{  
     text-align: center;   
-	padding:5%;   
+	padding-left:5%;  
+	padding-right:5%;   
     width: 100%;
-    top:5%;  
+    padding-top:3%;  
     height:auto;
 }
 

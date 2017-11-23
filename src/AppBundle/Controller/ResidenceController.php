@@ -116,6 +116,8 @@ class ResidenceController extends Controller
             'duenioid' => $resident,
             'error'=>$_SESSION['error']
         ));
+
+        printf.log($residencecode->getAddress());
     }
     /**
      * @Route("/checkupdateresidence",name="checkupdateresidence")
