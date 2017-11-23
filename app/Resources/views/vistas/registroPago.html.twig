@@ -16,13 +16,13 @@
                         </a>
                            </div>
                         <form action={{path("addpayment")}} method="POST">
-                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f25ce68920a6edaba16abdd2109566bc-dollar.png" style="width:15%;">
+                        <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-f25ce68920a6edaba16abdd2109566bc-dollar.png" style="width:10%;">
                         <p><strong> <h4>INGRESO DE PAGO RESIDENCIA</h4></strong></p>
                         <div class="row" id="contenedor"> 
                         
                         <div class="col-md-6">
                             <div class="Monto">
-                            <h2>Monto</h2>
+                            <h5>MONTO</h5>
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <select class="mdl-textfield__input" name="mes" required>
                                     {% for i in meses|keys %}
@@ -45,27 +45,41 @@
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                     <input class="mdl-textfield__input" type="text" name="monto" value="1500" required readonly style="color:#757575;">
                                     <label class="mdl-textfield__label" for="monto">Monto</label>
-                                    <span class="mdl-textfield__error">Ingrese número para registrar</span>
                                 </div>
-                            </div> 
+                            </div>
+                            
+                            <br></br> 
+                            <!--Button-->
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
+                                Limpiar
+                            </button>
+                             &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
+                                Ingresar Pago
+                            </button>   
+                            
+                            <br></br>                                             
+                            <label style="color: red;font-weight: bold;">{{error}}</label> 
                         </div>
 
                         <div class="col-md-6">
 
                             <div class="Ingresar">
-                           <h2>Ingresar Pago</h2>
+                            <h5>INGRESAR PAGO</h5>
+                            
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" name="type" min="3" maxlength="20" required>
+                                    <label class="mdl-textfield__label" for="type">Tipo de Pago</label>
+                                </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input type="text" name="type" min="3" maxlength="20" required>
-                                    <label class="mdl-textfield__label" for="tipopago">Tipo de Pago</label>
+                                    <input class="mdl-textfield__input" type="text" name="bank" min="2" maxlength="20">
+                                    <label class="mdl-textfield__label" for="bank">Banco</label>
                                 </div>
+                                
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input type="text" name="bank" min="2" maxlength="20">
-                                    <label class="mdl-textfield__label" for="tipopago">Banco</label>
-                                </div>
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input type="text" name="voucher" min="3" maxlength="30" required>
-                                    <label class="mdl-textfield__label" for="tipopago">Voucher</label>
+                                    <input class="mdl-textfield__input" type="text" name="voucher" min="3" maxlength="30" required>
+                                    <label class="mdl-textfield__label" for="voucher">Voucher</label>
                                 </div>
 
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -83,17 +97,7 @@
 
                         </div>                               
 
-                            <!--Button-->
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="reset">
-                                Limpiar
-                            </button>
-                             &nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
-                                Ingresar Pago
-                            </button>   
                             
-                            <br></br>                                             
-                            <label style="color: red;font-weight: bold;">{{error}}</label>
                         </form>
                     </div>
                 <!--Button
@@ -116,14 +120,10 @@ body {
 }
 
 .mdl-card{  
-    text-align: center;   
-	padding-left:5%;  
-	padding-right:5%;   
-    width: 100%;
-    padding-top:3%;  
+    text-align: center;  
+    width: 100%; 
     height:auto;
 }
-
 
 .mdl-button.mdl-button--colored {
 	
@@ -135,7 +135,7 @@ body {
 }
 
 .mdl-textfield{
-	width: 50%;
+	width: 80%;
 }
 
 .img{
