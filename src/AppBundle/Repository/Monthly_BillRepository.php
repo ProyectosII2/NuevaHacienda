@@ -70,15 +70,42 @@ class Monthly_BillRepository extends EntityRepository
     }
 
     /**
-     * Método que permite obtener todas las cuentas 
+     * Método que permite obtener todas las cuentas asignadas que no han sido pagadas
      */
-    public function GetAll_with_Residence()
+    public function GetAll_with_Residence_and_NoPayment()
     {   
         return $this->createQueryBuilder('m')
         ->select('m','r')
         ->innerJoin('m.id_residence', 'r')
+        ->where('m.id_monthly_pay IS NULL')
         ->getQuery()
         ->getArrayResult();
+    }
+    /**
+     * Update de monthly bill
+     */
+    public function Update($fechapago, $residencia, $pago)
+    {
+        //where b.date >= '2017-11-01' AND b.date <= '2017-11-30' AND b.id_residence = '1';
+        $inicio = $fechapago->format('Y-m-d');
+        $parts = explode('-',$inicio);
+        $fin   = date($parts[0] . '-' . $parts[1] . '-t' );
+        $bill = $this->createQueryBuilder('b')
+        ->where('b.date >= :inicio AND b.date <= :fin AND b.id_residence = :idres')
+        ->setParameter('inicio', $inicio)
+        ->setParameter('fin', $fin)
+        ->setParameter('idres', $residencia->getId())
+        ->getQuery()
+        ->getOneOrNullResult();
+        if($bill != null)
+        {
+            $bill->setPay($pago);
+            $em = $this->getEntityManager();
+            $em->flush();
+            return true;
+        }
+        return false;
+         
     }
 
     /**

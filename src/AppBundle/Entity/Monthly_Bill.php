@@ -47,6 +47,10 @@ class Monthly_Bill
         $this->id_monthly_pay = null;
         $this->monto = $monto;
     }
+    public function setPay($ppayment)
+    {
+        $this->id_monthly_pay = $ppayment;
+    }
 	
     public function getId_residence()
     {

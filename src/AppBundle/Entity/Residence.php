@@ -52,6 +52,10 @@ class Residence
         $this->sector = $sector;
         $this->id_resident = $residentid;
     }
+    public function getId()
+    {
+        return $this->id_residence;
+    }
     public function getid_resident()
     {
         return $this->id_resident;

@@ -41,18 +41,23 @@ class PayController extends Controller
             $type = strtolower($request->request->get('type'));
             $voucher = strtolower($request->request->get('voucher'));
             $mes = $this->ConvertToDate($mes);
-            $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($residence);
-            dump($residencecode);
-            return $this->render('vistas_test\exito.html.twig',
+            $residence = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($residence);
+            //Se ingresa pago
+            $pago = $this->getDoctrine()->getManager()->getRepository(Monthly_Pay::class)
+            ->createMonthlyPay($type, $bank, $voucher, $total, $desc);
+            //Se actualiza monthlyBill
+            $res = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)
+            ->Update($mes, $residence, $pago);
+            return $this->forward('AppBundle\Controller\DashboardController::loaddash',
             array(
-                'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
-                'approle' => $this->get('security.token_storage')->getToken()->getRoles()[0]->getRole(),
-                'error'=>""
-            ));
+                "message"=> "Pago Ingresado Exitosamente"
+                 )
+            );
         }
         $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll_with_Residents();
-        $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_with_Residence();
+        $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_with_Residence_and_NoPayment();
         $meses = $this->ArrayMeses();
+        dump($bills);
         return $this->render('vistas\registroPago.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -125,7 +130,7 @@ class PayController extends Controller
     private function ConvertToDate($mes)
     {
         $porciones = explode(":", $mes);
-        $tiempo = $porciones[1] . '-' . $porciones[0] . '-' . date('d');
+        $tiempo = $porciones[1] . '-' . $porciones[0] . '-' . '1';
         $date = new \DateTime($tiempo);;
         return $date;
     }
