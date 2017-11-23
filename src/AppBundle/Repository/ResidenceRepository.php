@@ -74,6 +74,18 @@ class ResidenceRepository extends EntityRepository
         ->getQuery()
         ->getArrayResult();
     }
+    /**
+     * Get all residencias con residents
+     */
+    public function GetAll_with_Residents()
+    {
+        return $this->createQueryBuilder('r')
+        ->where('r.id_resident IS NOT NULL')
+        ->orderBy('r.sector', 'ASC')
+        ->orderBy('r.residence_code', 'ASC')
+        ->getQuery()
+        ->getArrayResult();
+    }
 
     /**
      * Obtiene el Residente por su codigo

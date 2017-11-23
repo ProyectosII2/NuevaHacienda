@@ -29,18 +29,20 @@ class PayController extends Controller
     public function loadPaymentForm(Request $request)
     {
         if($request->request->has('bank') && $request->request->has('desc') && $request->request->has('mes')
-        && $request->request->has('monto') && $request->request->has('residence') && $request->request->has('total')
+        && $request->request->has('monto') && $request->request->has('residencia') && $request->request->has('total')
         && $request->request->has('type') && $request->request->has('voucher'))
         {
-            $bank = $request->request->get('bank');
-            $desc = $request->request->get('desc');
+            $bank = strtolower($request->request->get('bank'));
+            $desc = strtolower($request->request->get('desc'));
             $mes = $request->request->get('mes');
             $monto = $request->request->get('monto');
-            $residence = $request->request->get('residence');
+            $residence = $request->request->get('residencia');
             $total = $request->request->get('total');
-            $type = $request->request->get('type');
-            $voucher = $request->request->get('voucher');
-            
+            $type = strtolower($request->request->get('type'));
+            $voucher = strtolower($request->request->get('voucher'));
+            $mes = $this->ConvertToDate($mes);
+            $residencecode = $this->getDoctrine()->getManager()->getRepository(Residence::class)->Get_by_Code($residence);
+            dump($residencecode);
             return $this->render('vistas_test\exito.html.twig',
             array(
                 'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -48,10 +50,9 @@ class PayController extends Controller
                 'error'=>""
             ));
         }
-        $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll();
+        $residences = $this->getDoctrine()->getManager()->getRepository(Residence::class)->GetAll_with_Residents();
         $bills = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_with_Residence();
         $meses = $this->ArrayMeses();
-        dump($residences, $bills, $meses);
         return $this->render('vistas\registroPago.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -63,6 +64,9 @@ class PayController extends Controller
         ));
     }
     //------------------------------FUNCIONES PRIVADAS----------------------
+    /**
+     * Crea array de meses
+     */
     private function ArrayMeses()
     {
         $m = date('m');
@@ -114,5 +118,15 @@ class PayController extends Controller
             $m=$m-1;
         }
         return $meses;
+    }
+    /**
+     * Converite formato mes:anio a una variable DateTime
+     */
+    private function ConvertToDate($mes)
+    {
+        $porciones = explode(":", $mes);
+        $tiempo = $porciones[1] . '-' . $porciones[0] . '-' . date('d');
+        $date = new \DateTime($tiempo);;
+        return $date;
     }
 }
