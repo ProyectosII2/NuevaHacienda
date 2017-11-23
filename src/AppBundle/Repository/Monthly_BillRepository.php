@@ -75,8 +75,9 @@ class Monthly_BillRepository extends EntityRepository
     public function GetAll_with_Residence_and_NoPayment()
     {   
         return $this->createQueryBuilder('m')
-        ->select('m','r')
+        ->select('m','r', 'p')
         ->innerJoin('m.id_residence', 'r')
+        ->innerJoin('r.id_resident', 'p')
         ->where('m.id_monthly_pay IS NULL')
         ->getQuery()
         ->getArrayResult();
@@ -87,9 +88,10 @@ class Monthly_BillRepository extends EntityRepository
     public function GetAll_AlreadyPaid()
     {   
         return $this->createQueryBuilder('m')
-        ->select('m','p', 'r')
+        ->select('m','p', 'r', 'q')
         ->innerJoin('m.id_monthly_pay', 'p')
         ->innerJoin('m.id_residence', 'r')
+        ->innerJoin('r.id_resident', 'q')
         ->orderBy('m.date', 'ASC')
         ->orderBy('r.residence_code', 'ASC')
         ->getQuery()

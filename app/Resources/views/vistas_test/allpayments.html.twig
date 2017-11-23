@@ -6,8 +6,31 @@
         <button> Agregar Pago</button>
     </a>
     <h2>Pagos pendientes</h2>
-    {% for i in payments|keys %}
-    {% endfor %} 
+    <table>
+        <th>FECHA</th>
+        <th>MONTO</th>
+        <th>COD RESIDENCIA</th>
+        <th>SECTOR</th>
+        <th>TELEFONO</th>
+        <th>RESIDENTE</th>
+        <th>EMAIL</th>
+        <th>CELULAR</th>
+        
+        {% for i in payments|keys %}
+        <tr>
+            <td>payments[i]['']</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %} 
+
+    </table>
     <h2>Pagos realizados</h2>
     {% for i in payments|keys %}
     {% endfor %} 
