@@ -36,12 +36,12 @@
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="password" name="pass" id="password_user" maxlength="12" >
-                                <label class="mdl-textfield__label" for="password_user">Contraseña</label>
+                                <label class="mdl-textfield__label" for="password_user">{{"Contraseña" | convert_encoding('ISO-8859-1', 'UTF-8')}}</label>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="password" name="secondpass" id="second_password_user" maxlength="12">
-                                <label class="mdl-textfield__label" for="second_password_user">Reingresar Contraseña</label>
+                                <label class="mdl-textfield__label" for="second_password_user">{{"Reingresar Contraseña" | convert_encoding('ISO-8859-1', 'UTF-8')}}</label>
                             </div>                                
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -60,7 +60,7 @@
                             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" type="submit">
                                 Agregar
                             </button>
-                            <p style="color:red;">{{error}} </p>
+                            <p style="color:red;">{{error | convert_encoding('ISO-8859-1', 'UTF-8')}} </p>
                         </form>
                     
                 </div>

@@ -34,7 +34,7 @@
                                 <input class="mdl-textfield__input" type="tel" name="DPI" placeholder="1234 12345 1234" 
         pattern="\d{4} \d{5} \d{4}|\d{13}" min="13" maxlength="15">
                                 <label class="mdl-textfield__label" for="DPI">DPI</label>
-                                <span class="mdl-textfield__error">Ingrese número de DPI</span>
+                                <span class="mdl-textfield__error">{{"Ingrese número de DPI" | convert_encoding('ISO-8859-1', 'UTF-8')}}</span>
                             </div>
 
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -46,7 +46,7 @@
                                 <input class="mdl-textfield__input" type="tel" name="phone" placeholder="8888 8888" 
         pattern="\d{4}-\d{4}|\d{8}|\d{4} \d{4}" min="8" maxlength="9">
                                 <label class="mdl-textfield__label" for="phone">Telefono</label>
-                                <span class="mdl-textfield__error">Ingrese número de telefono</span>
+                                <span class="mdl-textfield__error">{{"Ingrese número de telefono" | convert_encoding('ISO-8859-1', 'UTF-8')}}</span>
                             </div>
 
                             <!--Button-->
@@ -59,7 +59,7 @@
                             </button>   
                             
                             <br></br>                                             
-                            <label style="color: red;font-weight: bold;">{{error}}</label>
+                            <label style="color: red;font-weight: bold;">{{error | convert_encoding('ISO-8859-1', 'UTF-8')}}</label>
                         </form>
                     </div>
                 <!--Button
