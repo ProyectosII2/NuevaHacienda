@@ -1,0 +1,15 @@
+{% extends 'baseNav.html.twig' %}
+{% block body %}
+<div>
+    <h1>Información de Pagos</h1>
+    <a href={{path('addpayment')}}>
+        <button> Agregar Pago</button>
+    </a>
+    <h2>Pagos pendientes</h2>
+    {% for i in payments|keys %}
+    {% endfor %} 
+    <h2>Pagos realizados</h2>
+    {% for i in payments|keys %}
+    {% endfor %} 
+</div>
+{% endblock %}

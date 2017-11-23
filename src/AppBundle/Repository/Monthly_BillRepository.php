@@ -82,6 +82,20 @@ class Monthly_BillRepository extends EntityRepository
         ->getArrayResult();
     }
     /**
+     * Método que permite obtener todas las cuentas asignadas que no han sido pagadas
+     */
+    public function GetAll_AlreadyPaid()
+    {   
+        return $this->createQueryBuilder('m')
+        ->select('m','p', 'r')
+        ->innerJoin('m.id_monthly_pay', 'p')
+        ->innerJoin('m.id_residence', 'r')
+        ->orderBy('m.date', 'ASC')
+        ->orderBy('r.residence_code', 'ASC')
+        ->getQuery()
+        ->getArrayResult();
+    }
+    /**
      * Update de monthly bill
      */
     public function Update($fechapago, $residencia, $pago)
