@@ -94,12 +94,6 @@ body {
     background: #F5F5F5;
 }
 
-.mdl-card{       
-    width: 100%;
-    top:15%;  
-    padding-bottom:3%;
-    height:auto;
-}
 
 #contenedor{
     width: 100%;   
@@ -108,11 +102,18 @@ body {
     height:auto;
 }
 
-.mdl-data-table{  
-    width: 100%;    
+.mdl-card{       
+    width: 100%;
+    top:15%;  
+    height:auto;
+    overflow: auto;    
+}
+
+.mdl-data-table{     
     table-layout: fixed;
     height:auto;
-    height:400px;
+    max-height:100%;
+    height:100px;
 }
 
 .mdl-data-table th {
