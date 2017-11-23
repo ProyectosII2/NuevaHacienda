@@ -30,7 +30,6 @@ class PayController extends Controller
     {
         $pendient =  $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_with_Residence_and_NoPayment();
         $payments = $this->getDoctrine()->getManager()->getRepository(Monthly_Bill::class)->GetAll_AlreadyPaid();
-        dump($pendient, $payments);
         return $this->render('vistas_test\allpayments.html.twig',
         array(
             'appuser' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
@@ -86,7 +85,7 @@ class PayController extends Controller
             'meses' => $meses,
             'residences' => $residences,
             'bills' => $bills,
-            'error'=>$_Session['error']
+            'error'=>$_SESSION['error']
         ));
     }
     //------------------------------FUNCIONES PRIVADAS----------------------

@@ -2,11 +2,13 @@
 {% block body %}
 <div>
     <h1>Información de Pagos</h1>
+    {% if approle == 'ROLE_ADMIN' %}
     <a href={{path('addpayment')}}>
         <button> Agregar Pago</button>
     </a>
+    {% endif %}
     <h2>Pagos pendientes</h2>
-    <table>
+    <table style="text-align:center;">
         <th>FECHA</th>
         <th>MONTO</th>
         <th>COD RESIDENCIA</th>
@@ -16,23 +18,42 @@
         <th>EMAIL</th>
         <th>CELULAR</th>
         
-        {% for i in payments|keys %}
+        {% for i in pendient|keys %}
         <tr>
-            <td>payments[i]['']</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{pendient[i]['date']|date("(M)m-Y", false)}}</td>
+            <td>{{"Q."~pendient[i]['monto']}}</td>
+            <td>{{pendient[i]['id_residence']['residence_code']}}</td>
+            <td>{{pendient[i]['id_residence']['sector']}}</td>
+            <td>{{pendient[i]['id_residence']['telephone']}}</td>
+            <td>{{pendient[i]['id_residence']['id_resident']['last_name']~" "~pendient[i]['id_residence']['id_resident']['first_name']}}</td>
+            <td>{{pendient[i]['id_residence']['id_resident']['email']}}</td>
+            <td>{{pendient[i]['id_residence']['id_resident']['phone']}}</td>
         </tr>
         {% endfor %} 
 
     </table>
     <h2>Pagos realizados</h2>
-    {% for i in payments|keys %}
-    {% endfor %} 
+    <table style="text-align:center;">
+        <th>FECHA</th>
+        <th>MONTO</th>
+        <th>TOTAL</th>
+        <th>TIPO</th>
+        <th>VOUCHER</th>
+        <th>COD RESIDENCIA</th>
+        <th>SECTOR</th>
+        <th>RESIDENTE</th>
+        {% for i in payments|keys %}
+        <tr>
+            <td>{{payments[i]['date']|date("(M)m-Y", false)}}</td>
+            <td>{{"Q."~payments[i]['monto']}}</td>
+            <td>{{"Q."~payments[i]['id_monthly_pay']['total']}}</td>
+            <td>{{payments[i]['id_monthly_pay']['payment_type']}}</td>
+            <td>{{payments[i]['id_monthly_pay']['payment_bank']~"-"~payments[i]['id_monthly_pay']['payment_voucher']}}</td>
+            <td>{{pendient[i]['id_residence']['residence_code']}}</td>
+            <td>{{pendient[i]['id_residence']['sector']}}</td>
+            <td>{{pendient[i]['id_residence']['id_resident']['last_name']~", "~pendient[i]['id_residence']['id_resident']['first_name']}}</td>
+        </tr>
+        {% endfor %} 
+    </table>
 </div>
 {% endblock %}

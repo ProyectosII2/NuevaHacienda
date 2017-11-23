@@ -26,7 +26,7 @@ class Monthly_Bill
 	
 	/**
      * @ORM\OneToOne(targetEntity="Monthly_Pay", inversedBy="monthly_bill_pay")
-     * @ORM\JoinColumn(name="id_monthly_pay", referencedColumnName="id_monthly_pay")
+     * @ORM\JoinColumn(name="id_monthly_pay", referencedColumnName="id_monthly_pay",nullable=true)
      */
 	private $id_monthly_pay;
 	
